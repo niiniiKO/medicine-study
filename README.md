@@ -1,1 +1,2 @@
 # medicine-study
+[[index.html]]
