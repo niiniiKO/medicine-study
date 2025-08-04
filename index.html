@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>過去問学習サイト</title>
+    <!-- Tailwind CSS CDNを読み込みます -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* カスタムフォントとしてInterを設定 */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800 flex flex-col items-center p-4 md:p-8">
+
+    <!-- メインコンテナ -->
+    <div class="w-full max-w-4xl bg-white shadow-xl rounded-2xl p-6 md:p-10">
+
+        <!-- サイトのヘッダー -->
+        <header class="text-center mb-10">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-indigo-700">過去問学習サイト</h1>
+            <p class="mt-2 text-base md:text-lg text-slate-500">カテゴリーと項目を選択して学習を開始しましょう。</p>
+        </header>
+
+        <!-- カテゴリーリストのコンテナ -->
+        <main class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- Category A -->
+            <div class="bg-gray-50 rounded-xl p-6 shadow-sm border border-gray-200">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Category A</h2>
+                <div class="space-y-6">
+                    <!-- kitano のサブカテゴリー -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">kitano</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="/pages/kitano-internal.html" class="block w-full py-2 px-3 bg-white hover:bg-indigo-100 text-indigo-600 font-medium rounded-lg shadow-sm transition-colors duration-200 text-center">
+                                    kitano-internal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/pages/kitano-surgery.html" class="block w-full py-2 px-3 bg-white hover:bg-indigo-100 text-indigo-600 font-medium rounded-lg shadow-sm transition-colors duration-200 text-center">
+                                    kitano-surgery
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/pages/kitano-pediatrics.html" class="block w-full py-2 px-3 bg-white hover:bg-indigo-100 text-indigo-600 font-medium rounded-lg shadow-sm transition-colors duration-200 text-center">
+                                    kitano-pediatrics
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- KU のサブカテゴリー -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">KU</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="/pages/ku-internal.html" class="block w-full py-2 px-3 bg-white hover:bg-indigo-100 text-indigo-600 font-medium rounded-lg shadow-sm transition-colors duration-200 text-center">
+                                    KU-internal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/pages/ku-surgery.html" class="block w-full py-2 px-3 bg-white hover:bg-indigo-100 text-indigo-600 font-medium rounded-lg shadow-sm transition-colors duration-200 text-center">
+                                    KU-surgery
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- center のサブカテゴリー -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">center</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="/pages/center-internal.html" class="block w-full py-2 px-3 bg-white hover:bg-indigo-100 text-indigo-600 font-medium rounded-lg shadow-sm transition-colors duration-200 text-center">
+                                    center-internal
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Luke のサブカテゴリー -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">Luke</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="/pages/luke-internal.html" class="block w-full py-2 px-3 bg-white hover:bg-indigo-100 text-indigo-600 font-medium rounded-lg shadow-sm transition-colors duration-200 text-center">
+                                    Luke-internal
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category B -->
+            <div class="bg-gray-50 rounded-xl p-6 shadow-sm border border-gray-200">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Category B</h2>
+                <div class="space-y-6">
+                    <!-- internal のサブカテゴリー -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">internal</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="/pages/kitano-internal.html" class="block w-full py-2 px-3 bg-white hover:bg-indigo-100 text-indigo-600 font-medium rounded-lg shadow-sm transition-colors duration-200 text-center">
+                                    kitano-internal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/pages/ku-internal.html" class="block w-full py-2 px-3 bg-white hover:bg-indigo-100 text-indigo-600 font-medium rounded-lg shadow-sm transition-colors duration-200 text-center">
+                                    KU-internal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/pages/center-internal.html" class="block w-full py-2 px-3 bg-white hover:bg-indigo-100 text-indigo-600 font-medium rounded-lg shadow-sm transition-colors duration-200 text-center">
+                                    center-internal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/pages/luke-internal.html" class="block w-full py-2 px-3 bg-white hover:bg-indigo-100 text-indigo-600 font-medium rounded-lg shadow-sm transition-colors duration-200 text-center">
+                                    Luke-internal
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- surgery のサブカテゴリー -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">surgery</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="/pages/kitano-surgery.html" class="block w-full py-2 px-3 bg-white hover:bg-indigo-100 text-indigo-600 font-medium rounded-lg shadow-sm transition-colors duration-200 text-center">
+                                    kitano-surgery
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/pages/ku-surgery.html" class="block w-full py-2 px-3 bg-white hover:bg-indigo-100 text-indigo-600 font-medium rounded-lg shadow-sm transition-colors duration-200 text-center">
+                                    KU-surgery
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- pediatrics のサブカテゴリー -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">pediatrics</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="/pages/kitano-pediatrics.html" class="block w-full py-2 px-3 bg-white hover:bg-indigo-100 text-indigo-600 font-medium rounded-lg shadow-sm transition-colors duration-200 text-center">
+                                    kitano-pediatrics
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- minor のサブカテゴリー -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">minor</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="/pages/dummy-minor.html" class="block w-full py-2 px-3 bg-white hover:bg-indigo-100 text-indigo-600 font-medium rounded-lg shadow-sm transition-colors duration-200 text-center">
+                                    minor-dummy
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- other のサブカテゴリー -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">other</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="/pages/dummy-other.html" class="block w-full py-2 px-3 bg-white hover:bg-indigo-100 text-indigo-600 font-medium rounded-lg shadow-sm transition-colors duration-200 text-center">
+                                    other-dummy
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+</html>
