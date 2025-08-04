@@ -1,2 +1,2 @@
 # medicine-study
-[[index.html]]
+(index)[[index.html]]
