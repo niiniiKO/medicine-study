@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北野病院 内科過去問対策 インタラクティブ・ノート</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: アプリケーションは、左側に診療科を選択するナビゲーション、右側にコンテンツを表示する2カラムレイアウトを採用します。この構造は、ユーザーが膨大な情報の中から目的の分野に素早くアクセスできるようにするためです。コンテンツエリアでは、各疾患やトピックをアコーディオン形式（クリックで開閉）で表示します。これにより、ユーザーはまず項目名だけを見て内容を思い出す「アクティブリコール（能動的想起）」を試みることができ、学習効率の向上を狙います。このインタラクティブな構造は、静的なテキストを読むだけの学習方法よりもエンゲージメントを高め、知識の定着を助けます。 -->
+    <!-- Visualization & Content Choices: 報告書の情報はテキスト中心であるため、主に構造化されたHTMLとインタラクティブなアコーディオンで情報を整理・提示します。Goal: Inform/Organize -> Method: HTML/CSS/JS Accordion -> Interaction: Click to expand/collapse -> Justification: 情報を隠すことでユーザーの能動的な想起を促し、学習効果を高める。また、各診療科のトピック数を比較する棒グラフをChart.jsで描画します。Goal: Compare -> Viz: Bar Chart -> Justification: 各科のコンテンツ量を視覚的に示し、学習計画の立案を助けるための導入情報として機能させる。SVGやMermaid JSは使用しません。 -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #FDFBF7;
+            color: #4A4A4A;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 40vh;
+        }
+        .accordion-button::after {
+            content: '▼';
+            transition: transform 0.3s;
+            margin-left: auto;
+        }
+        .accordion-button.open::after {
+            transform: rotate(180deg);
+        }
+        .nav-item.active {
+            background-color: #EAE5DD;
+            color: #3B3B3B;
+            font-weight: 700;
+        }
+        .table-auto th, .table-auto td {
+            border: 1px solid #EAE5DD;
+            padding: 8px;
+        }
+        .table-auto th {
+            background-color: #F5F2ED;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <nav id="sidebar" class="w-full md:w-64 bg-[#F5F2ED] p-4 md:p-6 shrink-0">
+            <h1 class="text-xl font-bold text-[#3B3B3B] mb-6">診療科一覧</h1>
+            <ul id="nav-list" class="space-y-2"></ul>
+        </nav>
+
+        <main id="main-content" class="flex-1 p-4 md:p-8 lg:p-12">
+            <div id="welcome-screen">
+                <div class="text-center bg-white p-8 rounded-xl shadow-sm">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">北野病院 内科過去問対策へようこそ</h2>
+                    <p class="text-gray-600 mb-6">左のメニューから診療科を選択して、学習を開始してください。各項目をクリックすると詳細な要点が表示されます。</p>
+                    <div class="chart-container">
+                        <canvas id="overviewChart"></canvas>
+                    </div>
+                     <p class="text-sm text-gray-500 mt-4">このアプリケーションは、提供された「北野病院 内科過去問対策 まとめノート」を基に、インタラクティブな学習体験を提供するために設計されました。各診療科のトピック数をグラフで可視化し、全体の学習範囲の把握を助けます。</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const studyData = {
+            rheumatology: {
+                name: "リウマチ・膠原病内科",
+                introduction: "リウマチ・膠原病内科では、自己免疫によって引き起こされる全身性の炎症性疾患を扱います。このセクションでは、診断に不可欠な自己抗体と各疾患の臨床的特徴、治療法に関する重要ポイントをまとめています。各項目をクリックして、知識の確認と定着を図りましょう。",
+                content: [
+                    {
+                        title: "自己抗体と関連疾患",
+                        details: `
+                        <div class="overflow-x-auto"><table class="table-auto w-full text-left">
+                            <thead><tr><th>自己抗体</th><th>関連疾患</th><th>特徴・補足</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>抗Mi-2抗体</strong></td><td><strong>皮膚筋炎 (DM)</strong></td><td>DMに特異的。特に定型的な皮膚症状（ヘリオトロープ疹、ゴットロン徴候）を呈する症例で陽性となる。</td></tr>
+                                <tr><td><strong>抗ARS抗体</strong></td><td><strong>抗ARS抗体症候群</strong></td><td><strong>間質性肺炎</strong>、多発性筋炎/皮膚筋炎、多発関節炎、レイノー現象、機械工の手などを呈する。</td></tr>
+                                <tr><td><strong>抗SS-A/Ro抗体</strong></td><td><strong>シェーグレン症候群</strong>、<strong>SLE</strong></td><td><strong>新生児ループス</strong>（母体の抗体が胎盤を通過し、胎児に心ブロック等を起こす）の原因となる。</td></tr>
+                                <tr><td><strong>抗MDA5抗体</strong></td><td><strong>皮膚筋炎 (DM)</strong></td><td>特に<strong>急速進行性間質性肺炎</strong>を合併する、筋症状に乏しい皮膚筋炎（CADM）で重要。</td></tr>
+                                <tr><td><strong>抗CCP抗体</strong></td><td><strong>関節リウマチ (RA)</strong></td><td>RAの診断に非常に特異度が高い。リウマチ性多発筋痛症（PMR）では通常陰性。</td></tr>
+                                <tr><td><strong>抗U1-RNP抗体</strong></td><td><strong>混合性結合組織病 (MCTD)</strong></td><td>MCTDの診断に<strong>必須</strong>。SLE、強皮症、多発性筋炎の症状が混在する。</td></tr>
+                                <tr><td><strong>抗dsDNA抗体</strong></td><td><strong>全身性エリテマトーデス (SLE)</strong></td><td>SLEに特異性が高く、<strong>疾患活動性</strong>（特にループス腎炎）を反映して力価が変動する。</td></tr>
+                                <tr><td><strong>抗Sm抗体</strong></td><td><strong>全身性エリテマトーデス (SLE)</strong></td><td>SLEに極めて特異的だが、疾患活動性との関連は低い。</td></tr>
+                            </tbody>
+                        </table></div>`
+                    },
+                    {
+                        title: "各論（疾患別要点）",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>全身性エリテマトーデス (SLE)</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li><strong>診断基準</strong>: 2019年EULAR/ACR分類基準では、<strong>抗核抗体(ANA) 80倍以上</strong>が必須エントリー項目。</li>
+                                    <li><strong>疾患活動性マーカー</strong>: <strong>抗dsDNA抗体価の上昇</strong>、<strong>補体価（C3, C4, CH50）の低下</strong>が重要。CRPは活動性と必ずしも相関しない。</li>
+                                    <li><strong>治療</strong>: <strong>ヒドロキシクロロキン</strong>は皮疹、倦怠感、関節症状に有効で、全SLE患者で投与が考慮される生命予後改善薬。</li>
+                                </ul>
+                            </li>
+                            <li><strong>皮膚筋炎 (DM) / 多発性筋炎 (PM)</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li>筋症状がない<strong>無筋症性皮膚筋炎 (CADM)</strong> が存在するため、「筋症状がないと診断できない」は誤り。</li>
+                                    <li><strong>ケブネル現象</strong>（物理的刺激により皮疹が出現）が見られることがある。</li>
+                                </ul>
+                            </li>
+                            <li><strong>全身性強皮症 (SSc)</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li><strong>限局皮膚硬化型 (lcSSc)</strong>: <strong>肺高血圧症 (PAH)</strong> のリスクが高い（CREST症候群）。</li>
+                                    <li>合併症: <strong>偽性腸閉塞</strong>（消化管蠕動運動の低下による）。</li>
+                                    <li><strong>強皮症腎クリーゼ</strong>: ACE阻害薬が第一選択。ステロイド大量投与は腎クリーゼを誘発するリスクがあり禁忌。</li>
+                                </ul>
+                            </li>
+                             <li><strong>血管炎</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li><strong>高安動脈炎</strong>: 大動脈およびその主要分枝を侵す大型血管炎。<strong>大動脈弁閉鎖不全症(AR)</strong>を合併しうる。</li>
+                                    <li><strong>多発血管炎性肉芽腫症 (GPA)</strong>: 上気道（<strong>鞍鼻</strong>）、肺、腎の三徴が典型的。</li>
+                                    <li><strong>クリオグロブリン血症性血管炎</strong>: <strong>C型肝炎ウイルス (HCV)</strong>との関連が深い。</li>
+                                </ul>
+                            </li>
+                            <li><strong>ベーチェット病</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li>合併症: <strong>腸管穿孔</strong>（特に回盲部潰瘍）、<strong>ぶどう膜炎</strong>。</li>
+                                    <li><strong>神経型ベーチェット病</strong>ではシクロスポリンは症状を増悪させるリスクがあり<strong>禁忌</strong>。</li>
+                                </ul>
+                            </li>
+                             <li><strong>成人Still病</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                     <li>合併症: <strong>血球貪食症候群 (HPS)</strong>、肝障害。</li>
+                                </ul>
+                            </li>
+                            <li><strong>脊椎関節炎 (SpA)</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li><strong>強直性脊椎炎 (AS)</strong>: <strong>仙腸関節の画像所見</strong>が診断に重要。<strong>ぶどう膜炎</strong>を合併しやすい。</li>
+                                    <li><strong>反応性関節炎</strong>: 先行する感染（クラミジアなどによる<strong>尿道炎</strong>）の後に発症。</li>
+                                </ul>
+                            </li>
+                             <li><strong>抗リン脂質抗体症候群 (APS)</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                     <li>妊婦の治療には<strong>低用量アスピリン＋ヘパリン</strong>を用いる。ワルファリンは禁忌。</li>
+                                </ul>
+                            </li>
+                             <li><strong>RS3PE症候群</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                     <li><strong>悪性腫瘍</strong>の合併を考慮する。</li>
+                                </ul>
+                            </li>
+                             <li><strong>家族性地中海熱 (FMF)</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                     <li>発作予防に<strong>コルヒチン</strong>が第一選択。</li>
+                                </ul>
+                            </li>
+                        </ul>`
+                    },
+                    {
+                        title: "治療薬・その他",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>副腎皮質ステロイド</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li><strong>副作用</strong>: <strong>顎骨壊死</strong>、大腿骨頭壊死、骨粗鬆症など。</li>
+                                    <li><strong>妊婦</strong>: 胎盤通過性の低い<strong>プレドニゾロン</strong>が望ましい。</li>
+                                    <li><strong>作用</strong>: 末梢血の好中球は増加、<strong>リンパ球は減少</strong>させる。</li>
+                                </ul>
+                            </li>
+                            <li><strong>レイノー現象</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li>寒冷刺激で手指が蒼白→紫→赤と変化するのが典型的（<strong>白→紫→赤</strong>）。</li>
+                                </ul>
+                            </li>
+                        </ul>`
+                    }
+                ]
+            },
+            diabetes: {
+                name: "糖尿病・内分泌内科",
+                introduction: "糖尿病・内分泌内科は、血糖コントロールやホルモン異常に関する疾患を対象とします。ここでは、1型・2型糖尿病の急性合併症、二次性糖尿病の原因、そして甲状腺や副腎、骨代謝などの主要な内分泌疾患の診断と治療の要点を学びます。",
+                content: [
+                    {
+                        title: "糖尿病",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>劇症1型糖尿病 / 急性発症1型糖尿病</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li><strong>臨床像</strong>: 急激な口渇・多飲・多尿、体重減少、<strong>ケトン体陽性</strong>、<strong>Cペプチド枯渇</strong>。</li>
+                                    <li><strong>初期治療</strong>: <strong>インスリン療法</strong>が必須。</li>
+                                    <li><strong>検査</strong>: <strong>抗GAD抗体</strong>、<strong>抗IA-2抗体</strong>を測定。</li>
+                                    <li><strong>DKA治療</strong>: 補液とインスリンが基本。<strong>血清カリウム値</strong>の変動に注意。</li>
+                                </ul>
+                            </li>
+                            <li><strong>高浸透圧高血糖症候群 (HHS)</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li><strong>初期治療</strong>: <strong>生理食塩水</strong>による大量輸液が最優先。</li>
+                                </ul>
+                            </li>
+                            <li><strong>膵全摘後糖尿病</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li>血糖変動が激しく、<strong>Cペプチドは検出感度以下</strong>となる。</li>
+                                </ul>
+                            </li>
+                            <li><strong>二次性糖尿病</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li>原因疾患: <strong>先端巨大症</strong>、<strong>クッシング症候群</strong>。</li>
+                                </ul>
+                            </li>
+                            <li><strong>糖尿病の合併症評価</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li>診断時に<strong>眼底検査</strong>、<strong>尿検査</strong>、<strong>ABI</strong>、<strong>頸動脈エコー</strong>を行う。</li>
+                                </ul>
+                            </li>
+                        </ul>`
+                    },
+                    {
+                        title: "内分泌疾患",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>クッシング症候群</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li><strong>スクリーニング検査</strong>: <strong>デキサメタゾン抑制試験</strong>。</li>
+                                </ul>
+                            </li>
+                            <li><strong>亜急性甲状腺炎</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li><strong>症状・検査</strong>: <strong>前頸部痛</strong>、<strong>赤沈亢進</strong>、甲状腺シンチで<strong>取り込み低下</strong>、血中<strong>サイログロブリン高値</strong>。</li>
+                                    <li><strong>治療</strong>: NSAIDs/ステロイド、β遮断薬。抗甲状腺薬は無効。</li>
+                                </ul>
+                            </li>
+                            <li><strong>原発性副甲状腺機能亢進症 (PHPT)</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li><strong>検査</strong>: <strong>高Ca血症</strong>、<strong>iPTH高値</strong>。</li>
+                                    <li><strong>画像検査</strong>: <strong>MIBIシンチグラフィ</strong>。</li>
+                                    <li><strong>合併症評価</strong>: <strong>骨密度測定 (DXA)</strong>。</li>
+                                </ul>
+                            </li>
+                            <li><strong>骨粗鬆症</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li><strong>脆弱性骨折</strong>があれば治療対象。</li>
+                                    <li>ビスホスホネート製剤などは<strong>顎骨壊死</strong>のリスクがあるため、<strong>歯科的評価</strong>が重要。</li>
+                                </ul>
+                            </li>
+                             <li><strong>先端巨大症 (アクロメガリー)</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li><strong>検査</strong>: <strong>下垂体MRI</strong>。</li>
+                                    <li><strong>治療</strong>: <strong>経蝶形骨洞手術 (TSS)</strong>、<strong>ソマトスタチン誘導体</strong>。</li>
+                                </ul>
+                            </li>
+                            <li><strong>免疫チェックポイント阻害薬(ICI)の副作用</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li>原発性副腎皮質機能低下症（<strong>高K、低Na</strong>）などをきたす。</li>
+                                    <li>ACTHとコルチゾール低値なら<strong>ヒドロコルチゾン</strong>を補充。</li>
+                                </ul>
+                            </li>
+                        </ul>`
+                    }
+                ]
+            },
+            respiratory: {
+                name: "呼吸器内科",
+                introduction: "呼吸器内科では、肺癌、間質性肺炎、感染症、閉塞性肺疾患など、多岐にわたる疾患を扱います。このセクションでは、最新の癌治療、各種間質性肺炎の鑑別、非結核性抗酸菌症の管理、そして喘息やCOPDの治療戦略について、試験で問われる核心的な知識を整理します。",
+                content: [
+                     {
+                        title: "肺癌",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>治療</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li><strong>PS不良 (PS3-4)</strong>でも<strong>EGFR-TKIなどの分子標的薬は適応となりうる</strong>。</li>
+                                    <li>高齢・PS不良の進行癌では<strong>緩和ケア</strong>や<strong>症状緩和目的の放射線治療</strong>を優先。</li>
+                                    <li><strong>免疫チェックポイント阻害薬 (ICI)</strong>: CTLA-4は主に<strong>ヘルパーT細胞 (CD4+)</strong>に発現。副作用に<strong>間質性肺炎</strong>、<strong>大腸炎</strong>。</li>
+                                </ul>
+                            </li>
+                            <li><strong>その他</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li><strong>肺気腫合併肺線維症 (CPFE)</strong>では高率に肺癌を合併。</li>
+                                    <li>縦隔リンパ節生検には<strong>EUS-FNA</strong>が用いられる。</li>
+                                </ul>
+                            </li>
+                        </ul>`
+                    },
+                    {
+                        title: "間質性肺炎・関連疾患",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>特発性器質化肺炎 (COP/OP)</strong>: <strong>ステロイドが著効</strong>する。</li>
+                            <li><strong>過敏性肺炎 (HP)</strong>: 夏型は<strong>トリコスポロン</strong>が原因。聴診で<strong>squeak</strong>。</li>
+                            <li><strong>膠原病肺</strong>: <strong>抗ARS抗体陽性例</strong>で高頻度に合併。</li>
+                            <li><strong>肺胞蛋白症 (PAP)</strong>: CTで<strong>Crazy-paving pattern</strong>、BAL液は<strong>米のとぎ汁様</strong>。<strong>抗GM-CSF抗体</strong>陽性。治療は<strong>全肺洗浄</strong>。</li>
+                        </ul>`
+                    },
+                    {
+                        title: "感染症",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>非結核性抗酸菌 (NTM) 症</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li>最多は<strong>MAC</strong>。<strong>中高年の非喫煙女性</strong>に好発。</li>
+                                    <li>診断補助に<strong>抗GPL-core IgA抗体</strong>。</li>
+                                    <li>治療は<strong>CAM+RFP+EB</strong>の3剤併用。</li>
+                                </ul>
+                            </li>
+                            <li><strong>COVID-19</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li>後遺症に<strong>心筋障害</strong>など。</li>
+                                </ul>
+                            </li>
+                        </ul>`
+                    },
+                    {
+                        title: "閉塞性肺疾患",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>気管支喘息</strong>: 難治例では<strong>LAMA</strong>の上乗せを考慮。</li>
+                            <li><strong>COPD</strong>: <strong>CO2ナルコーシス</strong>には<strong>NPPV</strong>が良い適応。</li>
+                        </ul>`
+                    },
+                     {
+                        title: "アレルギー",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>Ⅲ型アレルギー</strong>: <strong>IgG</strong>による<strong>免疫複合体</strong>が関与。</li>
+                             <li><strong>アナフィラキシー</strong>: <strong>エピペン®</strong>は小児にも適応がある。</li>
+                        </ul>`
+                    }
+                ]
+            },
+            cardiology: {
+                name: "循環器内科",
+                introduction: "循環器内科のセクションでは、生命に直結する虚血性心疾患や心不全の急性期管理、そして弁膜症や不整脈、高血圧の治療戦略に焦点を当てます。心電図所見から病態を読み解き、適切な検査・治療を選択する能力が問われます。",
+                content: [
+                    {
+                        title: "虚血性心疾患",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>安定労作狭心症</strong>: 診断には<strong>運動負荷心電図</strong>、<strong>薬剤負荷心筋シンチ</strong>、<strong>冠動脈造影CT</strong>が有用。</li>
+                            <li><strong>急性冠症候群 (ACS)</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li><strong>下壁梗塞</strong>: <strong>II, III, aVFのST上昇</strong>。<strong>右室梗塞</strong>を合併しうる。</li>
+                                    <li><strong>初期対応</strong>: <strong>アスピリン</strong>、緊急<strong>PCI</strong>。</li>
+                                </ul>
+                            </li>
+                            <li><strong>PCI後の二次予防（予後改善薬）</strong>: <strong>抗血小板薬</strong>、<strong>スタチン</strong>、<strong>ACE阻害薬/ARB</strong>、<strong>β遮断薬</strong>。硝酸薬やCa拮抗薬は症状緩和目的。</li>
+                        </ul>`
+                    },
+                    {
+                        title: "心不全",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>HFpEF</strong>: 原因は<strong>高血圧性心疾患</strong>、<strong>肥大型心筋症</strong>、<strong>加齢</strong>など。</li>
+                            <li><strong>急性心不全 (Forrester分類)</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li><strong>II群 (Wet & Warm)</strong>: <strong>ループ利尿薬</strong>、<strong>硝酸薬</strong>。</li>
+                                    <li><strong>IV群 (Wet & Cold)</strong>: <strong>ドブタミン</strong>などの強心薬。</li>
+                                </ul>
+                            </li>
+                            <li><strong>肺うっ血の評価</strong>: <strong>BNP</strong>、<strong>胸部X線</strong>、<strong>心エコー</strong>。</li>
+                        </ul>`
+                    },
+                    {
+                        title: "その他",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>感染性心内膜炎 (IE)</strong>: <strong>反復した血液培養</strong>が最重要。<strong>心不全悪化時</strong>は早期手術を考慮。</li>
+                            <li><strong>高血圧</strong>: 第一選択薬は<strong>Ca拮抗薬</strong>、<strong>ACE阻害薬/ARB</strong>、<strong>サイアザイド系利尿薬</strong>。</li>
+                            <li><strong>徐脈性不整脈</strong>: 症候性の<strong>洞不全症候群</strong>、<strong>徐脈性AF</strong>、<strong>完全房室ブロック</strong>はペースメーカーの適応。</li>
+                            <li><strong>異型狭心症</strong>: 治療は<strong>Ca拮抗薬</strong>、<strong>硝酸薬</strong>。β遮断薬は禁忌。</li>
+                        </ul>`
+                    }
+                ]
+            },
+            gastroenterology: {
+                name: "消化器内科",
+                introduction: "消化器内科では、食道から大腸までの消化管、および肝・胆・膵の疾患を幅広く扱います。このセクションでは、各臓器の癌のリスク因子と特徴、ウイルス性肝炎やピロリ菌などの感染症関連疾患、そして解剖や生理に関する基本的な知識を確認します。",
+                content: [
+                    {
+                        title: "悪性腫瘍",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>食道癌</strong>: リスクは<strong>飲酒</strong>、<strong>喫煙</strong>。日本では<strong>扁平上皮癌</strong>が主。</li>
+                            <li><strong>胃癌</strong>: リスクは<strong>H.ピロリ感染</strong>、<strong>高塩分食</strong>。胃全摘後の合併症に<strong>貧血</strong>、<strong>胆石</strong>など。</li>
+                            <li><strong>大腸癌</strong>: リスクは<strong>肥満</strong>、<strong>脂肪・赤肉の高摂取</strong>、<strong>運動不足</strong>。</li>
+                            <li><strong>膵臓癌</strong>: <strong>浸潤性膵管癌</strong>が90%以上。<strong>KRAS</strong>遺伝子変異が多い。</li>
+                        </ul>`
+                    },
+                    {
+                        title: "肝・胆・膵疾患",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>B型肝炎 (HBV)</strong>: <strong>化学療法</strong>や<strong>免疫抑制剤</strong>で再活性化のリスク。</li>
+                            <li><strong>C型肝炎 (HCV)</strong>: 肝外病変として<strong>クリオグロブリン血症性血管炎</strong>。</li>
+                            <li><strong>NASH</strong>: 病理で<strong>肝細胞の風船様腫大</strong>、<strong>線維化</strong>。</li>
+                            <li><strong>Glisson鞘</strong>: <strong>門脈</strong>、<strong>固有肝動脈</strong>、<strong>胆管</strong>が走行。</li>
+                        </ul>`
+                    },
+                    {
+                        title: "その他",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>ヘリコバクター・ピロリ</strong>: 関連疾患に<strong>胃MALTリンパ腫</strong>、<strong>ITP</strong>。</li>
+                            <li><strong>EBウイルス (EBV)</strong>: 関連疾患に<strong>伝染性単核球症</strong>、<strong>上咽頭癌</strong>、<strong>血球貪食症候群</strong>。</li>
+                            <li><strong>胃酸分泌促進</strong>: <strong>ガストリン</strong>、<strong>アセチルコリン</strong>、<strong>ヒスタミン</strong>。</li>
+                            <li><strong>ガドリニウム造影剤</strong>: 重篤な<strong>腎機能障害</strong>で禁忌。</li>
+                        </ul>`
+                    }
+                ]
+            },
+            neurology: {
+                name: "脳神経内科",
+                introduction: "脳神経内科は、脳、脊髄、末梢神経、筋肉の疾患を診療します。ここでは、パーキンソン病などの変性疾患、脳卒中の超急性期治療、多発性硬化症といった脱髄疾患について、症状、診断、治療の要点を網羅的に学習します。",
+                content: [
+                    {
+                        title: "パーキンソン病 (PD) とパーキンソン症候群",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>非運動症状</strong>: <strong>嗅覚低下</strong>、<strong>便秘</strong>、<strong>REM睡眠行動異常症</strong>が先行。</li>
+                            <li><strong>病理</strong>: 中脳<strong>黒質</strong>のドパミン神経細胞脱落と<strong>レビー小体</strong>。</li>
+                            <li><strong>治療薬</strong>: レボドパの半減期は約90分。ドパミンアゴニストは衝動制御障害に注意。</li>
+                            <li><strong>鑑別</strong>: <strong>多系統萎縮症 (MSA)</strong>は突然死のリスクがある。</li>
+                        </ul>`
+                    },
+                    {
+                        title: "脳卒中",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>t-PA静注療法</strong>: 発症<strong>4.5時間以内</strong>。禁忌に<strong>発症時刻不明</strong>、<strong>血小板数10万未満</strong>、<strong>PT-INR > 1.7</strong>など。</li>
+                            <li><strong>病巣と症状</strong>
+                                <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                                    <li><strong>前大脳動脈 (ACA) 領域</strong>: <strong>下肢優位</strong>の麻痺。</li>
+                                    <li><strong>劣位半球障害</strong>: <strong>着衣失行</strong>、半側空間無視。</li>
+                                    <li><strong>優位半球障害</strong>: <strong>失語</strong>。</li>
+                                </ul>
+                            </li>
+                            <li><strong>失語</strong>: <strong>伝導失語</strong>は聴覚理解・発話流暢だが<strong>復唱が障害</strong>される。</li>
+                        </ul>`
+                    },
+                    {
+                        title: "脱髄・変性疾患",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>多発性硬化症 (MS)</strong>: <strong>脳室周囲</strong>に卵円形病変。髄液で<strong>オリゴクローナルバンド</strong>陽性。</li>
+                            <li><strong>視神経脊髄炎 (NMOSD)</strong>: <strong>抗AQP4抗体</strong>陽性。<strong>3椎体以上に及ぶ長大な脊髄病変</strong>。</li>
+                            <li><strong>筋萎縮性側索硬化症 (ALS)</strong>: <strong>男性</strong>にやや多い。</li>
+                        </ul>`
+                    }
+                ]
+            },
+            nephrology: {
+                name: "腎臓内科",
+                introduction: "腎臓内科では、糸球体疾患から電解質異常まで、腎臓に関連する幅広い病態を扱います。このセクションでは、IgA腎症やネフローゼ症候群などの主要な糸球体疾患の病理と臨床像、腎代替療法の選択、そして臨床で頻繁に遭遇する電解質異常の対応について学びます。",
+                content: [
+                    {
+                        title: "糸球体疾患",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>IgA腎症</strong>: 日本で最多。<strong>IgA血管炎</strong>の腎症と病理が類似。</li>
+                            <li><strong>半月体形成性糸球体腎炎 (RPGN)</strong>: ANCA関連が最多（特に<strong>MPO-ANCA</strong>）。治療は<strong>ステロイド＋免疫抑制薬</strong>。</li>
+                            <li><strong>微小変化群ネフローゼ症候群 (MCNS)</strong>: 電子顕微鏡で<strong>足突起の癒合</strong>。<strong>ステロイドが著効</strong>。</li>
+                            <li><strong>アルポート症候群</strong>: IV型コラーゲン異常。腎症、<strong>感音難聴</strong>、眼症状。<strong>男性で重症化</strong>。</li>
+                        </ul>`
+                    },
+                    {
+                        title: "腎代替療法",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>CKD G5期 (eGFR < 15)</strong>で検討。</li>
+                            <li>腎移植は透析導入前でも、<strong>ABO血液型不適合</strong>でも可能。</li>
+                        </ul>`
+                    },
+                    {
+                        title: "電解質・その他",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>高K血症</strong>: まず<strong>再検</strong>や患者状態確認、そして<strong>心電図</strong>。</li>
+                            <li><strong>コレステロール塞栓症 (CCE)</strong>: カテーテル操作後に発症。<strong>Livedo reticularis</strong>、<strong>末梢血好酸球増多</strong>、<strong>補体価低下</strong>。</li>
+                            <li><strong>悪性高血圧</strong>: 臓器障害を伴う著しい血圧上昇。<strong>眼底検査</strong>で乳頭浮腫など。</li>
+                        </ul>`
+                    }
+                ]
+            },
+            hematology: {
+                name: "血液内科",
+                introduction: "血液内科は、赤血球、白血球、血小板、凝固因子など血液成分の異常を診療します。悪性リンパ腫や白血病といった造血器腫瘍の診断（特に染色体異常）と治療、そして各種貧血や凝固異常の鑑別が学習のポイントです。",
+                content: [
+                    {
+                        title: "悪性リンパ腫",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>疫学</strong>: 罹患率は<strong>増加傾向</strong>。</li>
+                            <li><strong>染色体転座</strong>: <strong>t(8;14)</strong>は<strong>バーキットリンパ腫</strong> (c-MYC)、<strong>t(14;18)</strong>は<strong>濾胞性リンパ腫</strong> (BCL2)。</li>
+                            <li><strong>治療</strong>: <strong>リツキシマブ</strong>は<strong>CD20</strong>標的。濾胞性リンパ腫は無症状なら経過観察も。</li>
+                        </ul>`
+                    },
+                    {
+                        title: "白血病",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>CML</strong>: <strong>BCR-ABL</strong>が原因。治療は<strong>イマチニブ</strong>などTKI。</li>
+                            <li><strong>APL</strong>: <strong>t(15;17)</strong>。治療は<strong>ATRA</strong>と<strong>亜ヒ酸</strong>。</li>
+                            <li><strong>AML</strong>: 予後良好群に<strong>t(8;21)</strong>、<strong>inv(16)</strong>。化学療法中の<strong>発熱性好中球減少症</strong>では、直ちに<strong>血液培養</strong>と広域抗菌薬。</li>
+                        </ul>`
+                    },
+                    {
+                        title: "その他",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>貧血</strong>: <strong>溶血性貧血</strong>は網赤血球増加。<strong>悪性貧血</strong>は<strong>ビタミンB12</strong>吸収障害。<strong>サラセミア</strong>は<strong>小球性貧血</strong>。</li>
+                            <li><strong>凝固異常</strong>: <strong>第VIII因子欠乏</strong>は<strong>APTTのみ延長</strong>。</li>
+                        </ul>`
+                    }
+                ]
+            },
+            infectious: {
+                name: "感染症科",
+                introduction: "感染症科のセクションでは、臨床で頻用される抗菌薬の代表的な副作用と、ワクチンに関する基本的な知識が問われます。薬剤の特性を理解し、安全な薬物療法を実践するための基礎を固めましょう。",
+                content: [
+                    {
+                        title: "抗菌薬の副作用",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>グリコペプチド系</strong>: <strong>レッドマン症候群</strong>。</li>
+                            <li><strong>アミノグリコシド系</strong>: <strong>第8脳神経障害</strong>、腎障害。</li>
+                            <li><strong>テトラサイクリン系</strong>: <strong>歯牙黄染</strong>。</li>
+                            <li><strong>ピボキシル基を持つ抗菌薬</strong>: 長期投与で<strong>低血糖</strong>のリスク。</li>
+                        </ul>`
+                    },
+                    {
+                        title: "ワクチン",
+                        details: `
+                        <ul class="list-disc list-inside space-y-4">
+                            <li><strong>実用化されている</strong>: <strong>ヒトパピローマウイルス (HPV)</strong>、<strong>風疹</strong>。</li>
+                            <li><strong>実用化されていない</strong>: C型肝炎 (HCV)、HIVなど。</li>
+                        </ul>`
+                    }
+                ]
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const navList = document.getElementById('nav-list');
+            const mainContent = document.getElementById('main-content');
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const overviewChartCtx = document.getElementById('overviewChart').getContext('2d');
+
+            const departmentKeys = Object.keys(studyData);
+
+            departmentKeys.forEach(key => {
+                const item = document.createElement('li');
+                item.innerHTML = `<button data-key="${key}" class="nav-item w-full text-left px-4 py-2 rounded-lg hover:bg-[#EAE5DD] transition-colors duration-200">${studyData[key].name}</button>`;
+                navList.appendChild(item);
+            });
+
+            const createSectionHTML = (data) => {
+                let contentHTML = `<div class="bg-white p-6 md:p-8 rounded-xl shadow-sm">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">${data.name}</h2>
+                    <p class="text-gray-600 mb-8">${data.introduction}</p>`;
+
+                data.content.forEach((item, index) => {
+                    contentHTML += `
+                        <div class="mb-4 border-b border-gray-200">
+                            <button class="accordion-button w-full flex items-center text-left text-lg font-semibold p-4 hover:bg-gray-50 rounded-t-lg focus:outline-none">
+                                ${item.title}
+                            </button>
+                            <div class="accordion-content hidden p-4 bg-gray-50/50">
+                                ${item.details}
+                            </div>
+                        </div>`;
+                });
+
+                contentHTML += `</div>`;
+                return contentHTML;
+            };
+
+            navList.addEventListener('click', (e) => {
+                const button = e.target.closest('.nav-item');
+                if (button) {
+                    const key = button.dataset.key;
+                    
+                    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+                    button.classList.add('active');
+
+                    welcomeScreen.style.display = 'none';
+                    
+                    document.querySelectorAll('.content-section').forEach(section => section.remove());
+
+                    const section = document.createElement('div');
+                    section.className = 'content-section';
+                    section.innerHTML = createSectionHTML(studyData[key]);
+                    mainContent.appendChild(section);
+
+                    section.querySelectorAll('.accordion-button').forEach(button => {
+                        button.addEventListener('click', () => {
+                            button.classList.toggle('open');
+                            const content = button.nextElementSibling;
+                            content.classList.toggle('hidden');
+                        });
+                    });
+                }
+            });
+            
+            const chartLabels = departmentKeys.map(key => studyData[key].name);
+            const chartData = departmentKeys.map(key => studyData[key].content.length);
+
+            new Chart(overviewChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: chartLabels,
+                    datasets: [{
+                        label: '主要トピック数',
+                        data: chartData,
+                        backgroundColor: [
+                            'rgba(211, 175, 133, 0.6)',
+                            'rgba(146, 172, 166, 0.6)',
+                            'rgba(223, 198, 169, 0.6)',
+                            'rgba(180, 153, 142, 0.6)',
+                            'rgba(138, 131, 144, 0.6)',
+                            'rgba(195, 203, 184, 0.6)',
+                            'rgba(234, 216, 201, 0.6)',
+                            'rgba(169, 186, 194, 0.6)',
+                             'rgba(205, 184, 172, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(211, 175, 133, 1)',
+                            'rgba(146, 172, 166, 1)',
+                            'rgba(223, 198, 169, 1)',
+                            'rgba(180, 153, 142, 1)',
+                            'rgba(138, 131, 144, 1)',
+                            'rgba(195, 203, 184, 1)',
+                            'rgba(234, 216, 201, 1)',
+                            'rgba(169, 186, 194, 1)',
+                            'rgba(205, 184, 172, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: '診療科別トピック数',
+                            font: {
+                                size: 16
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
