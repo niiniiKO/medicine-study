@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北野病院 外科 採用試験 重要ポイント インフォグラフィック（完全版）</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flow-arrow {
+            position: relative;
+            width: 100%;
+            height: 2px;
+            background-color: #94D2BD;
+            margin: 1rem 0;
+        }
+        .flow-arrow::after {
+            content: '';
+            position: absolute;
+            right: -1px;
+            top: -5px;
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-left: 10px solid #94D2BD;
+        }
+        .blowout-diagram {
+            width: 120px;
+            height: 100px;
+            border: 3px solid #005F73;
+            border-radius: 50%;
+            position: relative;
+            margin: 1rem auto;
+        }
+        .blowout-diagram::before {
+            content: '👁️';
+            font-size: 3rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .blowout-diagram::after {
+            content: '↓';
+            font-size: 2rem;
+            color: #AE2012;
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 1.5s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+            40% { transform: translate(-50%, -10px); }
+            60% { transform: translate(-50%, -5px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-6xl">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#005F73]">北野病院 外科</h1>
+            <h2 class="text-2xl md:text-3xl font-bold text-[#0A9396]">採用試験 重要ポイント・完全版</h2>
+            <p class="mt-4 text-gray-600 max-w-3xl mx-auto">全診療科の過去問出題傾向を網羅的に分析。合格に不可欠なコア知識を視覚化し、効率的な学習をサポートします。</p>
+        </header>
+
+        <main class="space-y-16">
+
+            <section class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                <h3 class="text-2xl font-bold text-[#005F73] mb-4 text-center">出題分野の全体像</h3>
+                <p class="text-center text-gray-600 mb-6">消化器・呼吸器外科が二大巨頭ですが、各専門分野からも満遍なく出題されています。苦手分野を作らないことが重要です。</p>
+                <div class="chart-container mx-auto" style="max-width: 450px; height: 400px;">
+                    <canvas id="categoryDistributionChart"></canvas>
+                </div>
+            </section>
+
+            <section id="gastrointestinal" class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                <h3 class="text-3xl font-bold text-[#005F73] mb-6 text-center">消化器外科 Core Concepts</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h4 class="text-xl font-bold text-[#0A9396] mb-4 text-center">癌治療の原則</h4>
+                        <ul class="space-y-4">
+                            <li class="p-3 bg-white rounded-lg shadow-sm"><strong>大腸癌:</strong> 最多転移先は<span class="font-bold text-[#EE9B00]">肝臓</span>。Stage IIIでは術後補助化学療法を推奨。</li>
+                            <li class="p-3 bg-white rounded-lg shadow-sm"><strong>胃癌 (GIST):</strong> リンパ節転移は稀なため、<span class="font-bold text-[#CA6702]">所属リンパ節郭清は原則不要</span>（部分切除）。</li>
+                            <li class="p-3 bg-white rounded-lg shadow-sm"><strong>膵臓癌:</strong> <span class="font-bold text-[#AE2012]">術後補助化学療法</span>が標準治療。主要血管への浸潤度が切除可否を分ける。</li>
+                            <li class="p-3 bg-white rounded-lg shadow-sm"><strong>食道癌:</strong> 再建の第一選択は<span class="font-bold text-[#005F73]">胃管</span>。胃が使えない場合は大腸・空腸。</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h4 class="text-xl font-bold text-[#0A9396] mb-4 text-center">急性腹症のマネジメント</h4>
+                         <div class="space-y-4">
+                            <div class="text-center p-4 bg-white rounded-lg shadow-sm">
+                                <div class="font-bold text-lg">急性胆嚢炎</div>
+                                <div class="text-sm text-gray-500 mb-2">全身状態が安定していれば…</div>
+                                <div class="text-xl font-bold text-[#0A9396]">早期腹腔鏡下胆嚢摘出術</div>
+                                <div class="text-xs mt-1">※重症例ではPTGBDでドレナージを先行</div>
+                            </div>
+                            <div class="flow-arrow"></div>
+                            <div class="text-center p-4 bg-white rounded-lg shadow-sm">
+                                <div class="font-bold text-lg">穿孔性腹膜炎（S状結腸癌）</div>
+                                <div class="text-sm text-gray-500 mb-2">感染制御と根治を目指す</div>
+                                <div class="text-xl font-bold text-[#9B2226]">Hartmann手術（ストマ造設）</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="respiratory" class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                <h3 class="text-3xl font-bold text-[#005F73] mb-6 text-center">呼吸器外科 Core Concepts</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h4 class="text-xl font-bold text-[#0A9396] mb-4 text-center">肺癌：治療方針の分岐点</h4>
+                        <p class="text-gray-600 mb-4 text-sm">肺癌の治療は組織型で大きく異なります。特に小細胞癌と非小細胞癌の違いは頻出です。</p>
+                        <div class="chart-container mx-auto" style="height: 300px;">
+                            <canvas id="lungCancerTreatmentChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h4 class="text-xl font-bold text-[#0A9396] mb-4 text-center">気胸：緊急度ランキング</h4>
+                        <p class="text-gray-600 mb-4 text-sm">気胸は種類によって緊急度が全く異なります。生命を脅かす病態から順に覚えることが重要です。</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center bg-white p-3 rounded-lg shadow-sm"><span class="text-2xl font-bold text-[#9B2226] mr-4">1</span><div><h5 class="font-bold">緊張性気胸</h5><p class="text-sm text-gray-600">最優先：緊急脱気（穿刺）</p></div></li>
+                            <li class="flex items-center bg-white p-3 rounded-lg shadow-sm"><span class="text-2xl font-bold text-[#CA6702] mr-4">2</span><div><h5 class="font-bold">血気胸</h5><p class="text-sm text-gray-600">持続出血時は緊急手術</p></div></li>
+                            <li class="flex items-center bg-white p-3 rounded-lg shadow-sm"><span class="text-2xl font-bold text-[#EE9B00] mr-4">3</span><div><h5 class="font-bold">両側性気胸</h5><p class="text-sm text-gray-600">呼吸不全リスク高く手術適応</p></div></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="specialties" class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                <h3 class="text-3xl font-bold text-[#005F73] mb-8 text-center">各科専門分野 キーポイント</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <div class="bg-gray-50 rounded-xl p-6 flex flex-col">
+                        <h4 class="text-xl font-bold text-[#0A9396] mb-4 text-center">心臓血管外科</h4>
+                        <div class="flex-grow space-y-4">
+                           <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                <div class="font-bold">CABGグラフト</div>
+                                <p class="text-sm">長期開存率No.1は <span class="text-lg font-bold text-[#005F73]">内胸動脈</span></p>
+                           </div>
+                           <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                <div class="font-bold">大動脈瘤 破裂リスク</div>
+                                <p class="text-sm"><span class="text-red-600 font-bold">囊状</span> > 紡錘状, <span class="text-red-600 font-bold">女性</span> > 男性</p>
+                           </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl p-6 flex flex-col">
+                        <h4 class="text-xl font-bold text-[#0A9396] mb-4 text-center">小児外科</h4>
+                        <div class="flex-grow space-y-4">
+                           <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                <div class="font-bold">肥厚性幽門狭窄症</div>
+                                <p class="text-sm">噴水状嘔吐 → <span class="font-bold text-[#EE9B00]">代謝性アルカローシス</span></p>
+                           </div>
+                           <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                <div class="font-bold">鼠径ヘルニア</div>
+                                <p class="text-sm">小児外科最多疾患。<span class="font-bold text-[#AE2012]">人工物(メッシュ)は用いない</span></p>
+                           </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl p-6 flex flex-col">
+                        <h4 class="text-xl font-bold text-[#0A9396] mb-4 text-center">乳腺外科</h4>
+                         <div class="chart-container mx-auto" style="height: 150px;">
+                            <canvas id="breastCancerAgeChart"></canvas>
+                        </div>
+                        <p class="text-center text-sm mt-2">乳癌は<span class="font-bold text-[#CA6702]">40代後半</span>と<span class="font-bold text-[#BB3E03]">60代後半</span>の二峰性ピーク</p>
+                        <p class="text-center text-sm mt-2 bg-white p-2 rounded-lg">血性乳頭分泌の最多原因は<span class="font-bold text-[#0A9396]">乳管内乳頭腫</span></p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl p-6 flex flex-col">
+                        <h4 class="text-xl font-bold text-[#0A9396] mb-4 text-center">脳神経外科</h4>
+                        <div class="text-center p-3 bg-white rounded-lg shadow-sm flex-grow flex flex-col justify-center">
+                            <div class="font-bold">急性期脳梗塞の再灌流療法</div>
+                            <p class="text-sm mt-2">t-PA: <span class="font-bold text-xl text-[#005F73]">~4.5h</span></p>
+                            <p class="text-sm mt-1">血栓回収: <span class="font-bold text-xl text-[#0A9396]">~6h (最大24h)</span></p>
+                            <p class="text-xs mt-2">※DWI-FLAIR mismatchも適応判断に有用</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl p-6 flex flex-col">
+                        <h4 class="text-xl font-bold text-[#0A9396] mb-4 text-center">形成外科</h4>
+                        <div class="text-center p-3 bg-white rounded-lg shadow-sm flex-grow">
+                            <div class="font-bold">眼窩吹き抜け骨折</div>
+                            <div class="blowout-diagram"></div>
+                            <p class="text-sm">眼球運動障害、頬部知覚障害、鼻出血</p>
+                        </div>
+                         <div class="text-center p-3 bg-white rounded-lg shadow-sm mt-4">
+                            <div class="font-bold">口蓋裂手術の目的</div>
+                            <p class="text-sm"><span class="font-bold text-lg text-[#EE9B00]">構音機能の改善</span></p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl p-6 flex flex-col">
+                        <h4 class="text-xl font-bold text-[#0A9396] mb-4 text-center">耳鼻咽喉科・頭頸部外科</h4>
+                        <div class="flex-grow space-y-4">
+                           <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                <div class="font-bold">甲状腺癌 最多組織型</div>
+                                <p class="text-lg font-bold text-[#005F73]">乳頭癌 (~90%)</p>
+                           </div>
+                           <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                <div class="font-bold">耳下腺腫瘍 最多</div>
+                                <p class="text-lg font-bold text-[#0A9396]">多形腺腫 (良性)</p>
+                           </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-16 pt-8 border-t border-gray-300">
+            <p class="text-gray-500 text-sm">このインフォグラフィックは提供された「北野病院 外科 過去問対策まとめノート」のデータを基に作成されました。</p>
+            <p class="text-gray-500 text-sm">最終更新: 2025年8月5日</p>
+        </footer>
+
+    </div>
+
+<script>
+const PALETTE = {
+    blue: '#005F73', teal: '#0A9396', aqua: '#94D2BD', sand: '#E9D8A6',
+    orange1: '#EE9B00', orange2: '#CA6702', rust1: '#BB3E03', rust2: '#AE2012', red: '#9B2226'
+};
+
+const tooltipTitleCallback = (tooltipItems) => {
+    const item = tooltipItems[0];
+    let label = item.chart.data.labels[item.dataIndex];
+    return Array.isArray(label) ? label.join(' ') : label;
+};
+
+const SHARED_CHART_OPTIONS = {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+        legend: { position: 'bottom', labels: { font: { family: "'Noto Sans JP', sans-serif" }, boxWidth: 20, padding: 20 }},
+        tooltip: {
+            callbacks: { title: tooltipTitleCallback },
+            titleFont: { family: "'Noto Sans JP', sans-serif", size: 14 },
+            bodyFont: { family: "'Noto Sans JP', sans-serif", size: 12 },
+            backgroundColor: 'rgba(0, 0, 0, 0.8)', titleColor: '#ffffff', bodyColor: '#ffffff', padding: 10, cornerRadius: 5
+        }
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    const categoryCtx = document.getElementById('categoryDistributionChart');
+    if (categoryCtx) {
+        new Chart(categoryCtx, {
+            type: 'polarArea',
+            data: {
+                labels: ['消化器外科', '呼吸器外科', '心臓血管外科', '小児外科', '耳鼻・頭頸部', '脳神経外科', '形成・乳腺'],
+                datasets: [{
+                    label: '出題数', data: [7, 5, 4, 4, 3, 2, 4],
+                    backgroundColor: [PALETTE.blue, PALETTE.teal, PALETTE.orange1, PALETTE.aqua, PALETTE.orange2, PALETTE.rust1, PALETTE.sand]
+                }]
+            },
+            options: { ...SHARED_CHART_OPTIONS }
+        });
+    }
+
+    const lungCancerCtx = document.getElementById('lungCancerTreatmentChart');
+    if (lungCancerCtx) {
+        new Chart(lungCancerCtx, {
+            type: 'bar',
+            data: {
+                labels: ['非小細胞癌', '小細胞癌'],
+                datasets: [
+                    { label: '手術', data: [80, 5], backgroundColor: PALETTE.blue },
+                    { label: '化学療法', data: [60, 95], backgroundColor: PALETTE.teal },
+                    { label: '放射線療法', data: [50, 90], backgroundColor: PALETTE.aqua }
+                ]
+            },
+            options: { ...SHARED_CHART_OPTIONS, scales: { x: { stacked: false }, y: { stacked: false, title: {display: true, text: '治療選択率(%) イメージ'} } } }
+        });
+    }
+
+    const breastCancerAgeCtx = document.getElementById('breastCancerAgeChart');
+    if (breastCancerAgeCtx) {
+        new Chart(breastCancerAgeCtx, {
+            type: 'line',
+            data: {
+                labels: ['20代', '30代', '40代', '50代', '60代', '70代', '80代'],
+                datasets: [{
+                    label: '乳癌好発年齢',
+                    data: [5, 20, 85, 70, 95, 60, 30],
+                    borderColor: PALETTE.orange2,
+                    backgroundColor: 'rgba(202, 103, 2, 0.2)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: { ...SHARED_CHART_OPTIONS, plugins: { ...SHARED_CHART_OPTIONS.plugins, legend: { display: false } } }
+        });
+    }
+});
+</script>
+
+</body>
+</html>

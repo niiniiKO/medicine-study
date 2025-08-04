@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北野病院 過去問分析インフォグラフィック (改訂版)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 250px;
+            width: 100%;
+            max-width: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 280px;
+            }
+        }
+        .flowchart-node {
+            border: 2px solid;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 700;
+            min-width: 110px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .card-header {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .card-header .icon {
+            font-size: 1.8rem;
+            margin-right: 0.75rem;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 0.1rem 0.4rem;
+            border-radius: 0.25rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-gradient-to-r from-slate-100 to-gray-200 shadow-lg sticky top-0 z-10 border-b-2 border-white">
+        <div class="container mx-auto px-6 py-4">
+            <h1 class="text-2xl md:text-3xl font-bold text-center text-[#2c3e50]">北野病院 マイナー科試験 頻出トピック分析</h1>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="intro" class="mb-12 text-center">
+            <p class="text-lg max-w-3xl mx-auto text-gray-600">
+                北野病院の過去問で問われた重要知識を、記憶に残りやすいインフォグラフィックで解説します。アイコンやグラフで要点を直感的に掴み、試験対策を加速させましょう。
+            </p>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <div class="card">
+                <h2 class="card-header text-[#1f77b4]"><span class="icon">🩹</span>形成外科</h2>
+                <h3 class="font-bold mb-2">創傷治癒のプロセス</h3>
+                <p class="text-gray-600 mb-4">①炎症期 → ②増殖期 → ③成熟期の順。<span class="highlight">湿潤環境</span>が治癒を促進します。</p>
+                <h3 class="font-bold mb-2">先天性疾患</h3>
+                <ul class="list-none space-y-2 text-gray-600">
+                    <li class="flex items-center"><span class="text-xl mr-2">👶</span>口唇口蓋裂: 発生頻度は<strong class="text-2xl text-[#1f77b4] ml-2">500人</strong>に1人。</li>
+                    <li class="flex items-center"><span class="text-xl mr-2">👁️</span>先天性眼瞼下垂: 放置すると<strong class="text-[#1f77b4]">弱視</strong>のリスク。</li>
+                </ul>
+            </div>
+
+            <div class="card md:col-span-2 lg:col-span-2">
+                <h2 class="card-header text-[#ff7f0e]"><span class="icon">🚑</span>救急科 (1) - 外傷・ショック</h2>
+                <h3 class="font-bold mb-2">初期診療 (ABCDE)</h3>
+                <p class="text-gray-600 mb-4">最優先は<strong class="text-[#ff7f0e] text-lg p-1 rounded bg-orange-100">A: 気道確保</strong>と頸椎保護。循環動態が不安定ならCTより安定化を優先。</p>
+                <h3 class="font-bold mb-2">ショックの分類と対応</h3>
+                <div class="chart-container">
+                    <canvas id="shockTypeChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card md:col-span-3">
+                <h2 class="card-header text-[#ff7f0e]"><span class="icon">🚨</span>救急科 (2) - トリアージとその他</h2>
+                <h3 class="font-bold mb-2">START式トリアージ</h3>
+                <p class="text-gray-600 mb-4">歩行→呼吸→循環→意識の順で評価。歩行可能なら緑。気道確保後も自発呼吸がなければ黒。</p>
+                <div class="flex flex-wrap justify-center gap-4 text-sm">
+                    <div class="flowchart-node text-white bg-red-500 border-red-600">赤: 呼吸>30, 橈骨動脈×, 指示×</div>
+                    <div class="flowchart-node text-yellow-800 bg-yellow-300 border-yellow-500">黄: 赤・緑・黒以外</div>
+                    <div class="flowchart-node text-white bg-green-500 border-green-600">緑: 歩行可能</div>
+                    <div class="flowchart-node text-white bg-black border-gray-700">黒: 呼吸なし</div>
+                </div>
+                 <h3 class="font-bold mt-6 mb-2">中毒・環境障害</h3>
+                <ul class="list-disc list-inside space-y-1 text-gray-600">
+                    <li>薬物中毒: <span class="highlight">活性炭</span>は摂取後1-2時間以内。</li>
+                    <li>熱傷: 輸液計算は<strong class="text-[#ff7f0e]">II度+III度</strong>の面積。予防的抗菌薬は不要。</li>
+                    <li>横紋筋融解症: <strong class="text-[#ff7f0e]">ミオグロビン尿</strong>（褐色尿）を呈する。</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2 class="card-header text-[#2ca02c]"><span class="icon">🦴</span>整形外科</h2>
+                <h3 class="font-bold mb-2">重要骨折と合併症</h3>
+                <ul class="list-none space-y-2 text-gray-600">
+                    <li>上腕骨骨幹部骨折: <strong class="text-[#2ca02c]">橈骨神経麻痺</strong></li>
+                    <li>上腕骨顆上骨折 (小児): <strong class="text-[#2ca02c]">Volkmann拘縮</strong></li>
+                    <li>開放骨折: <strong class="text-red-500">緊急手術</strong></li>
+                </ul>
+                 <h3 class="font-bold mt-4 mb-2">骨粗鬆症</h3>
+                 <p class="text-gray-600">閉経後女性やステロイド使用がリスク。治療は骨折予防に<span class="highlight">有効</span>。</p>
+            </div>
+
+            <div class="card">
+                <h2 class="card-header text-[#d62728]"><span class="icon">💧</span>泌尿器科</h2>
+                <h3 class="font-bold mb-2">泌尿器科腫瘍</h3>
+                <ul class="list-none space-y-2 text-gray-600">
+                    <li class="flex items-center"><span class="text-xl mr-2">🚬</span>膀胱癌: 最大のリスクは<strong class="text-[#d62728]">喫煙</strong>。</li>
+                    <li class="flex items-center"><span class="text-xl mr-2">💊</span>腎細胞癌: <strong class="text-[#d62728]">化学療法は無効</strong>。</li>
+                </ul>
+                <h3 class="font-bold mt-4 mb-2">前立腺肥大症 (BPH)</h3>
+                <p class="text-gray-600">α1遮断薬に<span class="highlight">前立腺縮小作用はない</span>。</p>
+            </div>
+
+            <div class="card">
+                <h2 class="card-header text-[#9467bd]"><span class="icon">🧠</span>精神科</h2>
+                <h3 class="font-bold mb-2">気分障害</h3>
+                <ul class="list-none space-y-2 text-gray-600">
+                    <li>うつ病: 微小妄想（罪業・貧困・心気）。</li>
+                    <li>双極性障害: 躁状態で<strong class="text-[#9467bd]">観念奔逸</strong>。</li>
+                </ul>
+                <h3 class="font-bold mt-4 mb-2">統合失調症</h3>
+                <p class="text-gray-600">幻覚は<strong class="text-[#9467bd]">幻聴</strong>が最多。遺伝一致率は約<strong class="text-2xl text-[#9467bd]">50%</strong>。</p>
+                 <h3 class="font-bold mt-4 mb-2">アルコール離脱</h3>
+                <p class="text-gray-600"><strong class="text-[#9467bd]">幻視</strong>が特徴。治療はベンゾジアゼピン。</p>
+            </div>
+
+            <div class="card md:col-span-3">
+                <h2 class="card-header text-[#8c564b]"><span class="icon">💉</span>麻酔科</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-bold mb-2">重要麻酔薬</h3>
+                        <ul class="list-none space-y-2 text-gray-600">
+                            <li><strong class="text-[#8c564b]">小児導入</strong>: セボフルラン (刺激少)</li>
+                            <li><strong class="text-[#8c564b]">PONV抑制</strong>: プロポフォール</li>
+                            <li><strong class="text-[#8c564b]">腎障害でもOK</strong>: レミフェンタニル</li>
+                        </ul>
+                        <h3 class="font-bold mt-4 mb-2">術中管理</h3>
+                         <ul class="list-disc list-inside space-y-1 text-gray-600">
+                           <li>肺塞栓症: 呼気終末CO2は<strong class="text-red-500">急激に低下</strong>。</li>
+                           <li>帝王切開: 麻酔が<strong class="text-blue-500">広がりやすい</strong>。</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-2">麻酔薬の拮抗薬ペア</h3>
+                        <div class="chart-container" style="height: 220px;">
+                            <canvas id="antidoteChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2 class="card-header text-[#e377c2]"><span class="icon">👂</span>耳鼻咽喉科</h2>
+                <ul class="list-disc list-inside space-y-1 text-gray-600">
+                    <li>腫瘍: 口腔は<strong class="text-[#e377c2]">扁平上皮癌</strong>、甲状腺は<strong class="text-[#e377c2]">乳頭癌</strong>が最多。</li>
+                    <li>真珠腫性中耳炎: <span class="highlight">伝音難聴</span>。</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2 class="card-header text-[#7f7f7f]"><span class="icon">⚡</span>脳神経外科</h2>
+                <ul class="list-disc list-inside space-y-1 text-gray-600">
+                    <li>TIA徴候: <strong class="text-[#7f7f7f]">一過性黒内障</strong>。</li>
+                    <li>急性期脳梗塞: <span class="highlight">DWI/FLAIRミスマッチ</span>が治療適応の鍵。</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2 class="card-header text-[#bcbd22]"><span class="icon">🎗️</span>腫瘍内科</h2>
+                <h3 class="font-bold mb-2">遺伝性乳癌卵巣癌(HBOC)</h3>
+                <ul class="list-disc list-inside space-y-1 text-gray-600">
+                    <li>BRCA1変異: <strong class="text-[#bcbd22]">トリプルネガティブ乳癌</strong>に多い。</li>
+                    <li>男性リスク: <strong class="text-[#bcbd22]">前立腺癌</strong>。</li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="text-center py-6 mt-8 bg-gray-800 text-white">
+        <p>&copy; 2025 北野病院 過去問分析インフォグラフィック</p>
+    </footer>
+
+    <script>
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        font: { size: 12 },
+                        padding: 20
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            }
+        };
+
+        new Chart(document.getElementById('shockTypeChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['血液分布異常性', '閉塞性', '循環血液量減少性', '心原性'],
+                datasets: [{
+                    label: 'ショックの分類',
+                    data: [3, 2, 2, 1],
+                    backgroundColor: ['#ff7f0e', '#d62728', '#1f77b4', '#9467bd'],
+                    borderColor: '#ffffff',
+                    borderWidth: 2,
+                }]
+            },
+            options: { ...commonChartOptions }
+        });
+
+        new Chart(document.getElementById('antidoteChart'), {
+            type: 'bar',
+            data: {
+                labels: ['ベンゾジアゼピン系', 'オピオイド', 'ロクロニウム'],
+                datasets: [{
+                    label: '拮抗薬',
+                    data: [1, 1, 1],
+                    backgroundColor: ['#8c564b', '#c49c94', '#e4d3cf'],
+                    barThickness: 25,
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback,
+                            label: (context) => {
+                                const antidotes = ['フルマゼニル', 'ナロキソン', 'スガマデクス'];
+                                return `拮抗薬: ${antidotes[context.dataIndex]}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: { display: false },
+                    y: {
+                        ticks: {
+                            font: { weight: 'bold' }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

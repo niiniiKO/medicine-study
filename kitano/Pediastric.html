@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【完全版】北野病院 産婦人科・小児科 試験対策インフォグラフィック</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #F8F9FA;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-height: 400px;
+            }
+        }
+        .flowchart-box {
+            border: 2px solid;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+        }
+        .flowchart-arrow {
+            font-size: 2rem;
+            line-height: 1;
+            color: #073B4C;
+            text-align: center;
+        }
+        .section-title {
+            color: #118AB2;
+            border-color: #FF6B6B;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card-title {
+            color: #073B4C;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        .card-content {
+            flex-grow: 1;
+        }
+        .card-explanation {
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: #4A5568;
+        }
+        .anatomy-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .vessel {
+            width: 80%;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            text-align: center;
+            font-weight: 600;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2" style="color: #073B4C;">北野病院 産婦人科・小児科</h1>
+            <p class="text-xl md:text-2xl font-semibold" style="color: #118AB2;">過去問完全網羅インフォグラフィック</p>
+        </header>
+
+        <!-- 産婦人科セクション -->
+        <section id="obgyn" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 pb-2 border-b-4 section-title">産婦人科</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- 乳癌 -->
+                <div class="card md:col-span-2 lg:col-span-4">
+                    <h3 class="card-title">乳癌の重要ポイント</h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="border p-4 rounded-lg">
+                            <h4 class="font-bold text-center mb-2" style="color:#FF6B6B;">乳房温存術の適応除外</h4>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>広範な進展（広範囲の枝状石灰化など）</li>
+                                <li>同側乳房内の多発病変</li>
+                                <li>放射線照射の禁忌（妊娠中、活動性膠原病）</li>
+                                <li>切除断端陽性（がんが取りきれない）</li>
+                                <li class="text-xs text-gray-500 mt-2">※腋窩リンパ節転移は絶対的禁忌ではない</li>
+                            </ul>
+                        </div>
+                        <div class="border p-4 rounded-lg">
+                            <h4 class="font-bold text-center mb-2" style="color:#FFD166;">ホルモン療法</h4>
+                             <table class="w-full text-sm">
+                                <thead><tr class="border-b"><th class="py-1">対象</th><th class="py-1">薬剤</th></tr></thead>
+                                <tbody>
+                                    <tr class="border-b"><td class="py-2 font-semibold">閉経前</td><td class="py-2">タモキシフェン + LH-RHアゴニスト</td></tr>
+                                    <tr><td class="py-2 font-semibold">閉経後</td><td class="py-2">アロマターゼ阻害薬</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="border p-4 rounded-lg">
+                            <h4 class="font-bold text-center mb-2" style="color:#06D6A0;">HBOC (遺伝性乳癌卵巣癌)</h4>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>原因遺伝子: <b>BRCA1, BRCA2</b> (常染色体優性)</li>
+                                <li><b>BRCA1</b>: トリプルネガティブ乳癌リスク↑</li>
+                                <li><b>BRCA2</b>: 男性乳癌, 膵癌, Fanconi貧血リスク↑</li>
+                                <li>治療薬: <b>PARP阻害薬</b> (合成致死)</li>
+                                <li>RRSOで卵巣癌リスク<b>80%以上減</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 子宮頸癌・体癌 -->
+                <div class="card md:col-span-2 lg:col-span-2">
+                    <h3 class="card-title">子宮頸癌</h3>
+                    <div class="card-content grid grid-cols-2 gap-4">
+                        <div class="chart-container h-48">
+                            <canvas id="cervicalCancerChart"></canvas>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-center text-sm mb-2" style="color:#118AB2;">HPV感染と発癌メカニズム</h4>
+                            <div class="text-center text-sm space-y-1">
+                                <div class="flowchart-box text-xs" style="border-color: #FF6B6B; color: #FF6B6B;">高リスクHPV持続感染</div>
+                                <div class="flowchart-arrow text-base">↓</div>
+                                <div class="flowchart-box text-xs" style="border-color: #FFD166; color: #FFD166;">E6→p53不活化<br>E7→RB不活化</div>
+                                <div class="flowchart-arrow text-base">↓</div>
+                                <div class="flowchart-box text-xs" style="border-color: #073B4C; color: #073B4C;">細胞周期の異常→癌化</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="card-explanation">組織型は扁平上皮癌(75%)、腺癌(25%)。9価ワクチンは原因の80-90%を予防。治療効果はない。</p>
+                </div>
+
+                <div class="card md:col-span-2 lg:col-span-2">
+                    <h3 class="card-title">子宮体癌・卵巣癌</h3>
+                    <div class="card-content grid grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-bold text-center mb-2" style="color:#FF6B6B;">子宮体癌リスク</h4>
+                            <ul class="list-none text-sm space-y-1">
+                                <li class="bg-red-50 p-1 rounded">Unopposed Estrogen</li>
+                                <li class="bg-red-50 p-1 rounded">肥満、未産婦、晩期閉経</li>
+                                <li class="bg-red-50 p-1 rounded">PCOS、タモキシフェン</li>
+                                <li class="bg-red-50 p-1 rounded"><b>Lynch症候群</b></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-center mb-2" style="color:#118AB2;">卵巣癌の組織型 (上皮性)</h4>
+                            <div class="chart-container h-48">
+                                <canvas id="ovarianCancerChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="card-explanation">子宮体癌は近年増加傾向。卵巣癌は日本では明細胞癌・類内膜癌が多く、子宮内膜症が発生母地となることがある。</p>
+                </div>
+
+                <!-- 解剖・生理 -->
+                 <div class="card md:col-span-2 lg:col-span-2">
+                    <h3 class="card-title">骨盤内血管走行</h3>
+                    <div class="card-content grid grid-cols-2 gap-4 items-center">
+                        <div class="anatomy-diagram">
+                            <h4 class="font-semibold text-center">動脈</h4>
+                            <div class="vessel" style="background-color: #FF6B6B;">腹部大動脈</div>
+                            <div class="flowchart-arrow text-lg">↓</div>
+                            <div class="vessel text-xs" style="background-color: #FF6B6B;">卵巣動脈</div>
+                            <div class="vessel mt-2" style="background-color: #FF6B6B;">内腸骨動脈</div>
+                            <div class="flowchart-arrow text-lg">↓</div>
+                            <div class="vessel text-xs" style="background-color: #FF6B6B;">子宮動脈 (尿管の前)</div>
+                        </div>
+                        <div class="anatomy-diagram">
+                            <h4 class="font-semibold text-center">静脈</h4>
+                            <div class="vessel text-xs" style="background-color: #118AB2;">左卵巣静脈</div>
+                            <div class="flowchart-arrow text-lg">↓</div>
+                            <div class="vessel" style="background-color: #118AB2;">左腎静脈</div>
+                            <div class="vessel mt-2 text-xs" style="background-color: #118AB2;">右卵巣静脈</div>
+                            <div class="flowchart-arrow text-lg">↓</div>
+                            <div class="vessel" style="background-color: #118AB2;">下大静脈</div>
+                        </div>
+                    </div>
+                    <p class="card-explanation">子宮動脈と尿管の位置関係 (Water under the bridge)、左右の卵巣静脈の還流先の違いは頻出。</p>
+                </div>
+                
+                <div class="card md:col-span-2 lg:col-span-2">
+                    <h3 class="card-title">妊娠中の母体の生理的変化</h3>
+                    <div class="card-content grid grid-cols-2 gap-x-4 gap-y-2">
+                        <div class="text-center"><span class="font-bold text-lg" style="color:#06D6A0;">↑</span> 循環血液量</div>
+                        <div class="text-center"><span class="font-bold text-lg" style="color:#FF6B6B;">↓</span> 末梢血管抵抗</div>
+                        <div class="text-center"><span class="font-bold text-lg" style="color:#06D6A0;">↑</span> 心拍出量</div>
+                        <div class="text-center"><span class="font-bold text-lg" style="color:#FF6B6B;">↓</span> 機能的残気量</div>
+                        <div class="text-center"><span class="font-bold text-lg" style="color:#06D6A0;">↑</span> GFR</div>
+                        <div class="text-center"><span class="font-bold text-lg" style="color:#06D6A0;">↑</span> 凝固能</div>
+                        <div class="text-center"><span class="font-bold text-lg" style="color:#06D6A0;">↑</span> 1回換気量</div>
+                        <div class="text-center"><span class="font-bold text-lg" style="color:#06D6A0;">↑</span> コルチゾール</div>
+                    </div>
+                    <p class="card-explanation">妊娠中は母体が胎児を育むためにダイナミックに変化する。特に循環器系、呼吸器系、腎機能、凝固系の変化は重要。</p>
+                </div>
+
+                <!-- 周産期 -->
+                <div class="card md:col-span-2 lg:col-span-2">
+                    <h3 class="card-title">CTG判読のポイント</h3>
+                    <div class="card-content space-y-2">
+                        <div class="p-2 rounded-lg" style="background-color: #f0fdf4;">
+                            <p class="font-bold" style="color:#06D6A0;">早発一過性徐脈</p>
+                            <p class="text-sm">原因: <b>児頭圧迫</b> / 予後: <b>良好</b></p>
+                        </div>
+                        <div class="p-2 rounded-lg" style="background-color: #fffbeb;">
+                            <p class="font-bold" style="color:#FFD166;">変動一過性徐脈</p>
+                            <p class="text-sm">原因: <b>臍帯圧迫</b> / 予後: <b>要注意</b></p>
+                        </div>
+                        <div class="p-2 rounded-lg" style="background-color: #fff1f2;">
+                            <p class="font-bold" style="color:#FF6B6B;">遅発一過性徐脈</p>
+                            <p class="text-sm">原因: <b>胎盤機能不全</b> / 予後: <b>不良 (危険サイン)</b></p>
+                        </div>
+                    </div>
+                    <p class="card-explanation">徐脈のパターンから胎児の状態を推測する。遅発一過性徐脈は胎児機能不全を強く示唆する。</p>
+                </div>
+
+                <div class="card md:col-span-2 lg:col-span-2">
+                    <h3 class="card-title">産科危機的出血とTORCH症候群</h3>
+                    <div class="card-content grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-bold text-center mb-2" style="color:#FF6B6B;">産科危機的出血</h4>
+                            <ul class="list-none text-sm space-y-1">
+                                <li class="p-1 rounded bg-red-50">原因最多: <b>弛緩出血</b></li>
+                                <li class="p-1 rounded bg-red-50">輸血比: RCC:FFP:PC ≈ <b>1:1:1</b></li>
+                                <li class="p-1 rounded bg-red-50">緊急輸血: RCCは<b>O型</b>, FFPは<b>AB型</b></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-center mb-2" style="color:#118AB2;">TORCH症候群</h4>
+                            <ul class="list-none text-sm space-y-1 font-semibold">
+                                <li><b>T</b>oxoplasma</li>
+                                <li><b>O</b>thers (梅毒, 水痘)</li>
+                                <li><b>R</b>ubella (風疹)</li>
+                                <li><b>C</b>ytomegalovirus</li>
+                                <li><b>H</b>erpes</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="card-explanation">出血への迅速な対応と、胎児に影響を及ぼす母体感染症の知識は周産期管理の基本。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 小児科セクション -->
+        <section id="pediatrics">
+            <h2 class="text-3xl font-bold text-center mb-8 pb-2 border-b-4 section-title" style="border-color: #FFD166;">小児科</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- 新生児 -->
+                <div class="card md:col-span-2 lg:col-span-2">
+                    <h3 class="card-title">新生児の救急対応 (PALS/DOPES)</h3>
+                    <div class="card-content grid grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-bold text-center mb-2" style="color:#118AB2;">PALSの重要数値</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-center"><b>15:2</b><span class="ml-2 text-gray-600">胸骨圧迫:呼吸(2人)</span></li>
+                                <li class="flex items-center"><b>2-3秒/回</b><span class="ml-2 text-gray-600">挿管後換気</span></li>
+                                <li class="flex items-center"><b>2→4 J/kg</b><span class="ml-2 text-gray-600">除細動</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-center mb-2" style="color:#FF6B6B;">挿管中急変: DOPES</h4>
+                            <ul class="list-none text-sm space-y-1 font-semibold">
+                                <li><b>D</b>isplacement (位置異常)</li>
+                                <li><b>O</b>bstruction (閉塞)</li>
+                                <li><b>P</b>neumothorax (気胸)</li>
+                                <li><b>E</b>quipment (機器故障)</li>
+                                <li><b>S</b>tomach (胃膨満)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="card-explanation">小児救急では、成人と異なる数値を正確に記憶し、急変時には原因を体系的に鑑別することが重要。</p>
+                </div>
+                
+                <div class="card md:col-span-2 lg:col-span-2">
+                    <h3 class="card-title">新生児の生理と生理的黄疸</h3>
+                    <div class="card-content grid grid-cols-2 gap-4">
+                        <ul class="list-disc list-inside space-y-1 text-sm">
+                            <li><b>生理的体重減少</b>: 5-10%</li>
+                            <li><b>胎便排泄</b>: 24-48時間以内</li>
+                            <li><b>母体由来免疫</b>: IgGのみ通過</li>
+                            <li><b>循環</b>: 肺血管抵抗↓, 体血管抵抗↑</li>
+                        </ul>
+                        <div class="chart-container h-40">
+                            <canvas id="jaundiceChart"></canvas>
+                        </div>
+                    </div>
+                    <p class="card-explanation">生理的黄疸は生後2-3日で出現し、4-5日でピークを迎える。24時間以内の黄疸は病的。</p>
+                </div>
+                
+                <!-- 小児腫瘍・血液 -->
+                <div class="card md:col-span-2 lg:col-span-4">
+                    <h3 class="card-title">小児腫瘍・血液疾患</h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="border p-4 rounded-lg">
+                            <h4 class="font-bold text-center mb-2" style="color:#FF6B6B;">小児固形腫瘍</h4>
+                            <table class="w-full text-xs text-left">
+                                <thead><tr class="border-b"><th class="py-1">腫瘍</th><th class="py-1">特徴</th></tr></thead>
+                                <tbody>
+                                <tr class="border-b"><td class="py-1 font-semibold">神経芽腫</td><td class="py-1">副腎, VMA/HVA↑, N-myc</td></tr>
+                                <tr class="border-b"><td class="py-1 font-semibold">腎芽腫</td><td class="py-1">腎, 腹部腫瘤, 肺転移</td></tr>
+                                <tr><td class="py-1 font-semibold">肝芽腫</td><td class="py-1">肝, AFP↑, PRETEXT分類</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="border p-4 rounded-lg">
+                            <h4 class="font-bold text-center mb-2" style="color:#118AB2;">小児白血病</h4>
+                            <div class="chart-container h-48">
+                                <canvas id="leukemiaChart"></canvas>
+                            </div>
+                            <p class="text-xs text-center mt-2">ALLはB細胞性(8割), T細胞性(1.5割)。AMLはダウン症で予後良好。</p>
+                        </div>
+                        <div class="border p-4 rounded-lg">
+                             <h4 class="font-bold text-center mb-2" style="color:#06D6A0;">ビタミン欠乏症</h4>
+                             <table class="w-full text-xs text-left">
+                                <thead><tr class="border-b"><th class="py-1">ビタミン</th><th class="py-1">欠乏症</th></tr></thead>
+                                <tbody>
+                                <tr class="border-b"><td class="py-1 font-semibold">B1</td><td class="py-1">脚気 (乳酸↑)</td></tr>
+                                <tr class="border-b"><td class="py-1 font-semibold">C</td><td class="py-1">壊血病 (出血傾向)</td></tr>
+                                <tr class="border-b"><td class="py-1 font-semibold">D</td><td class="py-1">くる病 (骨石灰化障害)</td></tr>
+                                <tr><td class="py-1 font-semibold">K</td><td class="py-1">出血傾向 (凝固因子↓)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 感染症・アレルギー -->
+                <div class="card md:col-span-2 lg:col-span-2">
+                    <h3 class="card-title">川崎病とワクチン</h3>
+                     <div class="card-content grid grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-bold text-center mb-2" style="color:#FF6B6B;">川崎病の6大症状</h4>
+                            <ul class="list-none text-xs space-y-1">
+                                <li class="bg-red-50 p-1 rounded">① 5日以上続く発熱</li>
+                                <li class="bg-red-50 p-1 rounded">② 眼球結膜充血</li>
+                                <li class="bg-red-50 p-1 rounded">③ 口唇・口腔所見</li>
+                                <li class="bg-red-50 p-1 rounded">④ 不定形発疹</li>
+                                <li class="bg-red-50 p-1 rounded">⑤ 四肢末端の変化</li>
+                                <li class="bg-red-50 p-1 rounded">⑥ 頸部リンパ節腫脹</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-center mb-2" style="color:#06D6A0;">ワクチン分類</h4>
+                            <p class="font-semibold text-sm">生ワクチン</p>
+                            <p class="text-xs text-gray-600">BCG, MR, 水痘, ロタ</p>
+                            <p class="font-semibold text-sm mt-2">不活化ワクチン</p>
+                            <p class="text-xs text-gray-600">5種混合, 肺炎球菌, 新型コロナ</p>
+                        </div>
+                    </div>
+                    <p class="card-explanation">川崎病は冠動脈瘤予防のIVIGが重要。ワクチンの種類は副反応や接種間隔の理解に必須。</p>
+                </div>
+                
+                <!-- その他 -->
+                <div class="card md:col-span-2 lg:col-span-2">
+                    <h3 class="card-title">児童虐待と発達の目安</h3>
+                    <div class="card-content grid grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-bold text-center mb-2" style="color:#FF6B6B;">児童虐待</h4>
+                            <ul class="list-none text-sm space-y-1">
+                                <li>加害者最多: <b>実母</b></li>
+                                <li>面前DVは<b>心理的虐待</b></li>
+                                <li>医師に通告<b>義務</b>あり (罰則なし)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-center mb-2" style="color:#118AB2;">発達の遅れを疑うサイン</h4>
+                            <ul class="list-none text-sm space-y-1">
+                                <li><b>3-4ヶ月</b>: 首が座らない</li>
+                                <li><b>1歳半</b>: 一人歩きしない</li>
+                                <li><b>2歳</b>: 二語文が出ない</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="card-explanation">虐待のサインを見逃さず、適切な対応をとることは医師の責務。正常な発達過程の知識はその判断基準となる。</p>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                return Array.isArray(label) ? label.join('') : label;
+            };
+
+            const commonChartOptions = (legendPos = 'bottom') => ({
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: legendPos,
+                        labels: { font: { size: 12, family: "'Noto Sans JP', sans-serif" } }
+                    },
+                    tooltip: {
+                        callbacks: { title: tooltipTitleCallback },
+                        bodyFont: { family: "'Noto Sans JP', sans-serif" },
+                        titleFont: { family: "'Noto Sans JP', sans-serif" }
+                    }
+                }
+            });
+
+            new Chart(document.getElementById('cervicalCancerChart').getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['扁平上皮癌', '腺癌'],
+                    datasets: [{ data: [75, 25], backgroundColor: ['#FF6B6B', '#FFD166'], borderColor: '#FFFFFF', borderWidth: 2 }]
+                },
+                options: commonChartOptions('right')
+            });
+
+            new Chart(document.getElementById('ovarianCancerChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['漿液性', '明細胞', '類内膜', '粘液性'],
+                    datasets: [{ label: '頻度', data: [50, 20, 15, 10], backgroundColor: '#118AB2', borderRadius: 4 }]
+                },
+                options: { ...commonChartOptions(), plugins: { ...commonChartOptions().plugins, legend: { display: false } }, indexAxis: 'y' }
+            });
+
+            new Chart(document.getElementById('jaundiceChart').getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: ['生後1日', '2-3日', '4-5日', '7日', '14日'],
+                    datasets: [{
+                        label: 'ビリルビン値',
+                        data: [2, 8, 12, 8, 2],
+                        borderColor: '#FFD166',
+                        backgroundColor: 'rgba(255, 209, 102, 0.2)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                 options: { ...commonChartOptions(), plugins: { ...commonChartOptions().plugins, legend: { display: false } } }
+            });
+
+            new Chart(document.getElementById('leukemiaChart').getContext('2d'), {
+                type: 'pie',
+                data: {
+                    labels: ['急性リンパ性白血病 (ALL)', '急性骨髄性白血病 (AML)'],
+                    datasets: [{ data: [80, 20], backgroundColor: ['#118AB2', '#06D6A0'], borderColor: '#FFFFFF', borderWidth: 2 }]
+                },
+                options: commonChartOptions()
+            });
+        });
+    </script>
+</body>
+</html>
