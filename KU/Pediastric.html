@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>京大病院 産婦人科・小児科 攻略インフォグラフィック（更新版）</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .icon {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2;
+        }
+        .section-title {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .obgyn-title {
+            background-image: linear-gradient(to right, #ec4899, #d946ef);
+        }
+        .peds-title {
+            background-image: linear-gradient(to right, #22d3ee, #3b82f6);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+
+    <!-- Header -->
+    <header class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-700">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400">
+                攻略インフォグラフィック
+            </h1>
+            <div class="hidden md:flex space-x-4">
+                <a href="#obgyn" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition-colors">産婦人科</a>
+                <a href="#peds" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition-colors">小児科</a>
+            </div>
+            <div class="md:hidden">
+                <select id="mobile-nav" class="bg-gray-800 border border-gray-600 rounded-md p-2 text-white">
+                    <option value="#obgyn">産婦人科</option>
+                    <option value="#peds">小児科</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+
+        <!-- 産婦人科 Section -->
+        <section id="obgyn" class="mb-16">
+            <h2 class="text-4xl font-bold mb-8 text-center section-title obgyn-title">I. 産婦人科</h2>
+
+            <!-- 婦人科腫瘍 -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6 border-l-4 border-pink-500 pl-4">婦人科腫瘍</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                    <!-- 卵巣癌 -->
+                    <div class="glassmorphism rounded-xl p-6 border-pink-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-pink-300">卵巣癌</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-pink-400">リスク:</strong> 未産, BRCA変異, <span class="font-bold text-yellow-300">子宮内膜症</span> (明細胞癌, 類内膜癌)</li>
+                            <li><strong class="text-pink-400">症状:</strong> 進行期で発見多い (腹部膨満, 腹水)</li>
+                            <li><strong class="text-pink-400">治療:</strong> <span class="font-bold text-yellow-300">Debulking surgery</span>, 化学療法, <span class="font-bold text-yellow-300">PARP阻害薬</span> (維持療法)</li>
+                        </ul>
+                    </div>
+                    <!-- 子宮体癌 -->
+                    <div class="glassmorphism rounded-xl p-6 border-pink-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-pink-300">子宮体癌 (子宮内膜癌)</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-pink-400">リスク:</strong> <span class="font-bold text-yellow-300">Unopposed estrogen</span> (肥満, PCOS, 無排卵)</li>
+                            <li><strong class="text-pink-400">症状:</strong> <span class="font-bold text-yellow-300">不正性器出血</span> (特に閉経後)</li>
+                            <li><strong class="text-pink-400">診断:</strong> 子宮内膜組織診 (掻爬 or 吸引)</li>
+                        </ul>
+                    </div>
+                    <!-- 子宮頸癌 -->
+                    <div class="glassmorphism rounded-xl p-6 border-pink-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-pink-300">子宮頸癌</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-pink-400">原因:</strong> <span class="font-bold text-yellow-300">HPV</span> (16, 18型) の持続感染</li>
+                            <li><strong class="text-pink-400">ワクチン:</strong> 2価, 4価, <span class="font-bold text-yellow-300">9価</span> がある</li>
+                            <li><strong class="text-pink-400">診断:</strong> 細胞診 → コルポスコピー下組織診</li>
+                        </ul>
+                    </div>
+                    <!-- 子宮筋腫 -->
+                    <div class="glassmorphism rounded-xl p-6 border-pink-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-pink-300">子宮筋腫</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-pink-400">特徴:</strong> <span class="font-bold text-yellow-300">エストロゲン依存性</span>, 30-40代に好発</li>
+                            <li><strong class="text-pink-400">症状:</strong> <span class="font-bold text-yellow-300">過多月経</span>, 貧血 (粘膜下筋腫で著明)</li>
+                            <li><strong class="text-pink-400">治療:</strong> GnRHアゴニスト, 手術 (筋腫分娩は子宮鏡下摘出)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 女性ヘルスケア・内分泌 -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6 border-l-4 border-fuchsia-500 pl-4">女性ヘルスケア・内分泌</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                    <!-- 多嚢胞性卵巣症候群(PCOS) -->
+                    <div class="glassmorphism rounded-xl p-6 border-fuchsia-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-fuchsia-300">多嚢胞性卵巣症候群(PCOS)</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-fuchsia-400">症状/所見:</strong> 月経不順, <span class="font-bold text-green-300">多毛</span>, 肥満, <span class="font-bold text-green-300">LH>FSH</span>, 高アンドロゲン血症</li>
+                            <li><strong class="text-fuchsia-400">リスク:</strong> 不妊症, <span class="font-bold text-yellow-300">子宮体癌</span>, <span class="font-bold text-green-300">耐糖能異常</span></li>
+                            <li><strong class="text-fuchsia-400">治療:</strong> 減量, 排卵誘発, 低用量ピル</li>
+                        </ul>
+                    </div>
+                    <!-- 月経・ホルモン関連知識 -->
+                    <div class="glassmorphism rounded-xl p-6 border-fuchsia-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-fuchsia-300">月経・ホルモン関連知識</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-fuchsia-400">無月経:</strong> <span class="font-bold text-green-300">過度なダイエット/運動 → 視床下部性</span></li>
+                            <li><strong class="text-fuchsia-400">子宮内膜症:</strong> <span class="font-bold text-green-300">若年期の高度月経痛はリスク</span>. 晩産化で増加傾向.</li>
+                            <li><strong class="text-fuchsia-400">骨量:</strong> <span class="font-bold text-green-300">20-30代前半でピーク</span>を迎える</li>
+                            <li><strong class="text-fuchsia-400">閉経後:</strong> <span class="font-bold text-green-300">FSHが著増</span>, エストロゲンは低下</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 周産期 -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6 border-l-4 border-purple-500 pl-4">周産期</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                    <!-- 妊娠高血圧症候群(HDP) -->
+                    <div class="glassmorphism rounded-xl p-6 border-purple-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-purple-300">妊娠高血圧症候群(HDP)</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-purple-400">管理:</strong> 安静, 降圧薬 (メチルドパ, ヒドララジン, ラベタロール)</li>
+                            <li><strong class="text-purple-400">禁忌薬:</strong> <span class="font-bold text-red-400">ACE阻害薬, ARB</span></li>
+                            <li><strong class="text-purple-400">子癇発作:</strong> <span class="font-bold text-yellow-300">硫酸マグネシウム</span>, ジアゼパム</li>
+                        </ul>
+                    </div>
+                    <!-- 抗リン脂質抗体症候群(APS) -->
+                    <div class="glassmorphism rounded-xl p-6 border-purple-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-purple-300">抗リン脂質抗体症候群(APS)</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-purple-400">特徴:</strong> 習慣流産, 血栓症</li>
+                            <li><strong class="text-purple-400">治療:</strong> <span class="font-bold text-yellow-300">低用量アスピリン＋ヘパリン</span></li>
+                        </ul>
+                    </div>
+                    <!-- 前置胎盤 -->
+                    <div class="glassmorphism rounded-xl p-6 border-purple-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-purple-300">前置胎盤</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-purple-400">症状:</strong> <span class="font-bold text-yellow-300">無痛性の警告出血</span></li>
+                            <li><strong class="text-purple-400">分娩:</strong> <span class="font-bold text-red-400">帝王切開が必須</span></li>
+                        </ul>
+                    </div>
+                    <!-- 妊婦の心肺蘇生 -->
+                    <div class="glassmorphism rounded-xl p-6 border-purple-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-purple-300">妊婦の心肺蘇生</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-purple-400">体位:</strong> <span class="font-bold text-yellow-300">子宮左方転位</span> (仰臥位低血圧予防)</li>
+                            <li><strong class="text-purple-400">蘇生不成功時:</strong> <span class="font-bold text-yellow-300">死戦期帝王切開</span> (心停止後4-5分)</li>
+                        </ul>
+                    </div>
+                     <!-- 分娩・胎児 -->
+                    <div class="glassmorphism rounded-xl p-6 border-purple-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-purple-300">分娩・胎児</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-purple-400">回旋異常:</strong> <span class="font-bold text-green-300">後方後頭位, 低在横定位</span></li>
+                            <li><strong class="text-purple-400">染色体異常:</strong> <span class="font-bold text-green-300">Overlapping finger → 18トリソミー</span></li>
+                            <li><strong class="text-purple-400">生理的変化:</strong> <span class="font-bold text-green-300">循環血漿量↑, 軽度食前低血糖/食後高血糖</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 小児科 Section -->
+        <section id="peds" class="mb-16">
+            <h2 class="text-4xl font-bold mb-8 text-center section-title peds-title">II. 小児科</h2>
+
+            <!-- 新生児・乳幼児 -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6 border-l-4 border-blue-500 pl-4">新生児・乳幼児</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 新生児の検査値 -->
+                    <div class="glassmorphism rounded-xl p-6 border-blue-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-blue-300">新生児の検査値</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-blue-400">成人より高い:</strong> Hb, Ht, WBC, ALP, LDH, AST</li>
+                            <li><strong class="text-blue-400">成人より低い:</strong> <span class="font-bold text-yellow-300">免疫グロブリン(IgG,A,M)</span>, クレアチニン</li>
+                        </ul>
+                    </div>
+                    <!-- 発達と診察 -->
+                    <div class="glassmorphism rounded-xl p-6 border-blue-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-blue-300">発達と診察</h4>
+                        <ul class="space-y-3 text-gray-300">
+                             <li><strong class="text-blue-400">マイルストーン:</strong> <span class="font-bold text-green-300">1ヶ月:追視</span>, 4ヶ月:定頸, <span class="font-bold text-green-300">1歳頃:独り立ち</span></li>
+                             <li><strong class="text-blue-400">原始反射:</strong> 吸啜, Moroは正常. <span class="font-bold text-green-300">Babinskiは2歳頃まで生理的</span>.</li>
+                             <li><strong class="text-blue-400">診察のコツ:</strong> <span class="font-bold text-green-300">嫌がる部位(口腔内, 耳)は最後</span>に.</li>
+                        </ul>
+                    </div>
+                    <!-- 新生児黄疸 -->
+                    <div class="glassmorphism rounded-xl p-6 border-blue-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-blue-300">新生児黄疸</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-blue-400">早発黄疸(24h以内):</strong> <span class="font-bold text-yellow-300">血液型不適合</span> (ABO, Rh)</li>
+                            <li><strong class="text-blue-400">遷延性黄疸:</strong> 母乳性, <span class="font-bold text-red-400">胆道閉鎖症</span>, 先天性代謝異常</li>
+                            <li><strong class="text-blue-400">核黄疸の原因:</strong> <span class="font-bold text-red-400">間接ビリルビン</span> (脂溶性)</li>
+                        </ul>
+                    </div>
+                    <!-- 腸重積症 -->
+                    <div class="glassmorphism rounded-xl p-6 border-blue-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-blue-300">腸重積症</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-blue-400">好発:</strong> 6ヶ月～2歳</li>
+                            <li><strong class="text-blue-400">症状:</strong> 間欠的啼泣, 嘔吐, <span class="font-bold text-yellow-300">イチゴジャム様粘血便</span></li>
+                            <li><strong class="text-blue-400">診断/治療:</strong> 超音波(Target sign), 高圧浣腸</li>
+                        </ul>
+                    </div>
+                    <!-- 肥厚性幽門狭窄症 -->
+                    <div class="glassmorphism rounded-xl p-6 border-blue-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-blue-300">肥厚性幽門狭窄症</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-blue-400">好発:</strong> 生後2週～2ヶ月</li>
+                            <li><strong class="text-blue-400">症状:</strong> <span class="font-bold text-yellow-300">非胆汁性・噴水状嘔吐</span></li>
+                            <li><strong class="text-blue-400">診断:</strong> 腹部超音波検査 (Olive sign)</li>
+                        </ul>
+                    </div>
+                    <!-- 新生児ビタミンK欠乏性出血症 -->
+                    <div class="glassmorphism rounded-xl p-6 border-blue-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-blue-300">新生児ビタミンK欠乏症</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-blue-400">病態:</strong> ビタミンK依存性凝固因子の活性低下</li>
+                            <li><strong class="text-blue-400">症状:</strong> 下血, 頭蓋内出血</li>
+                            <li><strong class="text-blue-400">検査/治療:</strong> <span class="font-bold text-green-300">PT/APTT延長</span>, <span class="font-bold text-green-300">ビタミンK(K2シロップ)投与</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 先天性心疾患 -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6 border-l-4 border-cyan-500 pl-4">先天性心疾患</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                    <!-- チアノーゼ性心疾患 -->
+                    <div class="glassmorphism rounded-xl p-6 border-cyan-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-cyan-300">チアノーゼ性心疾患 (右→左シャント)</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-cyan-400">代表:</strong> ファロー四徴症(TOF), 完全大血管転位(TGA), <span class="font-bold text-green-300">総肺静脈還流異常(TAPVC)</span></li>
+                            <li><strong class="text-cyan-400">動脈管依存性:</strong> <span class="font-bold text-yellow-300">PGE1製剤</span>で動脈管開存 (PA, TGAなど)</li>
+                            <li><strong class="text-cyan-400">TOF無酸素発作:</strong> <span class="font-bold text-yellow-300">胸膝位</span>, 鎮静, 酸素. 姑息術は<span class="font-bold text-green-300">Blalock-Taussig短絡術</span></li>
+                        </ul>
+                    </div>
+                    <!-- 非チアノーゼ性心疾患 -->
+                    <div class="glassmorphism rounded-xl p-6 border-cyan-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-cyan-300">非チアノーゼ性心疾患 (左→右シャント)</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-cyan-400">VSD:</strong> 最多. <span class="font-bold text-green-300">動脈下VSD</span>はAR合併しやすく早期手術.</li>
+                            <li><strong class="text-cyan-400">ASD:</strong> <span class="font-bold text-yellow-300">II音の固定性分裂</span>, 右脚ブロック</li>
+                            <li><strong class="text-cyan-400">PDA:</strong> <span class="font-bold text-yellow-300">連続性雑音</span>. インドメタシンで閉鎖.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+             <!-- その他小児疾患 -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6 border-l-4 border-teal-500 pl-4">その他小児疾患</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 川崎病 -->
+                    <div class="glassmorphism rounded-xl p-6 border-teal-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-teal-300">川崎病</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-teal-400">主要症状(6):</strong> 5日以上の発熱, 結膜充血, 口唇発赤, 発疹, 四肢末端変化, 頸部リンパ節腫脹</li>
+                            <li><strong class="text-teal-400">治療:</strong> <span class="font-bold text-yellow-300">免疫グロブリン大量療法(IVIG)＋アスピリン</span></li>
+                            <li><strong class="text-teal-400">合併症:</strong> 冠動脈瘤</li>
+                        </ul>
+                    </div>
+                    <!-- 小児白血病 -->
+                    <div class="glassmorphism rounded-xl p-6 border-teal-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-teal-300">小児白血病</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-teal-400">最多:</strong> <span class="font-bold text-yellow-300">急性リンパ性白血病(ALL)</span></li>
+                            <li><strong class="text-teal-400">寛解導入:</strong> <span class="font-bold text-yellow-300">ステロイド</span>が重要</li>
+                            <li><strong class="text-teal-400">予後不良因子:</strong> <span class="font-bold text-red-400">Philadelphia染色体 t(9;22)</span></li>
+                        </ul>
+                    </div>
+                    <!-- 小児気管支喘息 -->
+                    <div class="glassmorphism rounded-xl p-6 border-teal-500/50 border">
+                        <h4 class="text-xl font-bold mb-3 text-teal-300">小児気管支喘息</h4>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-teal-400">病態:</strong> <span class="font-bold text-green-300">慢性気道炎症</span>と<span class="font-bold text-green-300">気道過敏性</span></li>
+                            <li><strong class="text-teal-400">長期管理:</strong> <span class="font-bold text-green-300">吸入ステロイド(ICS)</span></li>
+                            <li><strong class="text-teal-400">発作治療:</strong> <span class="font-bold text-green-300">短時間作用性β2刺激薬(SABA)</span>吸入</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-900/80 mt-12 py-6 text-center text-gray-500 border-t border-gray-700">
+        <p>このインフォグラフィックは学習補助を目的としています。最終的な医学的判断は専門書や指導医にご確認ください。</p>
+        <p>&copy; 2024 Medical Exam Prep. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // For mobile navigation
+        document.getElementById('mobile-nav').addEventListener('change', function(e) {
+            window.location.hash = e.target.value;
+        });
+    </script>
+
+</body>
+</html>

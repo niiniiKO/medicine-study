@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>京大病院 内科攻略インフォグラフィック【改訂版】</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .card {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+        }
+        .card-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .card-header h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        .card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+        .topic {
+            margin-bottom: 1.5rem;
+        }
+        .topic:last-child {
+            margin-bottom: 0;
+        }
+        .topic-title {
+            font-weight: 700;
+            color: #1e3a8a; /* Deep blue */
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .topic-point {
+            margin-left: 1rem;
+            padding-left: 1rem;
+            border-left: 3px solid #60a5fa; /* Light blue */
+            margin-bottom: 0.5rem;
+            color: #4b5563;
+        }
+        .highlight-red {
+            color: #ef4444;
+            font-weight: 600;
+        }
+        .highlight-green {
+            color: #22c55e;
+            font-weight: 600;
+        }
+        .highlight-blue {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        .icon {
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">京大病院 内科 満点攻略インフォグラフィック</h1>
+            <p class="text-gray-600 mt-3 text-lg">全診療科の最重要ポイントをビジュアルで完全網羅！</p>
+        </header>
+
+        <div class="grid-container">
+
+            <!-- 循環器内科 -->
+            <div class="card">
+                <div class="card-header bg-red-50 text-red-800">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>
+                    <h2>循環器内科</h2>
+                </div>
+                <div class="card-body">
+                    <div class="topic">
+                        <h3 class="topic-title">冠攣縮性狭心症</h3>
+                        <p class="topic-point">治療: <span class="highlight-green">Ca拮抗薬 (第一選択)</span></p>
+                        <p class="topic-point"><span class="highlight-red">β遮断薬 (禁忌)</span> - 攣縮を誘発</p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">急性心筋梗塞 (AMI) 合併症</h3>
+                        <p class="topic-point">機械的合併症: 心破裂, VSP, 乳頭筋断裂 (<span class="highlight-red">後乳頭筋</span>に多い)</p>
+                        <p class="topic-point">予後改善薬: <span class="highlight-blue">ACE阻害薬/ARB, β遮断薬, スタチン</span></p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">心不全</h3>
+                        <p class="topic-point">Forrester分類 (Warm & Wet): <span class="highlight-green">利尿薬 + 血管拡張薬</span></p>
+                        <p class="topic-point">予後改善効果なし: <span class="highlight-red">ジギタリス, 利尿薬</span></p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">大動脈弁狭窄症 (AS)</h3>
+                        <p class="topic-point">三主徴: <span class="highlight-red">失神, 狭心痛, 心不全</span>. 症状出現で予後不良</p>
+                        <p class="topic-point">治療: 症候性なら<span class="highlight-green">TAVI</span> or <span class="highlight-green">AVR</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 呼吸器内科 -->
+            <div class="card">
+                <div class="card-header bg-blue-50 text-blue-800">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" /></svg>
+                    <h2>呼吸器内科</h2>
+                </div>
+                <div class="card-body">
+                    <div class="topic">
+                        <h3 class="topic-title">COPD</h3>
+                        <p class="topic-point">診断: スパイロメトリーで<span class="highlight-blue">1秒率 (FEV₁/FVC) < 70%</span></p>
+                        <p class="topic-point">急性増悪: <span class="highlight-green">ベンチュリーマスク</span>で低濃度O₂投与 (CO₂ナルコーシス注意)</p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">気管支喘息</h3>
+                        <p class="topic-point">治療: <span class="highlight-green">吸入ステロイド (ICS)</span>が治療の基本</p>
+                        <p class="topic-point">アスピリン喘息: 鎮痛薬は<span class="highlight-green">アセトアミノフェン</span>が安全</p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">特発性肺線維症 (IPF)</h3>
+                        <p class="topic-point">所見: <span class="highlight-red">捻髪音 (Fine crackles)</span>, 画像で<span class="highlight-red">蜂巣肺</span></p>
+                        <p class="topic-point">治療: <span class="highlight-green">抗線維化薬</span> (ステロイドは急性増悪以外効果乏)</p>
+                    </div>
+                     <div class="topic">
+                        <h3 class="topic-title">肺癌</h3>
+                        <p class="topic-point">腺癌: <span class="highlight-blue">EGFR遺伝子変異</span> → <span class="highlight-green">分子標的薬</span></p>
+                        <p class="topic-point">小細胞癌: <span class="highlight-red">SIADH</span>など腫瘍随伴症候群に注意</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 消化器内科 -->
+            <div class="card">
+                <div class="card-header bg-yellow-50 text-yellow-800">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A11.953 11.953 0 0112 16.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253M3 12c0 .778.099 1.533.284 2.253m0 0A11.953 11.953 0 0012 16.5c2.998 0 5.74-1.1 7.843-2.918m-15.686 0A8.959 8.959 0 003 12c0-.778.099-1.533.284-2.253m0 0A11.953 11.953 0 0012 10.5c2.998 0 5.74-1.1 7.843-2.918" /></svg>
+                    <h2>消化器内科</h2>
+                </div>
+                <div class="card-body">
+                    <div class="topic">
+                        <h3 class="topic-title">肝硬変</h3>
+                        <p class="topic-point">Child-Pugh分類項目: <span class="highlight-blue">脳症, 腹水, Bil, Alb, PT</span> (※ICGは含まない)</p>
+                        <p class="topic-point">肝性脳症治療: <span class="highlight-green">ラクツロース, BCAA</span></p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">急性膵炎</h3>
+                        <p class="topic-point">重症度: <span class="highlight-red">血清アミラーゼ値とは相関しない</span></p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">H. pylori</h3>
+                        <p class="topic-point">除菌判定: <span class="highlight-green">尿素呼気試験</span>, 便中抗原測定</p>
+                        <p class="topic-point">胃MALTリンパ腫: <span class="highlight-green">除菌治療</span>が第一選択</p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">炎症性腸疾患 (IBD)</h3>
+                        <p class="topic-point">UC: 直腸からの<span class="highlight-blue">連続性</span>病変・浅い炎症</p>
+                        <p class="topic-point">CD: <span class="highlight-blue">非連続性</span> (skip lesion)・全層性炎症</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 腎臓内科 -->
+            <div class="card">
+                <div class="card-header bg-green-50 text-green-800">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
+                    <h2>腎臓内科</h2>
+                </div>
+                <div class="card-body">
+                    <div class="topic">
+                        <h3 class="topic-title">糸球体疾患の病理</h3>
+                        <p class="topic-point">IgA腎症: <span class="highlight-blue">メサンギウムへのIgA沈着</span></p>
+                        <p class="topic-point">膜性腎症: 上皮下IgG沈着, <span class="highlight-red">スパイク形成</span></p>
+                        <p class="topic-point">ANCA関連血管炎: <span class="highlight-red">半月体形成</span>, Pauci-immune</p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">CKD</h3>
+                        <p class="topic-point">透析導入原因1位: <span class="highlight-red">糖尿病性腎症</span></p>
+                        <p class="topic-point">薬剤: <span class="highlight-red">メトホルミン</span>はeGFR<30で禁忌</p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">ADPKD</h3>
+                        <p class="topic-point">遺伝形式: 常染色体<span class="highlight-blue">優性</span></p>
+                        <p class="topic-point">合併症: <span class="highlight-red">脳動脈瘤</span>, 肝嚢胞</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 血液内科 -->
+            <div class="card">
+                <div class="card-header bg-pink-50 text-pink-800">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.362-3.797z" /></svg>
+                    <h2>血液内科</h2>
+                </div>
+                <div class="card-body">
+                    <div class="topic">
+                        <h3 class="topic-title">急性前骨髄球性白血病 (APL)</h3>
+                        <p class="topic-point">特徴: t(15;17), <span class="highlight-red">DIC合併</span></p>
+                        <p class="topic-point">治療: <span class="highlight-green">ATRA (オールトランスレチノイン酸)</span></p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">慢性骨髄性白血病 (CML)</h3>
+                        <p class="topic-point">特徴: t(9;22), BCR-ABL1融合遺伝子</p>
+                        <p class="topic-point">治療: <span class="highlight-green">チロシンキナーゼ阻害薬 (TKI)</span></p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">多発性骨髄腫 (MM)</h3>
+                        <p class="topic-point">症状: <span class="highlight-blue">CRAB</span> (高Ca, 腎不全, 貧血, 骨病変)</p>
+                        <p class="topic-point">治療: <span class="highlight-red">リツキシマブ無効</span></p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">血栓性血小板減少性紫斑病 (TTP)</h3>
+                        <p class="topic-point">病態: ADAMTS13活性低下</p>
+                        <p class="topic-point">治療: <span class="highlight-green">血漿交換 (◎)</span>, <span class="highlight-red">血小板輸血 (禁忌)</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 神経内科 -->
+            <div class="card">
+                <div class="card-header bg-indigo-50 text-indigo-800">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.562L16.25 22.5l-.648-1.938a2.625 2.625 0 00-1.732-1.732L12 18.25l1.938-.648a2.625 2.625 0 001.732-1.732L16.25 14l.648 1.938a2.625 2.625 0 001.732 1.732L20.562 18.25l-1.938.648a2.625 2.625 0 00-1.732 1.732z" /></svg>
+                    <h2>神経内科</h2>
+                </div>
+                <div class="card-body">
+                    <div class="topic">
+                        <h3 class="topic-title">Wallenberg症候群 (延髄外側)</h3>
+                        <p class="topic-point">特徴: <span class="highlight-red">片麻痺はきたさない</span>。病側の顔面、対側の体幹の温痛覚障害。</p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">rt-PA静注療法</h3>
+                        <p class="topic-point">適応: 発症<span class="highlight-red">4.5時間以内</span>の虚血性脳梗塞</p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">レビー小体型認知症 (DLB)</h3>
+                        <p class="topic-point">特徴: <span class="highlight-red">繰り返し出現する具体的な幻視</span>, パーキンソニズム</p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">Guillain-Barré症候群 (GBS)</h3>
+                        <p class="topic-point">髄液所見: <span class="highlight-blue">蛋白細胞解離</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 内分泌・代謝内科 -->
+            <div class="card">
+                <div class="card-header bg-purple-50 text-purple-800">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" /></svg>
+                    <h2>内分泌・代謝内科</h2>
+                </div>
+                <div class="card-body">
+                    <div class="topic">
+                        <h3 class="topic-title">インスリン絶対適応</h3>
+                        <p class="topic-point"><span class="highlight-blue">1型DM, DKA, 妊娠, 重症感染/手術時</span></p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">亜急性甲状腺炎</h3>
+                        <p class="topic-point">症状: <span class="highlight-red">頸部有痛性腫脹</span></p>
+                        <p class="topic-point">治療: <span class="highlight-green">ステロイド</span>, NSAIDs</p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">プロラクチノーマ</h3>
+                        <p class="topic-point">治療: <span class="highlight-green">ドパミン作動薬 (第一選択)</span></p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">中枢性尿崩症</h3>
+                        <p class="topic-point">MRI: <span class="highlight-red">下垂体後葉の高信号消失</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 膠原病・リウマチ科 -->
+            <div class="card">
+                <div class="card-header bg-teal-50 text-teal-800">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25v2.25A2.25 2.25 0 006 20.25z" /></svg>
+                    <h2>膠原病・リウマチ科</h2>
+                </div>
+                <div class="card-body">
+                    <div class="topic">
+                        <h3 class="topic-title">関節リウマチ (RA)</h3>
+                        <p class="topic-point">抗体: <span class="highlight-blue">抗CCP抗体</span> (特異度高)</p>
+                        <p class="topic-point">治療: <span class="highlight-green">メトトレキサート (MTX)</span>がアンカー</p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">全身性エリテマトーデス (SLE)</h3>
+                        <p class="topic-point">抗体: <span class="highlight-blue">抗ds-DNA抗体</span> (活動性と相関)</p>
+                        <p class="topic-point">検査: <span class="highlight-red">補体価 (C3, C4, CH50) 低下</span></p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">強皮症 (SSc) 腎クリーゼ</h3>
+                        <p class="topic-point">急激な高血圧と腎不全。治療は<span class="highlight-green">ACE阻害薬</span>。</p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">皮膚筋炎 (DM)</h3>
+                        <p class="topic-point">合併症: <span class="highlight-red">悪性腫瘍</span>, 間質性肺炎 (特に<span class="highlight-blue">抗MDA5抗体</span>陽性例)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 感染症科・腫瘍内科 -->
+            <div class="card">
+                <div class="card-header bg-orange-50 text-orange-800">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 10-2.636 6.364M16.5 12V8.25" /></svg>
+                    <h2>感染症科 / 腫瘍内科</h2>
+                </div>
+                <div class="card-body">
+                    <div class="topic">
+                        <h3 class="topic-title">C. difficile感染症</h3>
+                        <p class="topic-point">対策: <span class="highlight-red">石鹸と流水による手洗い</span> (アルコール無効)</p>
+                        <p class="topic-point">治療: <span class="highlight-green">経口バンコマイシン</span> (重症例)</p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">梅毒</h3>
+                        <p class="topic-point">治療効果判定: <span class="highlight-green">RPR法</span>など非特異的抗体価で評価</p>
+                    </div>
+                     <div class="topic">
+                        <h3 class="topic-title">免疫チェックポイント阻害薬</h3>
+                        <p class="topic-point">副作用: <span class="highlight-red">irAE</span> (免疫関連有害事象)。下垂体炎、甲状腺機能異常など多彩。</p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">がん悪性高Ca血症</h3>
+                        <p class="topic-point">初期治療: <span class="highlight-green">生理食塩水による補液 + ビスホスホネート</span></p>
+                    </div>
+                </div>
+            </div>
+
+             <!-- その他重要分野 -->
+            <div class="card">
+                <div class="card-header bg-gray-100 text-gray-800">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+                    <h2>その他重要分野</h2>
+                </div>
+                <div class="card-body">
+                    <div class="topic">
+                        <h3 class="topic-title">アレルギー科</h3>
+                        <p class="topic-point">アナフィラキシー: <span class="highlight-green">アドレナリン筋注</span>が第一選択</p>
+                    </div>
+                    <div class="topic">
+                        <h3 class="topic-title">老年医学</h3>
+                        <p class="topic-point">フレイル: 介入により改善可能な状態</p>
+                        <p class="topic-point">ポリファーマシー: <span class="highlight-blue">内服薬の整理</span>は転倒予防に有効</p>
+                    </div>
+                     <div class="topic">
+                        <h3 class="topic-title">緩和ケア</h3>
+                        <p class="topic-point">オピオイド: <span class="highlight-red">天井効果なし</span> (NSAIDsにはあり)</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -107,11 +107,11 @@
                 <!-- 乳癌 -->
                 <div class="card md:col-span-2 lg:col-span-4">
                     <h3 class="card-title">乳癌の重要ポイント</h3>
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
                         <div class="border p-4 rounded-lg">
-                            <h4 class="font-bold text-center mb-2" style="color:#FF6B6B;">乳房温存術の適応除外</h4>
+                            <h4 class="font-bold text-center mb-2" style="color:#EF476F;">乳房温存術の適応除外</h4>
                             <ul class="list-disc list-inside space-y-1 text-sm">
-                                <li>広範な進展（広範囲の枝状石灰化など）</li>
+                                <li>広範な進展（広範囲の枝状石灰化）</li>
                                 <li>同側乳房内の多発病変</li>
                                 <li>放射線照射の禁忌（妊娠中、活動性膠原病）</li>
                                 <li>切除断端陽性（がんが取りきれない）</li>
@@ -134,24 +134,32 @@
                                 <li>原因遺伝子: <b>BRCA1, BRCA2</b> (常染色体優性)</li>
                                 <li><b>BRCA1</b>: トリプルネガティブ乳癌リスク↑</li>
                                 <li><b>BRCA2</b>: 男性乳癌, 膵癌, Fanconi貧血リスク↑</li>
-                                <li>治療薬: <b>PARP阻害薬</b> (合成致死)</li>
+                                <li>治療薬: <b>PARP阻害薬</b> (オラパリブ等)</li>
                                 <li>RRSOで卵巣癌リスク<b>80%以上減</b></li>
+                            </ul>
+                        </div>
+                        <div class="border p-4 rounded-lg">
+                            <h4 class="font-bold text-center mb-2" style="color:#118AB2;">特殊型：小葉癌</h4>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>ホルモン受容体陽性が多い</li>
+                                <li>両側性・多中心性に生じやすい</li>
+                                <li>腹膜・卵巣・消化管への特殊な転移形式</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <!-- 子宮頸癌・体癌 -->
-                <div class="card md:col-span-2 lg:col-span-2">
+                <div class="card md:col-span-2">
                     <h3 class="card-title">子宮頸癌</h3>
                     <div class="card-content grid grid-cols-2 gap-4">
                         <div class="chart-container h-48">
                             <canvas id="cervicalCancerChart"></canvas>
                         </div>
                         <div>
-                            <h4 class="font-bold text-center text-sm mb-2" style="color:#118AB2;">HPV感染と発癌メカニズム</h4>
+                            <h4 class="font-bold text-center text-sm mb-2" style="color:#118AB2;">HPV感染と発癌</h4>
                             <div class="text-center text-sm space-y-1">
-                                <div class="flowchart-box text-xs" style="border-color: #FF6B6B; color: #FF6B6B;">高リスクHPV持続感染</div>
+                                <div class="flowchart-box text-xs" style="border-color: #EF476F; color: #EF476F;">高リスクHPV持続感染</div>
                                 <div class="flowchart-arrow text-base">↓</div>
                                 <div class="flowchart-box text-xs" style="border-color: #FFD166; color: #FFD166;">E6→p53不活化<br>E7→RB不活化</div>
                                 <div class="flowchart-arrow text-base">↓</div>
@@ -159,43 +167,45 @@
                             </div>
                         </div>
                     </div>
-                    <p class="card-explanation">組織型は扁平上皮癌(75%)、腺癌(25%)。9価ワクチンは原因の80-90%を予防。治療効果はない。</p>
+                    <p class="card-explanation">組織型は扁平上皮癌(75%)、腺癌(25%)。9価ワクチンは原因の80-90%を予防。男性への接種も有効。治療効果はない。</p>
                 </div>
 
-                <div class="card md:col-span-2 lg:col-span-2">
-                    <h3 class="card-title">子宮体癌・卵巣癌</h3>
+                <div class="card md:col-span-2">
+                    <h3 class="card-title">子宮体癌・卵巣癌・内膜症</h3>
                     <div class="card-content grid grid-cols-2 gap-4">
                         <div>
-                            <h4 class="font-bold text-center mb-2" style="color:#FF6B6B;">子宮体癌リスク</h4>
+                            <h4 class="font-bold text-center mb-2" style="color:#EF476F;">子宮体癌リスク & 特徴</h4>
                             <ul class="list-none text-sm space-y-1">
                                 <li class="bg-red-50 p-1 rounded">Unopposed Estrogen</li>
-                                <li class="bg-red-50 p-1 rounded">肥満、未産婦、晩期閉経</li>
-                                <li class="bg-red-50 p-1 rounded">PCOS、タモキシフェン</li>
-                                <li class="bg-red-50 p-1 rounded"><b>Lynch症候群</b></li>
+                                <li class="bg-red-50 p-1 rounded">肥満、未産婦、PCOS</li>
+                                <li class="bg-red-50 p-1 rounded"><b>Lynch症候群</b>, <b>MSI-High</b></li>
                             </ul>
                         </div>
                         <div>
-                            <h4 class="font-bold text-center mb-2" style="color:#118AB2;">卵巣癌の組織型 (上皮性)</h4>
-                            <div class="chart-container h-48">
-                                <canvas id="ovarianCancerChart"></canvas>
-                            </div>
+                            <h4 class="font-bold text-center mb-2" style="color:#118AB2;">卵巣癌 & 内膜症</h4>
+                             <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li><b>内膜症</b>は卵巣癌(明細胞癌,類内膜癌)リスク</li>
+                                <li>内膜症嚢胞はT2でshading</li>
+                                <li>漿液性癌: <b>砂粒小体</b></li>
+                                <li>初回治療後の維持療法に<b>PARP阻害薬</b></li>
+                            </ul>
                         </div>
                     </div>
-                    <p class="card-explanation">子宮体癌は近年増加傾向。卵巣癌は日本では明細胞癌・類内膜癌が多く、子宮内膜症が発生母地となることがある。</p>
+                    <p class="card-explanation">子宮体癌は近年増加傾向。卵巣癌は日本では明細胞癌・類内膜癌が多く、子宮内膜症が発生母地となる。</p>
                 </div>
 
                 <!-- 解剖・生理 -->
-                 <div class="card md:col-span-2 lg:col-span-2">
+                 <div class="card">
                     <h3 class="card-title">骨盤内血管走行</h3>
                     <div class="card-content grid grid-cols-2 gap-4 items-center">
                         <div class="anatomy-diagram">
                             <h4 class="font-semibold text-center">動脈</h4>
-                            <div class="vessel" style="background-color: #FF6B6B;">腹部大動脈</div>
+                            <div class="vessel" style="background-color: #EF476F;">腹部大動脈</div>
                             <div class="flowchart-arrow text-lg">↓</div>
-                            <div class="vessel text-xs" style="background-color: #FF6B6B;">卵巣動脈</div>
-                            <div class="vessel mt-2" style="background-color: #FF6B6B;">内腸骨動脈</div>
+                            <div class="vessel text-xs" style="background-color: #EF476F;">卵巣動脈</div>
+                            <div class="vessel mt-2" style="background-color: #EF476F;">内腸骨動脈</div>
                             <div class="flowchart-arrow text-lg">↓</div>
-                            <div class="vessel text-xs" style="background-color: #FF6B6B;">子宮動脈 (尿管の前)</div>
+                            <div class="vessel text-xs" style="background-color: #EF476F;">子宮動脈 (尿管の前)</div>
                         </div>
                         <div class="anatomy-diagram">
                             <h4 class="font-semibold text-center">静脈</h4>
@@ -210,13 +220,13 @@
                     <p class="card-explanation">子宮動脈と尿管の位置関係 (Water under the bridge)、左右の卵巣静脈の還流先の違いは頻出。</p>
                 </div>
                 
-                <div class="card md:col-span-2 lg:col-span-2">
+                <div class="card">
                     <h3 class="card-title">妊娠中の母体の生理的変化</h3>
                     <div class="card-content grid grid-cols-2 gap-x-4 gap-y-2">
                         <div class="text-center"><span class="font-bold text-lg" style="color:#06D6A0;">↑</span> 循環血液量</div>
-                        <div class="text-center"><span class="font-bold text-lg" style="color:#FF6B6B;">↓</span> 末梢血管抵抗</div>
+                        <div class="text-center"><span class="font-bold text-lg" style="color:#EF476F;">↓</span> 末梢血管抵抗</div>
                         <div class="text-center"><span class="font-bold text-lg" style="color:#06D6A0;">↑</span> 心拍出量</div>
-                        <div class="text-center"><span class="font-bold text-lg" style="color:#FF6B6B;">↓</span> 機能的残気量</div>
+                        <div class="text-center"><span class="font-bold text-lg" style="color:#EF476F;">↓</span> 機能的残気量</div>
                         <div class="text-center"><span class="font-bold text-lg" style="color:#06D6A0;">↑</span> GFR</div>
                         <div class="text-center"><span class="font-bold text-lg" style="color:#06D6A0;">↑</span> 凝固能</div>
                         <div class="text-center"><span class="font-bold text-lg" style="color:#06D6A0;">↑</span> 1回換気量</div>
@@ -226,7 +236,7 @@
                 </div>
 
                 <!-- 周産期 -->
-                <div class="card md:col-span-2 lg:col-span-2">
+                <div class="card">
                     <h3 class="card-title">CTG判読のポイント</h3>
                     <div class="card-content space-y-2">
                         <div class="p-2 rounded-lg" style="background-color: #f0fdf4;">
@@ -238,18 +248,18 @@
                             <p class="text-sm">原因: <b>臍帯圧迫</b> / 予後: <b>要注意</b></p>
                         </div>
                         <div class="p-2 rounded-lg" style="background-color: #fff1f2;">
-                            <p class="font-bold" style="color:#FF6B6B;">遅発一過性徐脈</p>
+                            <p class="font-bold" style="color:#EF476F;">遅発一過性徐脈</p>
                             <p class="text-sm">原因: <b>胎盤機能不全</b> / 予後: <b>不良 (危険サイン)</b></p>
                         </div>
                     </div>
                     <p class="card-explanation">徐脈のパターンから胎児の状態を推測する。遅発一過性徐脈は胎児機能不全を強く示唆する。</p>
                 </div>
 
-                <div class="card md:col-span-2 lg:col-span-2">
-                    <h3 class="card-title">産科危機的出血とTORCH症候群</h3>
+                <div class="card">
+                    <h3 class="card-title">産科危機的出血とTORCH</h3>
                     <div class="card-content grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <h4 class="font-bold text-center mb-2" style="color:#FF6B6B;">産科危機的出血</h4>
+                            <h4 class="font-bold text-center mb-2" style="color:#EF476F;">産科危機的出血</h4>
                             <ul class="list-none text-sm space-y-1">
                                 <li class="p-1 rounded bg-red-50">原因最多: <b>弛緩出血</b></li>
                                 <li class="p-1 rounded bg-red-50">輸血比: RCC:FFP:PC ≈ <b>1:1:1</b></li>
@@ -260,7 +270,7 @@
                             <h4 class="font-bold text-center mb-2" style="color:#118AB2;">TORCH症候群</h4>
                             <ul class="list-none text-sm space-y-1 font-semibold">
                                 <li><b>T</b>oxoplasma</li>
-                                <li><b>O</b>thers (梅毒, 水痘)</li>
+                                <li><b>O</b>thers (梅毒, 水痘, ﾊﾟﾙﾎﾞB19)</li>
                                 <li><b>R</b>ubella (風疹)</li>
                                 <li><b>C</b>ytomegalovirus</li>
                                 <li><b>H</b>erpes</li>
@@ -269,6 +279,51 @@
                     </div>
                     <p class="card-explanation">出血への迅速な対応と、胎児に影響を及ぼす母体感染症の知識は周産期管理の基本。</p>
                 </div>
+                
+                <!-- NEW CARDS for OBGYN -->
+                <div class="card md:col-span-2">
+                    <h3 class="card-title">周産期合併症</h3>
+                    <div class="card-content grid grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-bold text-center mb-2" style="color:#EF476F;">羊水過多の原因</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>母体：妊娠糖尿病</li>
+                                <li>胎児：無脳症、消化管閉鎖（食道・十二指腸）、双胎間輸血症候群（受血児）</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-center mb-2" style="color:#118AB2;">羊水過少の原因</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>前期破水</li>
+                                <li>胎盤機能不全</li>
+                                <li>胎児：腎無形成、尿路閉鎖</li>
+                            </ul>
+                        </div>
+                    </div>
+                     <p class="card-explanation"><b>常位胎盤早期剥離</b>：既往が最大のリスク。産科DICの原因となる。 <b>双胎妊娠</b>：流早産、妊娠高血圧、前置胎盤、FGRのリスク。</p>
+                </div>
+
+                <div class="card md:col-span-2">
+                    <h3 class="card-title">女性ヘルスケア</h3>
+                     <div class="card-content grid grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-bold text-center mb-2" style="color:#EF476F;">低用量ピル(OC/LEP)</h4>
+                             <ul class="list-disc list-inside text-sm">
+                                <li><b>禁忌</b>: <b>前兆のある片頭痛</b>, 35歳以上で15本/日以上の喫煙, 血栓症既往, 乳癌など</li>
+                                <li>喫煙、肥満は慎重投与</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-center mb-2" style="color:#118AB2;">PCOS（多嚢胞性卵巣）</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>症状: 月経異常, 不妊, 多毛, 肥満</li>
+                                <li>所見: <b>LH/FSH比 > 1</b>, 高アンドロゲン血症, ネックレスサイン</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="card-explanation"><b>人工妊娠中絶</b>：母体保護法に基づき<b>妊娠22週未満</b>まで。経済的理由も適応となる。指定医師のみ施行可能。</p>
+                </div>
+
             </div>
         </section>
 
@@ -278,8 +333,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 
                 <!-- 新生児 -->
-                <div class="card md:col-span-2 lg:col-span-2">
-                    <h3 class="card-title">新生児の救急対応 (PALS/DOPES)</h3>
+                <div class="card">
+                    <h3 class="card-title">新生児の救急対応</h3>
                     <div class="card-content grid grid-cols-2 gap-4">
                         <div>
                             <h4 class="font-bold text-center mb-2" style="color:#118AB2;">PALSの重要数値</h4>
@@ -290,7 +345,7 @@
                             </ul>
                         </div>
                         <div>
-                            <h4 class="font-bold text-center mb-2" style="color:#FF6B6B;">挿管中急変: DOPES</h4>
+                            <h4 class="font-bold text-center mb-2" style="color:#EF476F;">挿管中急変: DOPES</h4>
                             <ul class="list-none text-sm space-y-1 font-semibold">
                                 <li><b>D</b>isplacement (位置異常)</li>
                                 <li><b>O</b>bstruction (閉塞)</li>
@@ -303,8 +358,8 @@
                     <p class="card-explanation">小児救急では、成人と異なる数値を正確に記憶し、急変時には原因を体系的に鑑別することが重要。</p>
                 </div>
                 
-                <div class="card md:col-span-2 lg:col-span-2">
-                    <h3 class="card-title">新生児の生理と生理的黄疸</h3>
+                <div class="card">
+                    <h3 class="card-title">新生児の生理と黄疸</h3>
                     <div class="card-content grid grid-cols-2 gap-4">
                         <ul class="list-disc list-inside space-y-1 text-sm">
                             <li><b>生理的体重減少</b>: 5-10%</li>
@@ -316,15 +371,15 @@
                             <canvas id="jaundiceChart"></canvas>
                         </div>
                     </div>
-                    <p class="card-explanation">生理的黄疸は生後2-3日で出現し、4-5日でピークを迎える。24時間以内の黄疸は病的。</p>
+                    <p class="card-explanation">生理的黄疸は生後2-3日で出現し、4-5日でピーク。24時間以内の黄疸やHt>65%は病的。</p>
                 </div>
                 
                 <!-- 小児腫瘍・血液 -->
-                <div class="card md:col-span-2 lg:col-span-4">
+                <div class="card md:col-span-2">
                     <h3 class="card-title">小児腫瘍・血液疾患</h3>
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <div class="border p-4 rounded-lg">
-                            <h4 class="font-bold text-center mb-2" style="color:#FF6B6B;">小児固形腫瘍</h4>
+                            <h4 class="font-bold text-center mb-2" style="color:#EF476F;">小児固形腫瘍</h4>
                             <table class="w-full text-xs text-left">
                                 <thead><tr class="border-b"><th class="py-1">腫瘍</th><th class="py-1">特徴</th></tr></thead>
                                 <tbody>
@@ -339,36 +394,22 @@
                             <div class="chart-container h-48">
                                 <canvas id="leukemiaChart"></canvas>
                             </div>
-                            <p class="text-xs text-center mt-2">ALLはB細胞性(8割), T細胞性(1.5割)。AMLはダウン症で予後良好。</p>
-                        </div>
-                        <div class="border p-4 rounded-lg">
-                             <h4 class="font-bold text-center mb-2" style="color:#06D6A0;">ビタミン欠乏症</h4>
-                             <table class="w-full text-xs text-left">
-                                <thead><tr class="border-b"><th class="py-1">ビタミン</th><th class="py-1">欠乏症</th></tr></thead>
-                                <tbody>
-                                <tr class="border-b"><td class="py-1 font-semibold">B1</td><td class="py-1">脚気 (乳酸↑)</td></tr>
-                                <tr class="border-b"><td class="py-1 font-semibold">C</td><td class="py-1">壊血病 (出血傾向)</td></tr>
-                                <tr class="border-b"><td class="py-1 font-semibold">D</td><td class="py-1">くる病 (骨石灰化障害)</td></tr>
-                                <tr><td class="py-1 font-semibold">K</td><td class="py-1">出血傾向 (凝固因子↓)</td></tr>
-                                </tbody>
-                            </table>
+                            <p class="text-xs text-center mt-2">ALLはB細胞性(8割)。AMLはダウン症で予後良好。t(8;21)は芽球<20%でもAML。</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- 感染症・アレルギー -->
-                <div class="card md:col-span-2 lg:col-span-2">
+                <div class="card">
                     <h3 class="card-title">川崎病とワクチン</h3>
                      <div class="card-content grid grid-cols-2 gap-4">
                         <div>
-                            <h4 class="font-bold text-center mb-2" style="color:#FF6B6B;">川崎病の6大症状</h4>
-                            <ul class="list-none text-xs space-y-1">
-                                <li class="bg-red-50 p-1 rounded">① 5日以上続く発熱</li>
-                                <li class="bg-red-50 p-1 rounded">② 眼球結膜充血</li>
-                                <li class="bg-red-50 p-1 rounded">③ 口唇・口腔所見</li>
-                                <li class="bg-red-50 p-1 rounded">④ 不定形発疹</li>
-                                <li class="bg-red-50 p-1 rounded">⑤ 四肢末端の変化</li>
-                                <li class="bg-red-50 p-1 rounded">⑥ 頸部リンパ節腫脹</li>
+                            <h4 class="font-bold text-center mb-2" style="color:#EF476F;">川崎病</h4>
+                            <ul class="list-disc list-inside text-xs space-y-1">
+                                <li>6大症状（5つで診断）</li>
+                                <li>治療：<b>IVIG大量療法</b>, アスピリン</li>
+                                <li>不応例：ステロイド, インフリキシマブ</li>
+                                <li>合併症：<b>冠動脈瘤</b></li>
                             </ul>
                         </div>
                         <div>
@@ -379,19 +420,19 @@
                             <p class="text-xs text-gray-600">5種混合, 肺炎球菌, 新型コロナ</p>
                         </div>
                     </div>
-                    <p class="card-explanation">川崎病は冠動脈瘤予防のIVIGが重要。ワクチンの種類は副反応や接種間隔の理解に必須。</p>
+                    <p class="card-explanation">川崎病は冠動脈瘤予防が最重要。ワクチンの種類は副反応や接種間隔の理解に必須。</p>
                 </div>
                 
                 <!-- その他 -->
-                <div class="card md:col-span-2 lg:col-span-2">
+                <div class="card">
                     <h3 class="card-title">児童虐待と発達の目安</h3>
                     <div class="card-content grid grid-cols-2 gap-4">
                         <div>
-                            <h4 class="font-bold text-center mb-2" style="color:#FF6B6B;">児童虐待</h4>
+                            <h4 class="font-bold text-center mb-2" style="color:#EF476F;">児童虐待</h4>
                             <ul class="list-none text-sm space-y-1">
                                 <li>加害者最多: <b>実母</b></li>
                                 <li>面前DVは<b>心理的虐待</b></li>
-                                <li>医師に通告<b>義務</b>あり (罰則なし)</li>
+                                <li>医師に通告<b>義務</b>あり (守秘義務違反に問われない)</li>
                             </ul>
                         </div>
                         <div>
@@ -399,13 +440,68 @@
                             <ul class="list-none text-sm space-y-1">
                                 <li><b>3-4ヶ月</b>: 首が座らない</li>
                                 <li><b>1歳半</b>: 一人歩きしない</li>
-                                <li><b>2歳</b>: 二語文が出ない</li>
+                                <li><b>2歳</b>: 意味のある単語なし</li>
+                                <li><b>3歳</b>: 二語文が出ない</li>
                             </ul>
                         </div>
                     </div>
-                    <p class="card-explanation">虐待のサインを見逃さず、適切な対応をとることは医師の責務。正常な発達過程の知識はその判断基準となる。</p>
+                    <p class="card-explanation">虐待のサインを見逃さず、正常な発達過程の知識を基に判断することが医師の責務。</p>
+                </div>
+                
+                <!-- NEW CARDS for PEDIATRICS -->
+                <div class="card">
+                    <h3 class="card-title">先天性心疾患</h3>
+                    <div class="card-content">
+                        <h4 class="font-bold text-center mb-2" style="color:#118AB2;">肺血流増加群 (左→右シャント)</h4>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            <li><b>VSD (心室中隔欠損)</b>: 最多。左室・右室拡大。大欠損は肺高血圧。</li>
+                            <li><b>ASD (心房中隔欠損)</b>: 右房・右室拡大。成人期に発覚も。</li>
+                            <li><b>PDA (動脈管開存)</b></li>
+                        </ul>
+                         <p class="card-explanation">ファロー四徴症や肺動脈閉鎖は肺血流減少群（チアノーゼ性）。</p>
+                    </div>
                 </div>
 
+                <div class="card">
+                    <h3 class="card-title">小児の腎・血管炎疾患</h3>
+                    <div class="card-content">
+                        <h4 class="font-bold text-center mb-2" style="color:#06D6A0;">IgA腎症</h4>
+                        <ul class="list-disc list-inside text-sm mb-2">
+                           <li>学校検尿での潜血・蛋白尿で発見多。</li>
+                           <li>上気道感染後のコーラ色肉眼的血尿。</li>
+                           <li>血清IgA高値。</li>
+                        </ul>
+                        <h4 class="font-bold text-center mb-2" style="color:#FFD166;">IgA血管炎 (HSP)</h4>
+                        <ul class="list-disc list-inside text-sm">
+                           <li>3大症状: 皮膚(紫斑), 関節, 腹部症状。</li>
+                           <li>腹部症状が先行することもある。</li>
+                           <li>腎症(紫斑病性腎炎)の合併に注意。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card md:col-span-2">
+                    <h3 class="card-title">小児神経・その他</h3>
+                    <div class="card-content grid grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-bold text-center mb-2" style="color:#EF476F;">熱性けいれん</h4>
+                            <ul class="list-disc list-inside text-sm">
+                               <li>有病率 7-8%。てんかん移行は稀。</li>
+                               <li><b>非典型</b>：微熱(37℃台)、焦点性、15分以上持続、24h以内に反復。</li>
+                               <li>意識障害遷延は急性脳症を疑う。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-center mb-2" style="color:#118AB2;">その他頻出疾患</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li><b>ダウン症</b>: <b>心奇形</b>, <b>甲状腺機能低下症</b>の合併。</li>
+                                <li><b>いちご状血管腫</b>: βブロッカー内服が有効。</li>
+                                <li><b>急性陰嚢症</b>: 精巣捻転は6h以内が勝負。両側固定術。精巣垂捻転はblue dot sign。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="card-explanation">ビタミン欠乏症：B1(脚気,乳酸↑), C(壊血病), D(くる病), K(出血傾向)も重要。</p>
+                </div>
             </div>
         </section>
 
@@ -439,18 +535,9 @@
                 type: 'doughnut',
                 data: {
                     labels: ['扁平上皮癌', '腺癌'],
-                    datasets: [{ data: [75, 25], backgroundColor: ['#FF6B6B', '#FFD166'], borderColor: '#FFFFFF', borderWidth: 2 }]
+                    datasets: [{ data: [75, 25], backgroundColor: ['#EF476F', '#FFD166'], borderColor: '#FFFFFF', borderWidth: 2 }]
                 },
                 options: commonChartOptions('right')
-            });
-
-            new Chart(document.getElementById('ovarianCancerChart').getContext('2d'), {
-                type: 'bar',
-                data: {
-                    labels: ['漿液性', '明細胞', '類内膜', '粘液性'],
-                    datasets: [{ label: '頻度', data: [50, 20, 15, 10], backgroundColor: '#118AB2', borderRadius: 4 }]
-                },
-                options: { ...commonChartOptions(), plugins: { ...commonChartOptions().plugins, legend: { display: false } }, indexAxis: 'y' }
             });
 
             new Chart(document.getElementById('jaundiceChart').getContext('2d'), {

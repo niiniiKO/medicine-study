@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>京大マイナー科 満点対策インフォグラフィック【詳細版】</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f8fafc;
+        }
+        .dept-title-container {
+            border-left-width: 4px;
+            padding-left: 1rem;
+            margin-bottom: 2rem;
+        }
+        .dept-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            color: #1f2937;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px_6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+        .card-content {
+            flex-grow: 1;
+        }
+        .keyword {
+            background-color: #e0f2fe;
+            color: #0c4a6e;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            display: inline-block;
+            margin: 0.25rem;
+            font-size: 0.875rem;
+        }
+        .highlight {
+            color: #c2410c; /* orange-700 */
+            font-weight: 700;
+        }
+        .alert {
+            color: #be123c; /* rose-700 */
+            font-weight: 700;
+        }
+        .dl-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.5rem 1rem;
+        }
+        .dt {
+            font-weight: 700;
+            color: #4b5563;
+        }
+        .dd {
+            color: #1f2937;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">京大マイナー科 満点対策ノート</h1>
+            <p class="text-lg text-gray-600">詳細インフォグラフィック版</p>
+        </header>
+
+        <main class="space-y-16">
+            <!-- 救急科 -->
+            <section id="emergency">
+                <div class="dept-title-container border-red-500">
+                    <h2 class="dept-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                        救急科
+                    </h2>
+                    <p class="text-gray-500">迅速な病態評価と初期対応</p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div class="card lg:col-span-2">
+                        <h3 class="card-title">ショックの完全理解</h3>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <div>
+                                <h4 class="font-bold text-lg">循環血液量減少性</h4>
+                                <p class="text-sm text-gray-600">出血, 脱水</p>
+                                <p class="mt-2"><span class="dt">所見:</span> 皮膚冷感, CVP/PAWP <span class="alert">↓</span></p>
+                                <p class="mt-2"><span class="dt">対応:</span> <span class="highlight">輸液・輸血</span>, 止血</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">心原性</h4>
+                                <p class="text-sm text-gray-600">心筋梗塞, 心不全</p>
+                                <p class="mt-2"><span class="dt">所見:</span> <span class="alert">肺うっ血</span>, CVP/PAWP <span class="alert">↑</span></p>
+                                <p class="mt-2"><span class="dt">対応:</span> <span class="highlight">強心薬</span>, IABP</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">閉塞性</h4>
+                                <p class="text-sm text-gray-600">気胸, 心タンポナーデ</p>
+                                <p class="mt-2"><span class="dt">所見:</span> 頸静脈怒張, 奇脈</p>
+                                <p class="mt-2"><span class="dt">対応:</span> <span class="highlight">原因の機械的解除</span></p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">血液分布異常性</h4>
+                                <p class="text-sm text-gray-600">敗血症, アナフィラキシー</p>
+                                <p class="mt-2"><span class="dt">所見:</span> <span class="highlight">Warm Shock</span></p>
+                                <p class="mt-2"><span class="dt">対応:</span> <span class="highlight">大量輸液 + 昇圧薬</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">熱傷の深度診断と管理</h3>
+                        <div class="dl-grid">
+                            <div class="dt">I度</div><div class="dd">発赤、強い疼痛</div>
+                            <div class="dt">浅達性II度</div><div class="dd"><span class="highlight">水疱</span>、激しい疼痛</div>
+                            <div class="dt">深達性II度</div><div class="dd">水疱、<span class="alert">知覚鈍麻</span> → <span class="highlight">手術考慮</span></div>
+                            <div class="dt">III度</div><div class="dd">羊皮紙様、<span class="alert">無痛</span> → <span class="highlight">植皮必須</span></div>
+                        </div>
+                        <p class="mt-4"><span class="alert">気道熱傷</span> (嗄声・すす) → <span class="highlight">ためらわず早期挿管！</span></p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">外傷・CPA・環境異常</h3>
+                        <ul class="space-y-3">
+                            <li><span class="dt">外傷:</span> <span class="keyword">ABCDEアプローチ</span>, <span class="keyword">FAST</span>で腹腔内出血評価</li>
+                            <li><span class="dt">CPA:</span> <span class="keyword">BLS</span>(胸骨圧迫優先), <span class="keyword">ALS</span>(VF/pVTは除細動)</li>
+                            <li><span class="dt">熱中症:</span> <span class="highlight">深部体温</span>測定, III度は<span class="highlight">迅速な体表冷却</span></li>
+                            <li><span class="dt">中毒:</span> 硫化水素→<span class="keyword">亜硝酸Na</span>, アセトアミノフェン→<span class="keyword">N-アセチルシステイン</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 放射線科 -->
+            <section id="radiology">
+                <div class="dept-title-container border-blue-500">
+                    <h2 class="dept-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                        放射線科
+                    </h2>
+                     <p class="text-gray-500">特異的所見と治療適応の理解</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card">
+                        <h3 class="card-title">画像診断キー所見</h3>
+                        <div class="dl-grid">
+                            <div class="dt">Tree-in-bud</div><div class="dd">肺結核</div>
+                            <div class="dt">Crazy paving</div><div class="dd">肺胞蛋白症</div>
+                            <div class="dt">DWI高信号</div><div class="dd">急性期脳梗塞, 脳膿瘍</div>
+                            <div class="dt">Intimal flap</div><div class="dd">大動脈解離</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">放射線治療の適応</h3>
+                        <div class="dl-grid">
+                            <div class="dt"><span class="alert">緊急照射</span></div><div class="dd">上大静脈症候群, 脊髄圧迫</div>
+                            <div class="dt">IMRT</div><div class="dd">前立腺癌, 頭頸部癌</div>
+                            <div class="dt">SRT/SBRT</div><div class="dd">早期肺癌, 転移性脳腫瘍</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">核医学検査</h3>
+                        <div class="dl-grid">
+                            <div class="dt">¹⁸F-FDG</div><div class="dd">悪性腫瘍, 炎症</div>
+                            <div class="dt">¹²³I-MIBG</div><div class="dd"><span class="highlight">褐色細胞腫</span></div>
+                            <div class="dt">¹³¹I</div><div class="dd">甲状腺癌, バセドウ病</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 精神科 -->
+            <section id="psychiatry">
+                 <div class="dept-title-container border-purple-500">
+                    <h2 class="dept-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        精神科
+                    </h2>
+                     <p class="text-gray-500">診断基準・薬物療法・法律</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card lg:col-span-2">
+                        <h3 class="card-title">主要精神疾患</h3>
+                        <div class="dl-grid">
+                            <div class="dt">統合失調症</div><div class="dd">陽性/陰性症状 <span class="keyword">抗精神病薬</span></div>
+                            <div class="dt">双極性障害</div><div class="dd"><span class="highlight">躁病エピソード</span>が必須 <span class="keyword">気分安定薬</span></div>
+                            <div class="dt">せん妄</div><div class="dd">急性発症, 日内変動する意識障害 <span class="keyword">原因除去</span></div>
+                            <div class="dt">認知症</div><div class="dd">アルツハイマー型(物盗られ妄想), レビー小体型(幻視)</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">法律と副作用</h3>
+                        <div class="dl-grid">
+                            <div class="dt">医療保護入院</div><div class="dd">家族等同意, 指定医1名</div>
+                            <div class="dt">措置入院</div><div class="dd">自傷他害, 指定医2名</div>
+                        </div>
+                        <p class="mt-4"><span class="dt">副作用:</span> <span class="keyword">EPS</span> <span class="keyword">悪性症候群</span> <span class="alert">BZD依存</span></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 整形外科 & 皮膚科 -->
+            <div class="grid lg:grid-cols-2 gap-8">
+                <section id="orthopedics">
+                    <div class="dept-title-container border-orange-500">
+                        <h2 class="dept-title">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-orange-500" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2.586l.293.293a1 1 0 001.414 0l.293-.293V17a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>
+                            整形外科
+                        </h2>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">骨折・脱臼と神経麻痺</h3>
+                        <div class="dl-grid">
+                            <div class="dt">肩関節前方脱臼</div><div class="dd"><span class="highlight">腋窩神経麻痺</span></div>
+                            <div class="dt">上腕骨骨幹部骨折</div><div class="dd"><span class="highlight">橈骨神経麻痺 (下垂手)</span></div>
+                            <div class="dt">上腕骨顆上骨折</div><div class="dd"><span class="alert">コンパートメント症候群</span></div>
+                        </div>
+                        <h3 class="card-title mt-6">その他重要疾患</h3>
+                        <div class="dl-grid">
+                             <div class="dt">化膿性関節炎</div><div class="dd"><span class="alert">緊急切開排膿</span></div>
+                             <div class="dt">脊椎転移</div><div class="dd">麻痺出現は<span class="alert">緊急事態</span></div>
+                        </div>
+                    </div>
+                </section>
+                <section id="dermatology">
+                    <div class="dept-title-container border-pink-500">
+                        <h2 class="dept-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-pink-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" /></svg>
+                            皮膚科
+                        </h2>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">重要疾患のキーポイント</h3>
+                        <div class="dl-grid">
+                            <div class="dt">アトピー性皮膚炎</div><div class="dd">合併症: <span class="alert">Kaposi水痘様発疹症</span></div>
+                            <div class="dt">水疱性類天疱瘡</div><div class="dd">高齢者, <span class="highlight">緊満性水疱</span></div>
+                            <div class="dt">悪性黒色腫</div><div class="dd">予後は<span class="highlight">腫瘍の厚さ</span>(Breslow)</div>
+                            <div class="dt">基底細胞癌</div><div class="dd">最多の皮膚癌, 転移は稀</div>
+                            <div class="dt">皮膚筋炎</div><div class="dd">ヘリオトロープ疹, <span class="alert">悪性腫瘍合併</span></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- その他 -->
+            <section id="others">
+                <div class="dept-title-container border-teal-500">
+                    <h2 class="dept-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                        その他重要科目
+                    </h2>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card">
+                        <h3 class="card-title">泌尿器科</h3>
+                        <p><span class="keyword">前立腺癌(ホルモン療法)</span> <span class="keyword">精巣腫瘍(化学療法著効)</span></p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">眼科</h3>
+                        <p><span class="keyword">急性緑内障発作(散瞳)</span> <span class="keyword">網膜中心動脈閉塞症(超緊急)</span></p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">耳鼻咽喉科</h3>
+                        <p><span class="keyword">反回神経麻痺(嗄声)</span> <span class="keyword">上咽頭癌(EBV, 放射線感受性)</span></p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">麻酔科</h3>
+                        <p><span class="keyword">挿管確認(EtCO₂)</span> <span class="keyword">悪性高熱症(ダントロレン)</span></p>
+                    </div>
+                    <div class="card" colspan="2">
+                        <h3 class="card-title">輸血学</h3>
+                        <p><span class="keyword">血小板(20-24℃, 振盪保存)</span> <span class="keyword">GVHD予防(放射線照射)</span></p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</body>
+</html>

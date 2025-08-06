@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>京大病院 外科対策インフォグラフィック (詳細版)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .card {
+            background-color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .card .content {
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease-in-out, padding 0.6s ease;
+        }
+        .card.active .content {
+            display: block;
+            max-height: 2000px; /* 十分な高さを確保 */
+            padding-top: 1rem;
+        }
+        .icon {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+        }
+        .list-item {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.75rem;
+            text-align: left;
+        }
+        .list-item::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        .card.active .list-item::before {
+            transform: rotate(90deg);
+        }
+        .section-title {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 700;
+            margin-top: 1.25rem;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.25rem;
+            border-bottom-width: 2px;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8">
+        <header class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-900">京大病院 外科 過去問対策インフォグラフィック</h1>
+            <p class="mt-3 text-lg text-slate-600">頻出知識を完全網羅。クリックで詳細を展開。</p>
+        </header>
+
+        <div id="infographic-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Cards will be injected here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        const infographicData = [
+            {
+                title: "乳腺外科",
+                icon: `<svg class="icon text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18M5.478 6.358l.007-.007m13.044 11.284l-.007.007M12 21.75c-5.385 0-9.75-4.365-9.75-9.75S6.615 2.25 12 2.25s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75z"></path></svg>`,
+                color: "pink",
+                content: `
+                    <h4 class="section-title border-pink-500 text-pink-700">サブタイプと治療</h4>
+                    <ul>
+                        <li class="list-item"><b class="text-pink-600">ルミナール:</b> ホルモン療法 (閉経前:タモキシフェン±LH-RHアゴニスト, 閉経後:アロマターゼ阻害薬)</li>
+                        <li class="list-item"><b class="text-pink-600">HER2陽性:</b> 抗HER2療法 (トラスツズマブ, ペルツズマブ)。HER2はがん遺伝子でチロシンキナーゼ活性あり。</li>
+                        <li class="list-item"><b class="text-pink-600">トリプルネガティブ:</b> 化学療法が中心。</li>
+                    </ul>
+                    <h4 class="section-title border-pink-500 text-pink-700">薬物療法 Key Points</h4>
+                    <ul>
+                        <li class="list-item"><b class="text-pink-600">術前化学療法(NAC):</b> 予後改善効果は術後化学療法と同等。pCR達成が重要情報。</li>
+                        <li class="list-item"><b class="text-pink-600">タモキシフェン副作用:</b> 子宮体癌、血栓症。</li>
+                        <li class="list-item"><b class="text-pink-600">アロマターゼ阻害薬副作用:</b> 骨密度低下 (骨粗鬆症)。</li>
+                        <li class="list-item"><b class="text-pink-600">アントラサイクリン系副作用:</b> 心毒性。</li>
+                    </ul>
+                    <h4 class="section-title border-pink-500 text-pink-700">手術と遺伝性乳癌</h4>
+                    <ul>
+                        <li class="list-item"><b class="text-pink-600">SLNB:</b> 臨床的N0が対象。転移1-2個でも郭清省略を考慮。リンパ浮腫を回避。</li>
+                        <li class="list-item"><b class="text-pink-600">温存術:</b> 必ず術後放射線照射を行う。全摘と予後同等。</li>
+                        <li class="list-item"><b class="text-pink-600">BRCA1/2変異:</b> 遺伝性乳癌(HBOC)。BRCA1はTNBC多い。PARP阻害薬が奏効。リスク低減乳房切除(RRM)でリスク90%減。</li>
+                    </ul>
+                `
+            },
+            {
+                title: "上部消化管外科",
+                icon: `<svg class="icon text-amber-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h7.5v10.5h-7.5z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 5.25v.01" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75v.01" /></svg>`,
+                color: "amber",
+                content: `
+                    <h4 class="section-title border-amber-500 text-amber-700">食道癌</h4>
+                    <ul>
+                        <li class="list-item"><b class="text-amber-600">組織型:</b> 日本は<b class="font-bold">扁平上皮癌</b> (飲酒・喫煙)が9割。欧米は腺癌 (バレット食道)も多い。</li>
+                        <li class="list-item"><b class="text-amber-600">手術:</b> <b class="font-bold">右開胸・開腹</b>アプローチが標準。再建は胃管が最多。</li>
+                        <li class="list-item"><b class="text-amber-600">治療:</b> Stage II/IIIは<b class="font-bold">術前化学療法</b>が標準。</li>
+                        <li class="list-item"><b class="text-amber-600">解剖:</b> <b class="font-bold">左反回神経</b>は大動脈弓を反回。右は右鎖骨下動脈を反回。</li>
+                    </ul>
+                    <h4 class="section-title border-amber-500 text-amber-700">胃癌</h4>
+                    <ul>
+                        <li class="list-item"><b class="text-amber-600">手術:</b> <b class="font-bold">D2リンパ節郭清</b>が基本。腹腔鏡下手術は早期癌に標準。</li>
+                        <li class="list-item"><b class="text-amber-600">再建:</b> 胃全摘後は<b class="font-bold">Roux-en-Y法</b>で食道空腸吻合。</li>
+                        <li class="list-item"><b class="text-amber-600">術後:</b> 胃全摘後は<b class="font-bold">ビタミンB12欠乏</b>による巨赤芽球性貧血に注意。</li>
+                        <li class="list-item"><b class="text-amber-600">治療:</b> Stage II/IIIは<b class="font-bold">術後補助化学療法</b> (S-1等)を行う。</li>
+                    </ul>
+                `
+            },
+            {
+                title: "下部消化管外科",
+                icon: `<svg class="icon text-lime-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
+                color: "lime",
+                content: `
+                    <h4 class="section-title border-lime-500 text-lime-700">大腸癌</h4>
+                    <ul>
+                        <li class="list-item"><b class="text-lime-600">転移:</b> 最多は<b class="font-bold">肝臓</b>、次いで肺。</li>
+                        <li class="list-item"><b class="text-lime-600">Stage:</b> <b class="font-bold">壁深達度(T)</b>が重要。腫瘍径は無関係。</li>
+                        <li class="list-item"><b class="text-lime-600">遺伝子:</b> 切除不能例では<b class="font-bold">RAS/BRAF/MSI</b>検査が必須。</li>
+                        <li class="list-item"><b class="text-lime-600">治療:</b> 遠隔転移あっても切除可能なら手術適応。</li>
+                    </ul>
+                    <h4 class="section-title border-lime-500 text-lime-700">ヘルニア</h4>
+                    <ul>
+                        <li class="list-item"><b class="text-lime-600">疫学:</b> 鼠径ヘルニアは男性に多いが、<b class="font-bold">大腿ヘルニアは女性に多い</b>。</li>
+                        <li class="list-item"><b class="text-lime-600">嵌頓:</b> 血流障害のリスク。用手還納を試みるが、ダメなら緊急手術。</li>
+                        <li class="list-item"><b class="text-lime-600">手術:</b> 成人はメッシュ法 (Tension-free)。小児は高位結紮術。</li>
+                    </ul>
+                    <h4 class="section-title border-lime-500 text-lime-700">急性虫垂炎</h4>
+                    <ul>
+                        <li class="list-item"><b class="text-lime-600">症状:</b> 心窩部痛→右下腹部痛への移動(Kocher)。</li>
+                        <li class="list-item"><b class="text-lime-600">注意点:</b> 高齢者では<b class="font-bold">悪性腫瘍</b>の合併を考慮。</li>
+                    </ul>
+                `
+            },
+            {
+                title: "肝胆膵外科",
+                icon: `<svg class="icon text-emerald-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" /></svg>`,
+                color: "emerald",
+                content: `
+                    <h4 class="section-title border-emerald-500 text-emerald-700">肝臓</h4>
+                    <ul>
+                        <li class="list-item"><b class="text-emerald-600">HCC治療:</b> 肝予備能と腫瘍因子で決定 (切除, RFA, TACE)。</li>
+                        <li class="list-item"><b class="text-emerald-600">肝移植:</b> <b class="font-bold">ミラノ基準</b>(単発5cm↓, 3個以内/各3cm↓)が保険適応。肝内胆管癌は適応外。</li>
+                        <li class="list-item"><b class="text-emerald-600">Pringle法:</b> 肝離断時の出血コントロール手技。</li>
+                    </ul>
+                    <h4 class="section-title border-emerald-500 text-emerald-700">胆道</h4>
+                    <ul>
+                        <li class="list-item"><b class="text-emerald-600">急性胆管炎:</b> Charcot/Reynolds徴候。治療は<b class="font-bold">緊急胆道ドレナージ</b>(ERCP)。</li>
+                        <li class="list-item"><b class="text-emerald-600">急性胆嚢炎:</b> Murphy徴候。<b class="font-bold">早期腹腔鏡下胆嚢摘出術</b>が第一選択。</li>
+                        <li class="list-item"><b class="text-emerald-600">胆石リスク:</b> 4F (Female, Forty, Fatty, Fertile)。</li>
+                    </ul>
+                    <h4 class="section-title border-emerald-500 text-emerald-700">膵臓</h4>
+                    <ul>
+                        <li class="list-item"><b class="text-emerald-600">PD術:</b> 膵頭部癌など。切離血管は<b class="font-bold">胃十二指腸動脈</b>。再建は膵・胆・胃と空腸。</li>
+                        <li class="list-item"><b class="text-emerald-600">膵嚢胞:</b> <b class="font-bold">主膵管型IPMN</b>とMCNは癌化リスクあり手術。<b class="font-bold">SCN</b>は原則良性で経過観察。</li>
+                    </ul>
+                `
+            },
+            {
+                title: "呼吸器外科",
+                icon: `<svg class="icon text-sky-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" /></svg>`,
+                color: "sky",
+                content: `
+                    <h4 class="section-title border-sky-500 text-sky-700">肺癌</h4>
+                    <ul>
+                        <li class="list-item"><b class="text-sky-600">N因子:</b> N1(同側肺門), N2(同側縦隔), N3(対側/鎖骨上)。</li>
+                        <li class="list-item"><b class="text-sky-600">治療:</b> Stage I-IIは<b class="font-bold">手術</b>が第一選択。Stage II-IIIAの術後には<b class="font-bold">シスプラチン併用化学療法</b>。</li>
+                        <li class="list-item"><b class="text-sky-600">分子標的薬:</b> EGFR変異陽性例の術後に<b class="font-bold">オシメルチニブ</b>。</li>
+                        <li class="list-item"><b class="text-sky-600">肺移植適応外:</b> <b class="font-bold">多発性原発性肺癌</b>、活動性感染症など。</li>
+                    </ul>
+                    <h4 class="section-title border-sky-500 text-sky-700">気胸・縦隔腫瘍</h4>
+                    <ul>
+                        <li class="list-item"><b class="text-sky-600">気胸所見:</b> 患側呼吸音<b class="font-bold">減弱</b>、打診で<b class="font-bold">鼓音</b>。</li>
+                        <li class="list-item"><b class="text-sky-600">緊張性気胸:</b> ショックをきたす。治療は<b class="font-bold">緊急脱気</b>。</li>
+                        <li class="list-item"><b class="text-sky-600">前縦隔腫瘍:</b> <b class="font-bold">4T</b> (Thymoma, Teratoma, Thyroid, Terrible lymphoma)。</li>
+                        <li class="list-item"><b class="text-sky-600">胸腺腫:</b> <b class="font-bold">重症筋無力症(MG)</b>の合併に注意。</li>
+                    </ul>
+                `
+            },
+            {
+                title: "心外・小児外科",
+                icon: `<svg class="icon text-cyan-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345h5.372c.512 0 .734.667.368.98l-4.34 3.152a.563.563 0 00-.182.635l1.644 5.053a.562.562 0 01-.812.622l-4.34-3.152a.563.563 0 00-.666 0l-4.34 3.152a.562.562 0 01-.812-.622l1.644-5.053a.563.563 0 00-.182-.635l-4.34-3.152c-.366-.267-.144-.98.368-.98h5.372a.563.563 0 00.475-.345L11.48 3.5z" /></svg>`,
+                color: "cyan",
+                content: `
+                    <h4 class="section-title border-cyan-500 text-cyan-700">心臓血管外科</h4>
+                    <ul>
+                        <li class="list-item"><b class="text-cyan-600">A型解離:</b> 上行大動脈に及ぶ。<b class="font-bold">緊急手術</b>。心タンポナーデ、ARに注意。</li>
+                        <li class="list-item"><b class="text-cyan-600">B型解離:</b> <b class="font-bold">降圧療法</b>が基本。破裂・臓器虚血なら治療。</li>
+                        <li class="list-item"><b class="text-cyan-600">機械弁:</b> 耐久性◎、<b class="font-bold">生涯ワーファリン</b>必須。</li>
+                        <li class="list-item"><b class="text-cyan-600">生体弁:</b> 耐久性△ (10-20年)、抗凝固は原則不要。</li>
+                        <li class="list-item"><b class="text-cyan-600">TEVAR/EVAR:</b> 合併症に<b class="font-bold">エンドリーク</b>。Type Iは要治療。</li>
+                    </ul>
+                    <h4 class="section-title border-cyan-500 text-cyan-700">小児外科</h4>
+                    <ul>
+                        <li class="list-item"><b class="text-cyan-600">食道閉鎖症:</b> 最多は<b class="font-bold">Gross C型</b>。羊水過多、coil-up sign。</li>
+                        <li class="list-item"><b class="text-cyan-600">肥厚性幽門狭窄症:</b> <b class="font-bold">生後2-3週</b>から。非胆汁性・噴水状嘔吐。</li>
+                        <li class="list-item"><b class="text-cyan-600">腸重積症:</b> 乳児期。間欠的啼泣、<b class="font-bold">イチゴジャム血便</b>。</li>
+                        <li class="list-item"><b class="text-cyan-600">Hirschsprung病:</b> <b class="font-bold">直腸粘膜生検</b>で確定診断。</li>
+                        <li class="list-item"><b class="text-cyan-600">横隔膜ヘルニア:</b> 左(Bochdalek)に多い。<b class="font-bold">肺低形成</b>が問題。</li>
+                    </ul>
+                `
+            },
+            {
+                title: "脳神経外科",
+                icon: `<svg class="icon text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.5 13.5h.008v.008h-.008v-.008z" /></svg>`,
+                color: "indigo",
+                content: `
+                    <h4 class="section-title border-indigo-500 text-indigo-700">脳血管障害</h4>
+                    <ul>
+                        <li class="list-item"><b class="text-indigo-600">SAH:</b> 原因最多は<b class="font-bold">脳動脈瘤破裂</b>。合併症の<b class="font-bold">脳血管攣縮</b>(4-14日)に注意。</li>
+                        <li class="list-item"><b class="text-indigo-600">高血圧性脳出血:</b> <b class="font-bold">小脳出血</b>は手術適応あり。脳幹出血はなし。</li>
+                         <li class="list-item"><b class="text-indigo-600">もやもや病:</b> 周術期に<b class="font-bold">過換気(低CO2)は禁忌</b>。脳虚血を助長。</li>
+                    </ul>
+                    <h4 class="section-title border-indigo-500 text-indigo-700">脳腫瘍</h4>
+                     <ul>
+                        <li class="list-item"><b class="text-indigo-600">膠芽腫:</b> 最も悪性度の高い神経膠腫 (アストロサイト由来)。</li>
+                        <li class="list-item"><b class="text-indigo-600">髄膜腫:</b> 脳実質外の良性腫瘍。無症候性なら<b class="font-bold">経過観察</b>。</li>
+                    </ul>
+                    <h4 class="section-title border-indigo-500 text-indigo-700">その他</h4>
+                     <ul>
+                        <li class="list-item"><b class="text-indigo-600">急性閉塞性水頭症:</b> <b class="font-bold">脳室ドレナージ</b>を行う。<b class="font-bold">腰椎ドレナージは禁忌</b>(脳ヘルニアのリスク)。</li>
+                    </ul>
+                `
+            },
+            {
+                title: "外科一般・その他",
+                icon: `<svg class="icon text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>`,
+                color: "slate",
+                content: `
+                    <h4 class="section-title border-slate-500 text-slate-700">周術期管理</h4>
+                    <ul>
+                        <li class="list-item"><b class="text-slate-600">大量輸血:</b> 合併症は<b class="font-bold">低Ca血症, 高K血症, 低体温</b>, 凝固障害。</li>
+                        <li class="list-item"><b class="text-slate-600">SSI予防:</b> 硬いブラシでの手洗いは非推奨。</li>
+                        <li class="list-item"><b class="text-slate-600">抜糸:</b> 顔面は<b class="font-bold">5-7日</b>が目安。</li>
+                    </ul>
+                    <h4 class="section-title border-slate-500 text-slate-700">移植・ストマ</h4>
+                    <ul>
+                        <li class="list-item"><b class="text-slate-600">臓器移植法:</b> 本人意思不明でも<b class="font-bold">家族の承諾</b>で提供可。15歳未満も可。</li>
+                        <li class="list-item"><b class="text-slate-600">ストマ:</b> <b class="font-bold">術前マーキング</b>が重要。<b class="font-bold">回腸ストマ</b>は脱水に注意。</li>
+                    </ul>
+                    <h4 class="section-title border-slate-500 text-slate-700">重要解剖・その他</h4>
+                    <ul>
+                        <li class="list-item"><b class="text-slate-600">顔面骨折:</b> <b class="font-bold">下顎骨骨折</b>で咬合不全。</li>
+                        <li class="list-item"><b class="text-slate-600">舌癌:</b> 扁平上皮癌、側縁に好発。手術が主。</li>
+                        <li class="list-item"><b class="text-slate-600">胸部解剖:</b> 横隔神経は肺門の<b class="font-bold">前</b>、迷走神経は<b class="font-bold">後</b>を走行。</li>
+                    </ul>
+                `
+            }
+        ];
+
+        const grid = document.getElementById('infographic-grid');
+
+        const colorClasses = {
+            pink: { bg: 'bg-pink-50', border: 'border-pink-200', text: 'text-pink-700' },
+            amber: { bg: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-700' },
+            lime: { bg: 'bg-lime-50', border: 'border-lime-200', text: 'text-lime-700' },
+            emerald: { bg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-700' },
+            sky: { bg: 'bg-sky-50', border: 'border-sky-200', text: 'text-sky-700' },
+            cyan: { bg: 'bg-cyan-50', border: 'border-cyan-200', text: 'text-cyan-700' },
+            indigo: { bg: 'bg-indigo-50', border: 'border-indigo-200', text: 'text-indigo-700' },
+            slate: { bg: 'bg-slate-50', border: 'border-slate-200', text: 'text-slate-700' },
+        };
+
+        infographicData.forEach(item => {
+            const card = document.createElement('div');
+            const colors = colorClasses[item.color];
+            card.className = `card rounded-xl shadow-lg overflow-hidden border ${colors.border} p-5`;
+            
+            card.innerHTML = `
+                <div class="flex items-center">
+                    ${item.icon}
+                    <h3 class="ml-4 text-xl font-bold text-slate-800">${item.title}</h3>
+                </div>
+                <div class="content text-slate-700">
+                    ${item.content.replace(/<h4 class="section-title/g, `<h4 class="section-title ${colors.border} ${colors.text}`)}
+                </div>
+            `;
+            
+            grid.appendChild(card);
+        });
+
+        grid.addEventListener('click', (e) => {
+            const card = e.target.closest('.card');
+            if (card) {
+                const wasActive = card.classList.contains('active');
+                
+                // Close all cards first
+                document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+
+                // If the clicked card was not active, open it
+                if (!wasActive) {
+                    card.classList.add('active');
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

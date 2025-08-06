@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北野病院 内科過去問対策 インフォグラフィック (更新版)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Energetic & Playful -->
+    <!-- Application Structure Plan: このインフォグラフィックは、単一のスクロール可能なページとして構成されます。各診療科のセクションが続き、各セクションは「カード」としてデザインされ、重要な自己抗体や疾患のキーポイント、治療法などを整理して表示します。この構造は、まず全体像を掴み、次に各論へと深掘りしていくという学習の自然な流れをサポートするために選択されました。ユーザーはページをスクロールするだけで、すべての情報を俯瞰し、関心のある部分を詳細に確認できます。 -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: 自己抗体と疾患の対応 -> Goal: Organize/Inform -> Viz: Styled HTML Table -> Justification: 構造化された情報を明確に対応付けて表示するのに最適。-> Method: HTML/CSS
+        - Report Info: 各疾患の要点 -> Goal: Organize/Inform -> Viz: Bulleted Lists in Cards -> Justification: 複雑な情報を階層的に整理し、要点を簡潔に提示する。-> Method: HTML/CSS
+        - Report Info: 治療フロー（例：急性心不全） -> Goal: Organize -> Viz: Styled HTML/CSS Flow Diagram -> Justification: プロセスや判断基準を視覚的な流れで表現し、理解を促進する。SVG/Mermaidは使用しない。
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f8fafc;
+        }
+        .flow-step {
+            border: 2px solid #00A6ED;
+            background-color: white;
+            color: #333;
+        }
+        .flow-arrow {
+            color: #00A6ED;
+            font-size: 2rem;
+            line-height: 1;
+        }
+        .stat-card h3 {
+            color: #00A6ED;
+        }
+        .table-auto th, .table-auto td {
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            text-align: left;
+        }
+        .table-auto th {
+            background-color: #f1f5f9;
+        }
+        .update-badge {
+            background-color: #ffdd57;
+            color: #333;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#00A6ED]">北野病院 内科過去問対策</h1>
+            <p class="text-lg text-gray-600 mt-4">過去の出題傾向を分析し、重要ポイントを視覚的にまとめたインフォグラフィック</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- I. リウマチ・膠原病内科 -->
+            <div class="lg:col-span-3 bg-white p-6 rounded-2xl shadow-lg">
+                <h2 class="text-3xl font-bold mb-6 text-[#72D147]">Ⅰ. リウマチ・膠原病内科</h2>
+                <p class="mb-6 text-gray-600">自己免疫疾患の鍵となる「自己抗体」の理解は必須です。各抗体と疾患の組み合わせ、そして特異的な症状を正確に覚えましょう。</p>
+                <div class="overflow-x-auto mb-6">
+                    <table class="w-full table-auto">
+                        <thead class="bg-green-100">
+                            <tr><th>自己抗体</th><th>関連疾患</th><th>最重要ポイント</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>抗Mi-2抗体</td><td>皮膚筋炎 (DM)</td><td class="font-semibold">定型的な皮膚症状に特異的</td></tr>
+                            <tr><td>抗ARS抗体</td><td>抗ARS抗体症候群</td><td class="font-semibold">間質性肺炎を合併</td></tr>
+                            <tr><td>抗SS-A/Ro抗体</td><td>シェーグレン症候群, SLE</td><td class="font-semibold">新生児ループスの原因</td></tr>
+                            <tr><td>抗MDA5抗体</td><td>皮膚筋炎 (DM)</td><td class="font-semibold">急速進行性間質性肺炎を合併</td></tr>
+                            <tr><td>抗U1-RNP抗体</td><td>混合性結合組織病 (MCTD)</td><td class="font-semibold">診断に必須</td></tr>
+                            <tr><td>抗dsDNA抗体</td><td>SLE</td><td class="font-semibold">疾患活動性を反映</td></tr>
+                            <!-- ### 追加情報 ### -->
+                            <tr><td>抗CCP抗体</td><td>関節リウマチ (RA)</td><td class="font-semibold">RAに特異性が高いマーカー<span class="update-badge">NEW</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- ### 追加情報 ### -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h3 class="font-bold text-lg mb-2">疾患と特徴的所見<span class="update-badge">NEW</span></h3>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li><strong>多発血管炎性肉芽腫症(GPA):</strong> 鞍鼻</li>
+                            <li><strong>ベーチェット病:</strong> 腸管穿孔</li>
+                            <li><strong>成人Still病:</strong> 血球貪食症候群</li>
+                            <li><strong>全身性強皮症(SSc):</strong> 偽性腸閉塞</li>
+                            <li><strong>強直性脊椎炎:</strong> ぶどう膜炎</li>
+                            <li><strong>RS3PE症候群:</strong> 悪性腫瘍の合併</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h3 class="font-bold text-lg mb-2">治療・診断の重要点<span class="update-badge">NEW</span></h3>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li><strong>SLE診断:</strong> 抗核抗体80倍以上が前提</li>
+                            <li><strong>SLE治療:</strong> ヒドロキシクロロキンを考慮</li>
+                            <li><strong>抗リン脂質抗体症候群(妊婦):</strong> ワルファリンは禁忌。ヘパリンを使用。</li>
+                            <li><strong>ステロイド副作用:</strong> 顎骨壊死のリスクあり</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-lg stat-card">
+                <h3 class="text-2xl font-bold mb-4">SLEの活動性マーカー</h3>
+                <ul class="space-y-2 text-lg">
+                    <li class="flex items-center"><span class="text-green-500 mr-2">▲</span> 抗dsDNA抗体価の上昇</li>
+                    <li class="flex items-center"><span class="text-red-500 mr-2">▼</span> 補体価（C3, C4, CH50）の低下</li>
+                </ul>
+                <p class="mt-4 text-sm text-gray-500">これら2つの指標は、ループス腎炎などの重篤な病態をモニタリングする上で極めて重要です。</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-lg stat-card">
+                <h3 class="text-2xl font-bold mb-4">強皮症腎クリーゼ</h3>
+                <p class="text-5xl font-bold text-[#F15A29]">ACE阻害薬</p>
+                <p class="mt-2 text-lg font-semibold">が第一選択薬</p>
+                <p class="mt-4 text-sm text-gray-500">ステロイドの大量投与は腎クリーゼを誘発するリスクがあるため禁忌です。</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-lg stat-card">
+                <h3 class="text-2xl font-bold mb-4">神経ベーチェット病</h3>
+                <p class="text-5xl font-bold text-[#F15A29]">禁忌</p>
+                <p class="mt-2 text-lg font-semibold">シクロスポリンの使用</p>
+                <p class="mt-4 text-sm text-gray-500">症状を増悪させる危険性があるため、絶対に使用してはいけません。</p>
+            </div>
+
+            <!-- II. 糖尿病・内分泌内科 -->
+            <div class="lg:col-span-3 bg-white p-6 rounded-2xl shadow-lg">
+                <h2 class="text-3xl font-bold mb-6 text-[#FCEE21]">Ⅱ. 糖尿病・内分泌内科</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">糖尿病性ケトアシドーシス(DKA)</h3>
+                        <p class="mb-4 text-gray-600">急激な高血糖と代謝性アシドーシスをきたす緊急事態。初期対応が鍵となります。</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start"><span class="text-2xl mr-3">💧</span><div><strong>大量輸液:</strong> 生理食塩水による脱水の補正が最優先。</div></li>
+                            <li class="flex items-start"><span class="text-2xl mr-3">💉</span><div><strong>インスリン持続静注:</strong> 血糖値を緩やかに是正。</div></li>
+                            <li class="flex items-start"><span class="text-2xl mr-3">🔬</span><div><strong>カリウム管理:</strong> インスリン投与でKが細胞内に移動するため、血清K値のモニタリングと補充が必須。</div></li>
+                            <!-- ### 追加情報 ### -->
+                            <li class="flex items-start"><span class="text-2xl mr-3">💡</span><div><strong>成因把握:</strong> 抗GAD抗体、抗IA-2抗体が有用<span class="update-badge">NEW</span></div></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">亜急性甲状腺炎の3徴</h3>
+                         <ul class="space-y-3">
+                            <li class="flex items-start"><span class="text-2xl mr-3">🤒</span><div><strong>前頸部痛:</strong> 圧痛を伴う甲状腺の痛み。</div></li>
+                            <li class="flex items-start"><span class="text-2xl mr-3">📈</span><div><strong>赤沈亢進:</strong> 著しい炎症反応を反映。</div></li>
+                            <li class="flex items-start"><span class="text-2xl mr-3">📉</span><div><strong>シンチでの取り込み低下:</strong> 甲状腺細胞の破壊による。</div></li>
+                        </ul>
+                         <p class="mt-4 text-sm text-gray-500">抗甲状腺薬は無効。治療はNSAIDsやステロイド。動悸にβブロッカーも考慮。<span class="update-badge">NEW</span></p>
+                    </div>
+                    <!-- ### 追加情報 ### -->
+                    <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                        <div class="bg-yellow-50 p-4 rounded-lg">
+                            <h3 class="font-bold text-lg mb-2">二次性糖尿病/高血圧の原因<span class="update-badge">NEW</span></h3>
+                             <ul class="list-disc list-inside space-y-1">
+                                <li><strong>クッシング症候群:</strong> 中心性肥満、満月様顔貌。デキサメタゾン抑制試験で診断。</li>
+                                <li><strong>先端巨大症:</strong> 容貌の変化、手足の肥大。</li>
+                             </ul>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg">
+                            <h3 class="font-bold text-lg mb-2">骨・カルシウム代謝<span class="update-badge">NEW</span></h3>
+                             <ul class="list-disc list-inside space-y-1">
+                                <li><strong>骨粗鬆症:</strong> ビスホスホネート治療前の歯科確認が重要（顎骨壊死リスク）。</li>
+                                <li><strong>原発性副甲状腺機能亢進症:</strong> MIBIシンチで局在診断。</li>
+                             </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- III. 呼吸器内科 -->
+            <div class="lg:col-span-3 bg-white p-6 rounded-2xl shadow-lg">
+                <h2 class="text-3xl font-bold mb-6 text-[#00A6ED]">Ⅲ. 呼吸器内科</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-4 text-blue-800">間質性肺炎の鑑別ポイント</h3>
+                        <ul class="space-y-3">
+                            <li><strong>特発性器質化肺炎(COP):</strong> <span class="font-semibold">ステロイドが著効</span></li>
+                            <li><strong>過敏性肺炎(HP):</strong> 夏型はトリコスポロン、鳥関連も。聴診で<span class="font-semibold">squeak</span></li>
+                            <li><strong>肺胞蛋白症(PAP):</strong> CTで<span class="font-semibold">Crazy-paving pattern</span>、BAL液が<span class="font-semibold">米のとぎ汁様</span>。抗GM-CSF抗体陽性、全肺洗浄も。<span class="update-badge">NEW</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">非結核性抗酸菌(NTM)症</h3>
+                        <p class="mb-4 text-gray-600">最多はMAC。中高年の非喫煙女性に好発します。</p>
+                        <ul class="space-y-2">
+                            <li><strong>診断補助:</strong> 抗GPL-core IgA抗体 (血清診断)</li>
+                            <li><strong>治療:</strong> <span class="font-semibold">CAM+RFP+EBの3剤併用</span>が基本。CAM単剤は耐性化のため禁忌。</li>
+                            <li><strong>その他:</strong> <span class="font-semibold">COPDのCO2ナルコーシス</span>には<span class="font-semibold">NPPV</span>が良い適応。PaCO2 > 60mmHgでは酸素投与に注意。<span class="update-badge">NEW</span></li>
+                        </ul>
+                    </div>
+                    <!-- ### 追加情報 ### -->
+                     <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg md:col-span-2">
+                        <h3 class="text-2xl font-bold mb-4 text-blue-800">肺癌治療のポイント<span class="update-badge">NEW</span></h3>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong>PS不良例:</strong> 殺細胞性抗がん剤は適応となりにくい。緩和ケアや放射線治療（骨転移痛など）を考慮。</li>
+                            <li><strong>免疫チェックポイント阻害薬(ICI):</strong> 大腸炎などのirAE（免疫関連有害事象）に注意。</li>
+                            <li><strong>肺良性腫瘍:</strong> 最も多いのは<span class="font-semibold">過誤腫</span>。CTでポップコーン様石灰化を呈することがある。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IV. 循環器内科 -->
+            <div class="lg:col-span-3 bg-white p-6 rounded-2xl shadow-lg">
+                <h2 class="text-3xl font-bold mb-6 text-[#A1489B]">Ⅳ. 循環器内科</h2>
+                <p class="mb-6 text-gray-600">急性心不全の治療は、臨床所見に基づく病態評価（Forrester分類）が基本です。適切な治療選択の流れを理解しましょう。</p>
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="text-center p-4 rounded-lg flow-step w-full md:w-1/3">
+                        <div class="text-sm font-bold text-gray-500">STEP 1: 評価</div>
+                        <div class="text-xl font-bold">肺うっ血 (Wet/Dry)</div>
+                        <div class="text-xl font-bold">末梢循環不全 (Warm/Cold)</div>
+                    </div>
+                    <div class="flow-arrow hidden md:block">→</div>
+                    <div class="flow-arrow md:hidden">↓</div>
+                    <div class="text-center p-4 rounded-lg flow-step w-full md:w-1/3">
+                        <div class="text-sm font-bold text-gray-500">STEP 2: II群 (Wet & Warm)</div>
+                        <div class="text-xl font-bold">ループ利尿薬</div>
+                        <div class="text-xl font-bold">血管拡張薬</div>
+                    </div>
+                     <div class="flow-arrow hidden md:block">→</div>
+                     <div class="flow-arrow md:hidden">↓</div>
+                    <div class="text-center p-4 rounded-lg flow-step w-full md:w-1/3">
+                        <div class="text-sm font-bold text-gray-500">STEP 3: IV群 (Wet & Cold)</div>
+                        <div class="text-xl font-bold">強心薬 (ドブタミン)</div>
+                        <div class="text-xl font-bold">+ II群の治療</div>
+                    </div>
+                </div>
+                 <p class="mt-6 text-center text-sm text-gray-500">PCI後の二次予防薬として、<span class="font-semibold">抗血小板薬、スタチン、ACE阻害薬/ARB、β遮断薬</span>は生命予後を改善します。<span class="font-semibold text-red-600">硝酸薬</span>は症状改善目的であり、生命予後は改善しません。</p>
+                 <!-- ### 追加情報 ### -->
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <h3 class="font-bold text-lg mb-2">安定狭心症の診断<span class="update-badge">NEW</span></h3>
+                        <ul class="list-disc list-inside">
+                            <li>運動負荷心電図</li>
+                            <li>薬剤負荷心筋シンチ</li>
+                            <li>冠動脈造影CT</li>
+                        </ul>
+                    </div>
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <h3 class="font-bold text-lg mb-2">感染性心内膜炎(IE)<span class="update-badge">NEW</span></h3>
+                         <ul class="list-disc list-inside">
+                            <li>抗菌薬開始前に血液培養2セット以上</li>
+                            <li>心不全悪化時は早期手術を考慮</li>
+                        </ul>
+                    </div>
+                     <div class="bg-purple-50 p-4 rounded-lg">
+                        <h3 class="font-bold text-lg mb-2">高血圧の第一選択薬<span class="update-badge">NEW</span></h3>
+                        <p>ARB, ACE阻害薬, Ca拮抗薬, 利尿薬。<br>合併症のない若年者ではβ遮断薬は第一選択になりにくい。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- V. 消化器内科 -->
+            <div class="lg:col-span-3 bg-white p-6 rounded-2xl shadow-lg">
+                <h2 class="text-3xl font-bold mb-6 text-[#F15A29]">Ⅴ. 消化器内科</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="p-4 bg-orange-50 rounded-lg">
+                        <h4 class="font-bold text-lg mb-2">食道癌リスク</h4>
+                        <p>飲酒、喫煙</p>
+                    </div>
+                    <div class="p-4 bg-orange-50 rounded-lg">
+                        <h4 class="font-bold text-lg mb-2">胃癌リスク</h4>
+                        <p>H.ピロリ、高塩分食</p>
+                    </div>
+                     <div class="p-4 bg-orange-50 rounded-lg">
+                        <h4 class="font-bold text-lg mb-2">大腸癌リスク</h4>
+                        <p>肥満、高脂肪食、運動不足</p>
+                    </div>
+                </div>
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-bold text-xl mb-3">関連疾患</h4>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong>H.ピロリ:</strong> 胃MALTリンパ腫、ITP</li>
+                            <li><strong>C型肝炎(HCV):</strong> クリオグロブリン血症性血管炎</li>
+                            <li><strong>B型肝炎(HBV):</strong> 化学療法や免疫抑制剤で再活性化のリスク<span class="update-badge">NEW</span></li>
+                            <li><strong>EBウイルス(EBV):</strong> 伝染性単核球症、上咽頭癌、血球貪食症候群</li>
+                        </ul>
+                    </div>
+                    <!-- ### 追加情報 ### -->
+                    <div class="bg-orange-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-xl mb-3">その他重要事項<span class="update-badge">NEW</span></h4>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong>胃全摘後:</strong> 貧血、胆石、耐糖能異常をきたしうる。</li>
+                            <li><strong>NASH病理:</strong> 肝細胞の風船様膨化、脂肪変性、線維化が特徴。（ロゼット形成は稀）</li>
+                            <li><strong>Glisson鞘の構成:</strong> 門脈、固有肝動脈、胆管</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VI. 脳神経内科 -->
+            <div class="lg:col-span-3 bg-white p-6 rounded-2xl shadow-lg">
+                <h2 class="text-3xl font-bold mb-6 text-[#00A6ED]">Ⅵ. 脳神経内科</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-4 text-red-800">t-PA静注療法の絶対禁忌</h3>
+                        <p class="mb-4 text-red-700">脳梗塞超急性期の強力な治療法ですが、出血リスクのため禁忌事項の確認が極めて重要です。</p>
+                        <ul class="space-y-2 font-semibold">
+                            <li>▶ 発症時刻不明 or 4.5時間以上経過</li>
+                            <li>▶ 血小板数 < 10万/μL</li>
+                            <li>▶ PT-INR > 1.7</li>
+                            <li>▶ 収縮期血圧 > 185, 拡張期 > 110</li>
+                            <li>▶ 血糖 < 50 or > 400 mg/dL</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">多発性硬化症 vs 視神経脊髄炎</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-bold text-lg">多発性硬化症 (MS)</h4>
+                                <p>髄液オリゴクローナルバンド陽性、脳室周囲に卵円形病変 (Dawson's finger)。MRIでOpen ring sign。<span class="update-badge">NEW</span></p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">視神経脊髄炎 (NMOSD)</h4>
+                                <p>抗AQP4抗体陽性、3椎体以上に及ぶ長大な脊髄病変。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ### 追加情報 ### -->
+                    <div class="md:col-span-2 bg-blue-50 p-4 rounded-lg mt-6">
+                        <h3 class="font-bold text-lg mb-2">パーキンソン病/症候群<span class="update-badge">NEW</span></h3>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li><strong>非運動症状:</strong> 運動症状に先行して、嗅覚低下、便秘、REM睡眠行動異常症が出現しうる。</li>
+                            <li><strong>薬剤性:</strong> 抗精神病薬（スルピリドなど）が原因となりうる。</li>
+                            <li><strong>多系統萎縮症(MSA):</strong> 突然死の原因となりうる。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- VII. 腎臓内科 -->
+            <div class="lg:col-span-3 bg-white p-6 rounded-2xl shadow-lg">
+                <h2 class="text-3xl font-bold mb-6 text-[#72D147]">Ⅶ. 腎臓内科</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">主要糸球体疾患</h3>
+                        <ul class="space-y-3">
+                            <li><strong>IgA腎症:</strong> <span class="font-semibold">日本で最多</span>。IgA血管炎の腎症と類似。治療は扁摘パルスも。<span class="update-badge">NEW</span></li>
+                            <li><strong>MCNS:</strong> 電子顕微鏡で<span class="font-semibold">足突起の癒合</span>。ステロイド著効。</li>
+                            <li><strong>アルポート症候群:</strong> IV型コラーゲン異常。腎症＋<span class="font-semibold">感音難聴</span>＋眼症状。</li>
+                            <!-- ### 追加情報 ### -->
+                            <li><strong>半月体形成性腎炎:</strong> 高齢者に多く、急速に腎不全が進行。ステロイド＋免疫抑制薬で治療。<span class="update-badge">NEW</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-4 text-green-800">高K血症の対応</h3>
+                        <p class="mb-4 text-green-700">致死性不整脈のリスクがあるため、迅速な対応が必要です。</p>
+                        <ol class="list-decimal list-inside space-y-2 font-semibold">
+                            <li>患者状態確認、再検（偽性を除外）</li>
+                            <li>心電図施行（テント状T波など）</li>
+                            <li>緊急治療（Ca製剤、GI療法など）</li>
+                        </ol>
+                    </div>
+                    <!-- ### 追加情報 ### -->
+                    <div class="md:col-span-2 bg-green-50 p-4 rounded-lg mt-6">
+                        <h3 class="font-bold text-lg mb-2">その他重要疾患<span class="update-badge">NEW</span></h3>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li><strong>コレステロール塞栓症:</strong> カテーテル検査後に発症。血中好酸球増多、補体価低下、網状皮斑が特徴。</li>
+                            <li><strong>悪性高血圧:</strong> 眼底検査（乳頭浮腫、出血）、心エコー、腹部エコーでの標的臓器障害の評価が必須。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIII. 血液内科 -->
+            <div class="lg:col-span-3 bg-white p-6 rounded-2xl shadow-lg">
+                <h2 class="text-3xl font-bold mb-6 text-[#A1489B]">Ⅷ. 血液内科</h2>
+                <div class="overflow-x-auto mb-6">
+                    <table class="w-full table-auto">
+                        <thead class="bg-purple-100">
+                            <tr><th>疾患</th><th>染色体/遺伝子異常</th><th>特異的治療薬/ポイント</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>バーキットリンパ腫</td><td>t(8;14) [c-MYC]</td><td>-</td></tr>
+                            <tr><td>濾胞性リンパ腫</td><td>t(14;18) [BCL2]</td><td>無症状なら経過観察(Watchful waiting)も</td></tr>
+                            <tr><td>慢性骨髄性白血病(CML)</td><td>t(9;22) [BCR-ABL]</td><td class="font-semibold">イマチニブ (TKI)</td></tr>
+                            <tr><td>急性前骨髄球性白血病(APL)</td><td>t(15;17) [PML-RARA]</td><td class="font-semibold">ATRA, 亜ヒ酸</td></tr>
+                            <!-- ### 追加情報 ### -->
+                            <tr><td>急性骨髄性白血病(AML)</td><td>t(8;21), inv(16)</td><td class="font-semibold">予後良好群<span class="update-badge">NEW</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- ### 追加情報 ### -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                     <div class="bg-purple-50 p-4 rounded-lg">
+                        <h3 class="font-bold text-lg mb-2">悪性リンパ腫の基本<span class="update-badge">NEW</span></h3>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>B細胞性リンパ腫の多くに<span class="font-semibold">リツキシマブ(抗CD20抗体)</span>が使用される。</li>
+                            <li>びまん性大細胞型B細胞リンパ腫(DLBCL)の標準治療は<span class="font-semibold">R-CHOP療法</span>。</li>
+                            <li>日本の罹患率は増加傾向にある。</li>
+                        </ul>
+                    </div>
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <h3 class="font-bold text-lg mb-2">貧血・その他<span class="update-badge">NEW</span></h3>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li><strong>溶血性貧血:</strong> 網赤血球↑, MCV↑, LDH↑, Haptoglobin↓</li>
+                            <li><strong>悪性貧血(B12欠乏):</strong> 自己免疫性胃炎による内因子欠乏が原因。</li>
+                            <li><strong>サラセミア:</strong> 小球性貧血をきたす遺伝性疾患。</li>
+                            <li><strong>発熱性好中球減少症:</strong> 血液培養2セット採取後、広域抗菌薬を投与。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- IX. 感染症科 -->
+            <div class="lg:col-span-3 bg-white p-6 rounded-2xl shadow-lg">
+                <h2 class="text-3xl font-bold mb-6 text-[#FCEE21]">Ⅸ. 感染症科</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">抗菌薬の副作用</h3>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong>グリコペプチド系:</strong> レッドマン症候群</li>
+                            <li><strong>アミノグリコシド系:</strong> 第8脳神経障害（聴器・前庭毒性）、腎毒性</li>
+                            <li><strong>テトラサイクリン系:</strong> 歯牙黄染、光線過敏症</li>
+                            <!-- ### 追加情報 ### -->
+                            <li><strong>ピボキシル基含有抗菌薬:</strong> 低カルニチン血症からの低血糖<span class="update-badge">NEW</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">ワクチン</h3>
+                         <ul class="list-disc list-inside space-y-2">
+                            <li><strong>実用化済み:</strong> <span class="font-semibold">HPV</span>、<span class="font-semibold">風疹</span>、水痘、麻疹など</li>
+                            <li><strong>未実用化:</strong> <span class="font-semibold">HCV</span>、HIV、単純ヘルペスなど</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
