@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北野病院HBOC試験対策 インタラクティブ学習アプリ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony Palette -->
+    <!-- Application Structure Plan: ユーザーが情報を能動的に学習できるよう、レポートの線形構造を再設計しました。ナビゲーションで4つの主要テーマ（「知識の核心」「リスクと管理」「治療の最前線」「模擬試験」）を自由に移動できる、タスク指向のダッシュボード構造を採用。これにより、基礎学習から応用的知識の習得、そして自己評価まで、学習者のニーズに応じた非線形な学習フローを実現します。インタラクティブなチャートやクイズ形式を取り入れることで、受動的な読書から能動的な探求へと学習体験を変革し、知識の定着を最大化することを目的としています。 -->
+    <!-- Visualization & Content Choices: レポート内の定量的データを効果的に比較・理解するため、生涯発症リスクの比較にはインタラクティブな棒グラフ（Chart.js）を選択。ユーザーが癌種を選択することでデータが動的に更新され、能動的な情報探索を促します。作用機序のような複雑なプロセスは、HTML/CSSを用いた概念図で視覚的に表現。リスク低減手術の効果や遺伝子ごとの特徴は、比較・整理が容易なHTMLテーブルで提示します。模擬問題はインタラクティブなクイズ形式とし、即時フィードバックによって学習効果を高めます。これらの選択は、すべて学習者の理解度とエンゲージメントを最大化するという設計思想に基づいています。 -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #FDFBF6;
+            color: #3C3633;
+        }
+        .nav-button {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-button.active, .nav-button:hover {
+            color: #7A9D96;
+            border-bottom-color: #7A9D96;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .card {
+            background-color: #FFFFFF;
+            border: 1px solid #E0DCD5;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 60vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 500px;
+            }
+        }
+        .quiz-option {
+            transition: background-color 0.2s;
+        }
+        .quiz-option:hover {
+            background-color: #F0EBE3;
+        }
+        .quiz-option.selected {
+            background-color: #7A9D96;
+            color: white;
+            border-color: #617d78;
+        }
+        .quiz-option.correct {
+            background-color: #A3C9A8;
+            color: #3C3633;
+        }
+        .quiz-option.incorrect {
+            background-color: #E8A0A0;
+            color: #3C3633;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="min-h-screen">
+        <header class="bg-white/80 backdrop-blur-md sticky top-0 z-10 border-b border-gray-200">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center justify-between py-4">
+                    <h1 class="text-2xl font-bold text-gray-800 mb-4 md:mb-0">HBOC完全攻略ガイド</h1>
+                    <nav id="main-nav" class="flex flex-wrap justify-center space-x-4 md:space-x-6">
+                        <button data-target="core" class="nav-button active text-lg font-medium py-2 px-3">知識の核心</button>
+                        <button data-target="risk" class="nav-button text-lg font-medium py-2 px-3">リスクと管理</button>
+                        <button data-target="treatment" class="nav-button text-lg font-medium py-2 px-3">治療の最前線</button>
+                        <button data-target="quiz" class="nav-button text-lg font-medium py-2 px-3">模擬試験</button>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main class="container mx-auto p-4 md:p-8">
+            <div id="core" class="content-section active">
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-center mb-2">知識の核心</h2>
+                    <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto">HBOCの理解は、その分子遺伝学的基礎から始まります。ここでは、試験合格に不可欠な基本原理を視覚的に学びます。</p>
+                </section>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                    <div class="card rounded-lg p-6">
+                        <h3 class="text-2xl font-bold mb-4">BRCA1 vs BRCA2：臨床的特徴の比較</h3>
+                        <p class="mb-4 text-gray-600">両遺伝子はDNA修復に関与しますが、その変異がもたらす臨床像には明確な差異があります。この違いを正確に把握することが重要です。</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="p-3 font-semibold border-b">特徴</th>
+                                        <th class="p-3 font-semibold border-b">BRCA1</th>
+                                        <th class="p-3 font-semibold border-b">BRCA2</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 border-b font-medium">関連乳癌</td>
+                                        <td class="p-3 border-b">トリプルネガティブ乳癌 (約70%)</td>
+                                        <td class="p-3 border-b">ホルモン受容体陽性乳癌の割合が高い</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 border-b font-medium">卵巣癌リスク</td>
+                                        <td class="p-3 border-b">特に高い (生涯約44%)</td>
+                                        <td class="p-3 border-b">高い (生涯約17%)</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 border-b font-medium">男性乳癌リスク</td>
+                                        <td class="p-3 border-b">軽度上昇</td>
+                                        <td class="p-3 border-b">顕著に上昇</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 border-b font-medium">その他のがん</td>
+                                        <td class="p-3 border-b">ー</td>
+                                        <td class="p-3 border-b">前立腺癌、膵癌のリスクが顕著に上昇</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card rounded-lg p-6">
+                        <h3 class="text-2xl font-bold mb-4">作用機序「合成致死」の概念</h3>
+                        <p class="mb-6 text-gray-600">PARP阻害薬の画期的な作用機序である「合成致死」は、BRCA変異がん細胞を選択的に攻撃する鍵です。このメカニズムを理解しましょう。</p>
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0 w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-2xl font-bold text-blue-600">正常</div>
+                                <div>
+                                    <h4 class="font-bold text-lg">正常細胞</h4>
+                                    <p class="text-gray-600">DNA一本鎖切断はPARPが修復。PARPが阻害されても、BRCAによる相同組換え修復(HRR)が機能し、細胞は生存します。</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0 w-16 h-16 bg-red-100 rounded-full flex items-center justify-center text-2xl font-bold text-red-600">がん</div>
+                                <div>
+                                    <h4 class="font-bold text-lg">BRCA変異がん細胞 + PARP阻害薬</h4>
+                                    <p class="text-gray-600">HRR機能が欠損。PARPも阻害されると、DNA二本鎖切断が修復できず蓄積し、がん細胞は選択的に細胞死に至ります。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="risk" class="content-section">
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-center mb-2">リスクと管理</h2>
+                    <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto">HBOCの臨床管理には、正確なリスク評価と、それに基づいたサーベイランス・予防戦略が不可欠です。ここでは具体的な数値と選択肢を学びます。</p>
+                </section>
+
+                <div class="card rounded-lg p-6 mb-8">
+                    <h3 class="text-2xl font-bold mb-4">生涯発症リスクの比較</h3>
+                    <p class="mb-4 text-gray-600">BRCA病的バリアント保持者の生涯発症リスクは、一般人口と比較して著しく上昇します。下部のボタンで癌種を切り替え、その差を視覚的に確認してください。</p>
+                    <div class="text-center mb-4">
+                        <div id="risk-chart-controls" class="inline-flex rounded-md shadow-sm" role="group">
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="riskChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card rounded-lg p-6">
+                    <h3 class="text-2xl font-bold mb-4">リスク低減手術の比較</h3>
+                     <p class="mb-4 text-gray-600">リスク低減手術は、がん発症リスクを大幅に低減させる有効な選択肢です。各手術の効果と対象を正確に理解しましょう。</p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="p-3 font-semibold border-b">手術</th>
+                                    <th class="p-3 font-semibold border-b">対象</th>
+                                    <th class="p-3 font-semibold border-b">乳癌リスク低減率</th>
+                                    <th class="p-3 font-semibold border-b">卵巣癌リスク低減率</th>
+                                    <th class="p-3 font-semibold border-b">全生存率(OS)への影響</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-3 border-b font-medium">CRRM</td>
+                                    <td class="p-3 border-b">乳癌既発症者</td>
+                                    <td class="p-3 border-b">>90% (対側)</td>
+                                    <td class="p-3 border-b">-</td>
+                                    <td class="p-3 border-b">改善</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-3 border-b font-medium">BRRM</td>
+                                    <td class="p-3 border-b">乳癌未発症者</td>
+                                    <td class="p-3 border-b">>90% (両側)</td>
+                                    <td class="p-3 border-b">-</td>
+                                    <td class="p-3 border-b">データ限定的</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="p-3 border-b font-medium">RRSO</td>
+                                    <td class="p-3 border-b">BRCA1/2保持者</td>
+                                    <td class="p-3 border-b">約50%</td>
+                                    <td class="p-3 border-b">80-90%</td>
+                                    <td class="p-3 border-b">改善</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="treatment" class="content-section">
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-center mb-2">治療の最前線</h2>
+                    <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto">HBOC診療は、PARP阻害薬の登場や多遺伝子パネル検査の普及により、急速に進化しています。最新の知識をアップデートしましょう。</p>
+                </section>
+                
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold mb-4">主要なPARP阻害薬</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="card rounded-lg p-6">
+                            <h4 class="text-xl font-bold text-gray-800">オラパリブ (Olaparib)</h4>
+                            <p class="mt-2 text-gray-600">HBOC関連癌治療の基軸となる薬剤。特にOlympiA試験の結果は、早期乳癌の術後補助療法に革命をもたらしました。</p>
+                            <div class="mt-4 bg-gray-50 p-4 rounded-lg">
+                                <p class="font-semibold">重要試験：OlympiA試験</p>
+                                <p class="text-sm text-gray-600">高リスク早期乳癌の術後補助療法として、浸潤性無病生存期間(iDFS)のリスクを<span class="font-bold text-red-600">42%</span>有意に低下させました。</p>
+                            </div>
+                        </div>
+                        <div class="card rounded-lg p-6">
+                            <h4 class="text-xl font-bold text-gray-800">タラゾパリブ (Talazoparib)</h4>
+                            <p class="mt-2 text-gray-600">転移・再発乳癌に対する新たな選択肢。2024年に本邦で承認された最新の薬剤です。</p>
+                             <div class="mt-4 bg-gray-50 p-4 rounded-lg">
+                                <p class="font-semibold">重要試験：EMBRACA試験</p>
+                                <p class="text-sm text-gray-600">転移・再発乳癌に対し、化学療法を上回る無増悪生存期間(PFS)の延長を示しました。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">BRCA1/2を越えて：臨床的に重要な他の原因遺伝子</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="card rounded-lg p-6">
+                            <h4 class="text-xl font-bold text-gray-800">PALB2</h4>
+                            <p class="mt-2 text-gray-600">「BRCA3」とも称される重要遺伝子。乳癌リスクはBRCA2に匹敵し、膵癌リスクも上昇させます。</p>
+                        </div>
+                        <div class="card rounded-lg p-6 border-2 border-red-500 bg-red-50">
+                            <h4 class="text-xl font-bold text-red-700 flex items-center"><span class="text-2xl mr-2">⚠️</span>TP53 (Li-Fraumeni症候群)</h4>
+                            <p class="mt-2 text-red-800">非常に高い乳癌リスクに加え、放射線感受性が極めて高く、<span class="font-bold">放射線治療は原則禁忌</span>です。これは絶対的な知識です。</p>
+                        </div>
+                        <div class="card rounded-lg p-6">
+                            <h4 class="text-xl font-bold text-gray-800">ATM, CHEK2</h4>
+                            <p class="mt-2 text-gray-600">中等度リスク遺伝子の代表。生涯乳癌リスクを一般人口の2-4倍程度に上昇させます。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="quiz" class="content-section">
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-center mb-2">模擬試験</h2>
+                    <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto">知識の定着度を試しましょう。過去問の分析と最新のガイドラインに基づいた模擬問題です。冷静に、そして正確に解答してください。</p>
+                </section>
+                <div id="quiz-container" class="max-w-3xl mx-auto card rounded-lg p-6 md:p-8">
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navButtons = document.querySelectorAll('.nav-button');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            function switchTab(targetId) {
+                contentSections.forEach(section => {
+                    section.classList.toggle('active', section.id === targetId);
+                });
+                navButtons.forEach(button => {
+                    button.classList.toggle('active', button.dataset.target === targetId);
+                });
+                window.scrollTo(0, 0);
+            }
+            
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    switchTab(button.dataset.target);
+                });
+            });
+
+            const riskData = {
+                '女性乳癌': { labels: ['一般人口', 'BRCA2', 'BRCA1'], values: [9, 69, 72] },
+                '卵巣癌': { labels: ['一般人口', 'BRCA2', 'BRCA1'], values: [1.5, 17, 44] },
+                '男性乳癌': { labels: ['一般人口', 'BRCA1', 'BRCA2'], values: [0.1, 1.2, 7.1] },
+                '膵癌': { labels: ['一般人口', 'BRCA1', 'BRCA2'], values: [1.5, 3, 7] },
+                '前立腺癌': { labels: ['一般人口', 'BRCA1', 'BRCA2'], values: [9, 15, 25] },
+            };
+
+            const riskChartCtx = document.getElementById('riskChart').getContext('2d');
+            let riskChart;
+
+            function createOrUpdateRiskChart(cancerType) {
+                const data = riskData[cancerType];
+                if (riskChart) {
+                    riskChart.data.labels = data.labels;
+                    riskChart.data.datasets[0].data = data.values;
+                    riskChart.options.plugins.title.text = `${cancerType} 生涯発症リスク (80歳まで, %)`;
+                    riskChart.update();
+                } else {
+                    riskChart = new Chart(riskChartCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: data.labels,
+                            datasets: [{
+                                label: '生涯発症リスク (%)',
+                                data: data.values,
+                                backgroundColor: [
+                                    'rgba(122, 157, 150, 0.4)',
+                                    'rgba(122, 157, 150, 0.7)',
+                                    'rgba(122, 157, 150, 1.0)',
+                                ],
+                                borderColor: [
+                                    'rgba(122, 157, 150, 1)',
+                                    'rgba(122, 157, 150, 1)',
+                                    'rgba(122, 157, 150, 1)',
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            indexAxis: 'y',
+                            scales: {
+                                x: {
+                                    beginAtZero: true,
+                                    title: { display: true, text: 'リスク (%)' }
+                                }
+                            },
+                            plugins: {
+                                legend: { display: false },
+                                title: {
+                                    display: true,
+                                    text: `${cancerType} 生涯発症リスク (80歳まで, %)`,
+                                    font: { size: 18 }
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            return ` ${context.dataset.label}: ${context.raw}%`;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+
+            const controlsContainer = document.getElementById('risk-chart-controls');
+            Object.keys(riskData).forEach((cancerType, index) => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.textContent = cancerType;
+                button.className = 'px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700';
+                if (index === 0) {
+                    button.classList.add('rounded-l-lg', 'active-risk-btn');
+                    button.style.backgroundColor = '#7A9D96';
+                    button.style.color = 'white';
+                }
+                if (index === Object.keys(riskData).length - 1) button.classList.add('rounded-r-lg');
+                
+                button.addEventListener('click', () => {
+                    createOrUpdateRiskChart(cancerType);
+                    document.querySelectorAll('#risk-chart-controls button').forEach(btn => {
+                        btn.style.backgroundColor = 'white';
+                        btn.style.color = '#3C3633';
+                    });
+                    button.style.backgroundColor = '#7A9D96';
+                    button.style.color = 'white';
+                });
+                controlsContainer.appendChild(button);
+            });
+            createOrUpdateRiskChart('女性乳癌');
+
+            const quizData = [
+                {
+                    question: "42歳女性。右乳癌（cT2N1M0, ER陽性, HER2陰性）で術前化学療法後、リンパ節に2mmの浸潤巣を認めた。生殖細胞系列BRCA1病的バリアント陽性。術後のホルモン療法に加えて最も推奨されるのはどれか。",
+                    options: ["ペンブロリズマブ", "アベマシクリブ", "オラパリブ", "カペシタビン", "経過観察"],
+                    answer: "オラパリブ",
+                    explanation: "これはOlympiA試験の知見を直接問う問題です。高リスクのBRCA関連HER2陰性早期乳癌に対する術後補助療法として、オラパリブが再発リスクを有意に低下させることが示されました。したがって、正解はオラパリブです。"
+                },
+                {
+                    question: "50歳女性。乳癌に対する多遺伝子パネル検査でPALB2遺伝子に病的バリアントを認めた。この患者へのカウンセリング内容として適切でないのはどれか。",
+                    options: [
+                        "生涯の乳癌発症リスクは一般人口より高く、BRCA2変異保持者に準じて考える必要がある。",
+                        "膵癌の発症リスクも上昇するため、腹部画像検査によるサーベイランスを検討する。",
+                        "血縁者も同じ病的バリアントを持つ可能性があるため、遺伝カウンセリングを勧める。",
+                        "放射線治療は二次がんのリスクを著しく上昇させるため、避けるべきである。",
+                        "対側乳房のサーベイランスとして、乳房MRI検査を推奨する。"
+                    ],
+                    answer: "放射線治療は二次がんのリスクを著しく上昇させるため、避けるべきである。",
+                    explanation: "放射線治療が原則禁忌となるのは、TP53病的バリアント（Li-Fraumeni症候群）に特有の注意点です。PALB2とTP53の臨床的特徴を明確に区別できているかを試す問題です。したがって、不適切なのはこの選択肢です。"
+                },
+                {
+                    question: "BRCA2病的バリアントを保持する38歳の健康男性。父親が65歳で膵癌、叔母が55歳で乳癌と診断されている。この男性に対するサーベイランスとして推奨されるものの組み合わせで正しいのはどれか。",
+                    options: [
+                        "年1回のマンモグラフィ、年1回のPSA検査",
+                        "25歳からの乳房自己検診・臨床検診、40歳からのPSA検査",
+                        "年1回の胸部CT検査、年1回の腹部超音波検査",
+                        "30歳からの大腸内視鏡検査、40歳からのPSA検査",
+                        "特にサーベイランスは不要で、症状出現時の受診を勧める。"
+                    ],
+                    answer: "25歳からの乳房自己検診・臨床検診、40歳からのPSA検査",
+                    explanation: "男性HBOC保持者の管理に関する問題です。BRCA2保持者男性は乳癌、前立腺癌、膵癌のリスクが上昇します。推奨されるのは、乳房の自己検診・臨床検診、40歳からの前立腺癌検診（PSA検査）です。マンモグラフィのルーチン推奨はありません。"
+                }
+            ];
+
+            let currentQuestionIndex = 0;
+            const quizContainer = document.getElementById('quiz-container');
+
+            function renderQuiz() {
+                const q = quizData[currentQuestionIndex];
+                let optionsHTML = q.options.map((option, index) => 
+                    `<div class="quiz-option border-2 border-gray-300 p-4 rounded-lg cursor-pointer" data-index="${index}">${option}</div>`
+                ).join('');
+
+                quizContainer.innerHTML = `
+                    <div class="mb-4">
+                        <p class="text-gray-600">問題 ${currentQuestionIndex + 1} / ${quizData.length}</p>
+                        <h3 class="text-xl font-semibold mt-2">${q.question}</h3>
+                    </div>
+                    <div id="quiz-options" class="space-y-3">${optionsHTML}</div>
+                    <div id="quiz-feedback" class="mt-6"></div>
+                    <div class="mt-6 flex justify-end">
+                        <button id="next-quiz-btn" class="px-6 py-2 bg-gray-300 text-gray-500 rounded-md cursor-not-allowed" disabled>次の問題へ</button>
+                    </div>
+                `;
+
+                const optionElements = quizContainer.querySelectorAll('.quiz-option');
+                let selectedOption = null;
+
+                optionElements.forEach(opt => {
+                    opt.addEventListener('click', () => {
+                        if (selectedOption !== null) return;
+                        
+                        optionElements.forEach(o => o.classList.remove('selected'));
+                        opt.classList.add('selected');
+                        
+                        const selectedAnswer = q.options[parseInt(opt.dataset.index)];
+                        const isCorrect = selectedAnswer === q.answer;
+
+                        opt.classList.add(isCorrect ? 'correct' : 'incorrect');
+                        if (!isCorrect) {
+                            const correctIndex = q.options.indexOf(q.answer);
+                            optionElements[correctIndex].classList.add('correct');
+                        }
+
+                        const feedbackEl = document.getElementById('quiz-feedback');
+                        feedbackEl.innerHTML = `
+                            <div class="p-4 rounded-lg ${isCorrect ? 'bg-green-100' : 'bg-red-100'}">
+                                <h4 class="font-bold text-lg">${isCorrect ? '正解' : '不正解'}</h4>
+                                <p class="mt-2">${q.explanation}</p>
+                            </div>
+                        `;
+                        
+                        const nextBtn = document.getElementById('next-quiz-btn');
+                        nextBtn.disabled = false;
+                        nextBtn.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+                        nextBtn.classList.add('bg-[#7A9D96]', 'text-white', 'hover:bg-[#617d78]');
+                        selectedOption = opt;
+                    });
+                });
+
+                document.getElementById('next-quiz-btn').addEventListener('click', () => {
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < quizData.length) {
+                        renderQuiz();
+                    } else {
+                        quizContainer.innerHTML = `
+                            <h3 class="text-2xl font-bold text-center">模擬試験完了</h3>
+                            <p class="text-center mt-4">お疲れ様でした。すべての問題が終了しました。繰り返し学習して、知識を完璧に定着させましょう。</p>
+                            <div class="text-center mt-6">
+                                <button id="restart-quiz-btn" class="px-6 py-2 bg-[#7A9D96] text-white rounded-md hover:bg-[#617d78]">もう一度挑戦する</button>
+                            </div>
+                        `;
+                        document.getElementById('restart-quiz-btn').addEventListener('click', () => {
+                            currentQuestionIndex = 0;
+                            renderQuiz();
+                        });
+                    }
+                });
+            }
+
+            renderQuiz();
+        });
+    </script>
+</body>
+</html>
